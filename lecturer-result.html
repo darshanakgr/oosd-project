@@ -20,15 +20,17 @@
     <!--  Light Bootstrap Table core CSS    -->
     <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
-
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="css/demo.css" rel="stylesheet"/>
 
 
     <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="css/pe-icon-7-stroke.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' type='text/css'/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/pe-icon-7-stroke.css"/>
 
 </head>
 <body>
@@ -127,7 +129,291 @@
 
         <div class="content">
             <div class="container-fluid">
+                <!-- Tabs with icons on Card -->
+                <div class="card card-nav-tabs">
+                    <div class="header header-success">
+                        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active">
+                                        <a href="#create-new" data-toggle="tab">
+                                            <i class="material-icons">file_upload</i>
+                                            Upload
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#update" data-toggle="tab">
+                                            <i class="material-icons">format_align_center</i>
+                                            Enter Manually
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#view-all" data-toggle="tab">
+                                            <i class="material-icons">history</i>
+                                            History
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="create-new">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">Upload Result via a File</h4>
+                                    </div>
+                                    <div class="content">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Module Code</label>
+                                                        <select class="form-control">
+                                                            <option value="CS001">CS001</option>
+                                                            <option value="CS002">CS002</option>
+                                                            <option value="CS003">CS003</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Module Name</label>
+                                                        <input type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Credits</label>
+                                                        <input type="text" class="form-control" placeholder="2.0">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Batch</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Semester</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Result File</label>
+                                                        <input type="file" class="form-control" name="file" id="path">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-info btn-fill">
+                                                <i class="material-icons">insert_drive_file</i>
+                                                Upload
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="update">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">Enter Manually</h4>
+                                    </div>
+                                    <div class="content">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Module Code</label>
+                                                        <select class="form-control">
+                                                            <option value="CS001">CS001</option>
+                                                            <option value="CS002">CS002</option>
+                                                            <option value="CS003">CS003</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Module Name</label>
+                                                        <input type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Credits</label>
+                                                        <input type="text" class="form-control" placeholder="2.0">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Batch</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Semester</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card">
+                                                <div class="content">
+                                                    <form>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Index No</label>
+                                                                    <input type="text" class="form-control" placeholder="150528X">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Name</label>
+                                                                    <input type="text" class="form-control" placeholder="K.G.R.D.Rathnayake">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Grade</label>
+                                                                    <select class="form-control">
+                                                                        <option value="4.2">A+</option>
+                                                                        <option value="4.0">A</option>
+                                                                        <option value="3.7">A-</option>
+                                                                        <option value="3.3">B+</option>
+                                                                        <option value="3.0">B</option>
+                                                                        <option value="2.7">B-</option>
+                                                                        <option value="2.3">C+</option>
+                                                                        <option value="2.0">C</option>
+                                                                        <option value="1.5">C-</option>
+                                                                        <option value="1.0">D</option>
+                                                                        <option value="0.0">I-we</option>
+                                                                        <option value="0.0">F</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Credit</label>
+                                                                    <input type="text" class="form-control" placeholder="4.2">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="table-responsive table-full-width">
+                                                            <table class="table table-hover table-striped">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Index</th>
+                                                                    <th>Name</th>
+                                                                    <th>Grade</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>150500A</td>
+                                                                    <td>Darshana</td>
+                                                                    <td>A-</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>150500A</td>
+                                                                    <td>Darshana</td>
+                                                                    <td>A-</td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-info btn-fill">
+                                                <i class="material-icons">insert_drive_file</i>
+                                                Upload
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="view-all">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">Result History</h4>
+                                    </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Credits</th>
+                                                <th>Batch</th>
+                                                <th>Semester</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>2016/01/01</td>
+                                                <td>CS001</td>
+                                                <td>Operating System</td>
+                                                <td>2.5</td>
+                                                <td>BSC15</td>
+                                                <td>Sem 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2017/02/31</td>
+                                                <td>CS002</td>
+                                                <td>Graph Theory</td>
+                                                <td>20</td>
+                                                <td>BSC15</td>
+                                                <td>Sem 3</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Tabs with icons on Card -->
             </div>
         </div>
 
