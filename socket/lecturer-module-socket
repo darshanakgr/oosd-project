@@ -1,0 +1,22 @@
+const moduleControlelr = require('./../controller/module-controller');
+
+
+class LectureModuleSocket{
+    constructor(io, socket){
+        console.log('New connection established on /lecturer-module @', new Date().getTime());
+
+        socket.on('disconnect', () => {
+            console.log("Connection was interrupted on /lecturer-module @", new Date().getTime());
+        });
+
+        socket.on('createNewModule', (module, callback) => {
+            moduleControlelr.createNewModule(module).then((message) => {
+                callback(message);
+            }).catch((error) => {
+                callback(error);
+            });
+        })
+    }
+}
+
+module.exports.LectureModuleSocket = LectureModuleSocket;
