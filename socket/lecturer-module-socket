@@ -1,6 +1,5 @@
 const moduleControlelr = require('./../controller/module-controller');
 
-
 class LectureModuleSocket{
     constructor(io, socket){
         console.log('New connection established on /lecturer-module @', new Date().getTime());
@@ -15,7 +14,29 @@ class LectureModuleSocket{
             }).catch((error) => {
                 callback(error);
             });
-        })
+        });
+
+        socket.on('searchModule', (moduleCode, callback) => {
+           moduleControlelr.searchModule(moduleCode).then((module) => {
+               callback(module);
+           }).catch((error) => {
+               callback(error);
+           })
+        });
+
+        socket.on('updateModule', (moduleCode, module, callback) => {
+            moduleControlelr.updateModule(moduleCode, module).then((module) => {
+                callback(module);
+            }).catch((error) => {
+                callback(error);
+            })
+        });
+
+        socket.on('getAllModules', (callback) => {
+            moduleControlelr.getAllModules().then((modules) => {
+                callback(modules);
+            });
+        });
     }
 }
 

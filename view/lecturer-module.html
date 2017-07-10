@@ -240,17 +240,17 @@
                                         <h4 class="title">Update Module</h4>
                                     </div>
                                     <div class="content">
-                                        <form>
+                                        <form id="update-module">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Module Code</label>
                                                         <div class="row">
                                                             <div class="col-md-8">
-                                                                <input type="text" class="form-control" placeholder="XX0000">
+                                                                <input type="text" class="form-control" placeholder="XX0000" name="up-moduleCode">
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <input type="button" class="form-control btn btn-fill btn-info" value="Search">
+                                                                <input type="button" class="form-control btn btn-fill btn-info" value="Search" id="search-btn">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -261,7 +261,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Module Name</label>
-                                                        <input type="text" class="form-control" placeholder="">
+                                                        <input type="text" class="form-control" placeholder="" name="up-moduleName">
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,7 +270,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Credits</label>
-                                                        <input type="text" class="form-control" placeholder="2.0">
+                                                        <input type="text" class="form-control" placeholder="2.0" name="up-credits">
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,11 +279,11 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Batch</label>
-                                                        <select class="form-control" id="bacth">
-                                                            <option>Bsc 12</option>
-                                                            <option>Bsc 13</option>
-                                                            <option>Bsc 14</option>
-                                                            <option>Bsc 15</option>
+                                                        <select class="form-control" name="up-batch">
+                                                            <option value="BSC12">Bsc 12</option>
+                                                            <option value="BSC13">Bsc 13</option>
+                                                            <option value="BSC14">Bsc 14</option>
+                                                            <option value="BSC15">Bsc 15</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -293,15 +293,15 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Semester</label>
-                                                        <select class="form-control" id="semester">
-                                                            <option>Semester 1</option>
-                                                            <option>Semester 2</option>
-                                                            <option>Semester 3</option>
-                                                            <option>Semester 4</option>
-                                                            <option>Semester 5</option>
-                                                            <option>Semester 6</option>
-                                                            <option>Semester 7</option>
-                                                            <option>Semester 8</option>
+                                                        <select class="form-control" name="up-semester">
+                                                            <option value="1">Semester 1</option>
+                                                            <option value="2">Semester 2</option>
+                                                            <option value="3">Semester 3</option>
+                                                            <option value="4">Semester 4</option>
+                                                            <option value="5">Semester 5</option>
+                                                            <option value="6">Semester 6</option>
+                                                            <option value="7">Semester 7</option>
+                                                            <option value="8">Semester 8</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -319,7 +319,7 @@
                                         <h4 class="title">View All Modules</h4>
                                     </div>
                                     <div class="content table-responsive table-full-width">
-                                        <table class="table table-hover table-striped">
+                                        <table class="table table-hover table-striped" id="module-table">
                                             <thead>
                                             <tr><th>Code</th>
                                                 <th>Name</th>
@@ -328,20 +328,6 @@
                                                 <th>Semester</th>
                                             </tr></thead>
                                             <tbody>
-                                            <tr>
-                                                <td>CS001</td>
-                                                <td>Operating System</td>
-                                                <td>2.5</td>
-                                                <td>BSC15</td>
-                                                <td>Sem 2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>CS002</td>
-                                                <td>Graph Theory</td>
-                                                <td>20</td>
-                                                <td>BSC15</td>
-                                                <td>Sem 3</td>
-                                            </tr>
                                             </tbody>
                                         </table>
 
@@ -371,7 +357,7 @@
 <!--   Core JS Files   -->
 <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
-<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
 <!--  Charts Plugin -->
 <script src="js/chartist.min.js"></script>

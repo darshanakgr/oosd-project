@@ -22,8 +22,47 @@ var createNewModule = (module) => {
             reject(error.errors);
         });
     });
+};
+
+var searchModule = (moduleCode) => {
+    return new Promise((resolve, reject) => {
+        Modules.findOne({
+            moduleCode:moduleCode
+        }).then((module) => {
+            resolve(module);
+        }, (error) => {
+            reject(error.errors);
+        });
+    });
+};
+
+var updateModule = (moduleCode, module) => {
+    return new Promise((resolve, reject) => {
+        Modules.findOneAndUpdate({
+            moduleCode:moduleCode
+        }, {$set:module}, {new:true}
+        ).then((module) => {
+            console.log(module);
+            resolve(module);
+        }, (error) => {
+            reject(error.errors);
+        });
+    });
+};
+
+var getAllModules = () => {
+    return new Promise((resolve, reject) => {
+        Modules.find().then((modules) => {
+            resolve(modules);
+        }, (error) => {
+            reject(error.errors);
+        });
+    });
 }
 
 module.exports = {
-    createNewModule
+    createNewModule,
+    searchModule,
+    updateModule,
+    getAllModules
 };
