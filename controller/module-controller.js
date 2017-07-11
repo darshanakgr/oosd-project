@@ -58,11 +58,23 @@ var getAllModules = () => {
             reject(error.errors);
         });
     });
-}
+};
+
+var getModuleCodes = () => {
+    return new Promise((resolve, reject) => {
+        Modules.find().select("moduleCode").exec((error, modules) => {
+            if (error) {
+                reject(error.errors);
+            }
+            resolve(modules);
+        });
+    });
+};
 
 module.exports = {
     createNewModule,
     searchModule,
     updateModule,
-    getAllModules
+    getAllModules,
+    getModuleCodes
 };

@@ -4,11 +4,10 @@
 
 const mongoose = require('mongoose');
 
-var Modules = mongoose.model('Modules', {
+var modules = new mongoose.Schema({
     moduleCode:{
         type:String,
         required:true,
-        unique: true,
         minlength:4,
         trim:true
     },
@@ -36,5 +35,9 @@ var Modules = mongoose.model('Modules', {
         trim:true
     }
 });
+
+modules.index({moduleCode:1, batch:1}, {unique:true});
+
+var Modules = mongoose.model('Modules', modules);
 
 module.exports = {Modules};

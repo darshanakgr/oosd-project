@@ -23,7 +23,6 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="css/demo.css" rel="stylesheet"/>
 
-
     <!--     Fonts and icons     -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' type='text/css'/>
@@ -47,19 +46,19 @@
 
             <ul class="nav">
                 <li>
-                    <a href="lecturer-main.html">
+                    <a href="/lecturer">
                         <i class="pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
                 <li>
-                    <a href="lecturer-module.html">
+                    <a href="/lecturer-module">
                         <i class="pe-7s-note2"></i>
                         <p>Module</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="lecturer-result.html">
+                    <a href="/lecturer-result">
                         <i class="pe-7s-upload"></i>
                         <p>Result</p>
                     </a>
@@ -166,16 +165,12 @@
                                         <h4 class="title">Upload Result via a File</h4>
                                     </div>
                                     <div class="content">
-                                        <form>
+                                        <form id="upoload-file">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Module Code</label>
-                                                        <select class="form-control">
-                                                            <option value="CS001">CS001</option>
-                                                            <option value="CS002">CS002</option>
-                                                            <option value="CS003">CS003</option>
-                                                        </select>
+                                                        <select class="form-control" name="uf-module-code"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -184,7 +179,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Module Name</label>
-                                                        <input type="text" class="form-control" placeholder="">
+                                                        <input type="text" class="form-control" placeholder="" name="uf-module-name" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,7 +188,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Credits</label>
-                                                        <input type="text" class="form-control" placeholder="2.0">
+                                                        <input type="text" class="form-control" placeholder="2.0" name="uf-credits" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,7 +197,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Batch</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" placeholder="BSC15" name="uf-batch" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,7 +206,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Semester</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" placeholder="Semester 1" name="uf-semester" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -220,7 +215,24 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Result File</label>
-                                                        <input type="file" class="form-control" name="file" id="path">
+                                                        <input type="file" class="form-control" name="uf-file-path" id="file-path">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card" id="result-preview" style="display: none;">
+                                                <div class="content">
+                                                    <div class="table-responsive table-full-width">
+                                                        <table class="table table-hover table-striped" id="preview-table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Index</th>
+                                                                <th>Grade</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
@@ -230,6 +242,7 @@
                                                 Upload
                                             </button>
                                             <div class="clearfix"></div>
+
                                         </form>
                                     </div>
                                 </div>
@@ -424,7 +437,6 @@
                 </p>
             </div>
         </footer>
-
     </div>
 </div>
 
@@ -432,7 +444,7 @@
 </body>
 
 <!--   Core JS Files   -->
-<script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 
 <!--  Checkbox, Radio & Switch Plugins -->
@@ -449,5 +461,11 @@
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="js/demo.js"></script>
+
+<script src="js/xlsx.full.min.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="js/usr/lecturer-result.js"></script>
 
 </html>
