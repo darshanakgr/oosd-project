@@ -38,6 +38,14 @@ class LectureResultSocket {
             });
         });
 
+        socket.on('checkExistence', (data, callback) => {
+            resultControlelr.checkExistence(data).then((res) => {
+                callback(undefined, res);
+            }, (error) => {
+                callback(error, undefined);
+            });
+        });
+
     }
 }
 

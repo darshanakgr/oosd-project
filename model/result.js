@@ -20,15 +20,13 @@ var resultSchema = new mongoose.Schema({
         minlength:6,
         trim:true
     },
-    batch:{
+    resultId:{
         type:String,
-        required:true,
-        minlength:5,
-        trim:true
+        required:true
     }
 });
 
-resultSchema.index({index:1, moduleCode:1, batch:1}, {unique:true});
+resultSchema.index({index:1, moduleCode:1}, {unique:true});
 
 var Result = mongoose.model('Result', resultSchema);
 

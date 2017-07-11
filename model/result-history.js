@@ -24,7 +24,6 @@ var resultHistory = new mongoose.Schema({
         type:String,
         required:true
     }
-
 });
 
 resultHistory.index({moduleCode:1, batch:1},{unique:true});

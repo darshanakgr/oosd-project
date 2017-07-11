@@ -22,9 +22,12 @@ app.use(express.static(publicPath));
 app.get('/lecturer', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-main.html')));
 app.get('/lecturer-module', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-module.html')));
 app.get('/lecturer-result', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-result.html')));
+app.get('/reception', (req, res) => res.sendFile(path.join(publicPath, '/reception-main.html')));
+app.get('/reception-student', (req, res) => res.sendFile(path.join(publicPath, '/reception-student.html')));
 
 io.of('/lecturer-module').on('connection', (socket) => socketFactory.getLecturerModuleSocket(io, socket));
 io.of('/lecturer-result').on('connection', (socket) => socketFactory.getLecturerResultSocket(io, socket));
+io.of('/reception-student').on('connection', (socket) => socketFactory.getReceptionStudentSocket(io, socket));
 
 server.listen(port, () => console.log('Server is up on ' + port));
 

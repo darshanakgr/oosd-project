@@ -23,8 +23,14 @@ const addResults = (results, resultHistory) => {
     Result.collection.insert(resultArr);
 }
 
+const checkExistence = (data) => {
+    return ResultHistory.find(data);
+}
+
 
 module.exports = {
-    createNewResultHistory, addResults
+    createNewResultHistory,
+    addResults,
+    checkExistence
 }
 

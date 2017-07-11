@@ -9,32 +9,34 @@ class LectureModuleSocket{
         });
 
         socket.on('createNewModule', (module, callback) => {
-            moduleControlelr.createNewModule(module).then((message) => {
-                callback(message);
+            moduleControlelr.createNewModule(module).then((res) => {
+                callback(undefined, res);
             }).catch((error) => {
                 callback(error);
             });
         });
 
         socket.on('searchModule', (moduleCode, callback) => {
-           moduleControlelr.searchModule(moduleCode).then((module) => {
-               callback(module);
+           moduleControlelr.searchModule(moduleCode).then((res) => {
+               callback(undefined, res);
            }).catch((error) => {
                callback(error);
-           })
+           });
         });
 
         socket.on('updateModule', (moduleCode, module, callback) => {
-            moduleControlelr.updateModule(moduleCode, module).then((module) => {
-                callback(module);
+            moduleControlelr.updateModule(moduleCode, module).then((res) => {
+                callback(undefined, res);
             }).catch((error) => {
                 callback(error);
-            })
+            });
         });
 
         socket.on('getAllModules', (callback) => {
-            moduleControlelr.getAllModules().then((modules) => {
-                callback(modules);
+            moduleControlelr.getAllModules().then((res) => {
+                callback(undefined, res);
+            }).catch((error) => {
+                callback(error);
             });
         });
     }

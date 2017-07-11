@@ -15,11 +15,11 @@ socket.emit('getModuleCodes', function (moduleCodes) {
     if (moduleCodes) {
         moduleCodes.forEach(function (data) {
             $("[name=uf-module-code]").append($('<option>', {
-                val: data.moduleCode,
-                text: data.moduleCode
+                val: data._id,
+                text: data.moduleCode + ":" + data.batch
             }));
-            var moduleCode = $("[name=uf-module-code]").val();
-            socket.emit('searchModule', moduleCode, function (module) {
+            var id = $("[name=uf-module-code]").val();
+            socket.emit('searchModule', id, function (module) {
                 if (module) {
                     $('[name=uf-module-name]').val(module.moduleName);
                     $('[name=uf-credits]').val(module.credits);
@@ -91,25 +91,39 @@ $('[name=uf-file-path]').on('change', function (e) {
 
 $('#upoload-file').on('submit', function (e) {
     e.preventDefault();
-    var file = $('[name=uf-file-path]')[0].files[0];
-    var reader = new FileReader();
-    var name = file.name;
-    reader.onload = function(e) {
-        var data = e.target.result;
-        var workbook = XLSX.read(data, {type: 'binary'});
-        var sheetName = workbook.Workbook.Sheets[0].name;
-        var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-        socket.emit('uploadResult', {
-            moduleCode:$('[name=uf-module-code]').val(),
-            batch:$('[name=uf-batch]').val(),
-            date:new Date(),
-            user:"Admin"
-        }, data, function (err, res) {
-            if(err){
-                return alert("Unable to save result");
-            }
-            alert("Result saved")
-        });
-    };
-    reader.readAsBinaryString(file);
+
+    socket.emit('checkExistence', {
+        moduleCode:$('[name=uf-module-code]').val(),
+        batch:$('[name=uf-batch]').val()
+    }, function (err, res) {
+        if(err){
+            return alert(err);
+        }
+        if(!res){
+           alert('No previous records');
+        }else{
+            alert('Previous records available');
+        }
+    });
+    // var file = $('[name=uf-file-path]')[0].files[0];
+    // var reader = new FileReader();
+    // var name = file.name;
+    // reader.onload = function(e) {
+    //     var data = e.target.result;
+    //     var workbook = XLSX.read(data, {type: 'binary'});
+    //     var sheetName = workbook.Workbook.Sheets[0].name;
+    //     var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+    //     socket.emit('uploadResult', {
+    //         moduleCode:$('[name=uf-module-code]').val(),
+    //         batch:$('[name=uf-batch]').val(),
+    //         date:new Date(),
+    //         user:"Admin"
+    //     }, data, function (err, res) {
+    //         if(err){
+    //             return alert("Unable to save result");
+    //         }
+    //         alert("Result saved")
+    //     });
+    // };
+    // reader.readAsBinaryString(file);
 });

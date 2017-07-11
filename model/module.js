@@ -4,12 +4,13 @@
 
 const mongoose = require('mongoose');
 
-var modules = new mongoose.Schema({
+var Module = mongoose.model('Module', {
     moduleCode:{
         type:String,
         required:true,
         minlength:4,
-        trim:true
+        trim:true,
+        unique:true
     },
     moduleName:{
         type:String,
@@ -21,23 +22,7 @@ var modules = new mongoose.Schema({
         type:Number,
         required:true,
         minlength:1
-    },
-    batch:{
-        type:String,
-        required:true,
-        minlength:5,
-        trim:true
-    },
-    semester:{
-        type:Number,
-        required:true,
-        minlength:5,
-        trim:true
     }
 });
 
-modules.index({moduleCode:1, batch:1}, {unique:true});
-
-var Modules = mongoose.model('Modules', modules);
-
-module.exports = {Modules};
+module.exports = {Module};
