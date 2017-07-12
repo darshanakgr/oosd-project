@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 
 var Batch = mongoose.model('Batch', {
     batchName: {
-        type:String
+        type:String,
+        required:true,
+        unique:true
     }
 });
 

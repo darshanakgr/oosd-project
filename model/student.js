@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 var Student = mongoose.model('Student', {
     index:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     batch:{
         type:String,

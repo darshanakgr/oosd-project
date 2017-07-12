@@ -159,7 +159,7 @@
                                     <li>
                                         <a href="#enroll" data-toggle="tab">
                                             <i class="material-icons">alarm</i>
-                                            Manage Enrollments
+                                            Enrollments
                                         </a>
 
                                     </li>
@@ -283,11 +283,84 @@
                                             <tbody>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="tab-pane" id="enroll">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">New Enrollment</h4>
+                                    </div>
+                                    <div class="content">
+                                        <form id="new-enrollment-form">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Module</label>
+                                                        <select name="me-module-code" class="form-control"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Module Name</label>
+                                                        <input type="text" name="me-module-name" class="form-control" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Batch</label>
+                                                        <select name="me-batch" class="form-control"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Semester</label>
+                                                        <select name="me-semester" class="form-control">
+                                                            <option value="1">Semester 1</option>
+                                                            <option value="2">Semester 2</option>
+                                                            <option value="3">Semester 3</option>
+                                                            <option value="4">Semester 4</option>
+                                                            <option value="5">Semester 5</option>
+                                                            <option value="6">Semester 6</option>
+                                                            <option value="7">Semester 7</option>
+                                                            <option value="8">Semester 8</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-danger btn-fill">Submit</button>
+                                        </form>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">Current Enrollments</h4>
+                                    </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped" id="current-enrollment-table">
+                                            <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Credits</th>
+                                                <th>Batch</th>
+                                                <th>Semester</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

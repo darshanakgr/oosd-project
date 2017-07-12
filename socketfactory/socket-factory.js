@@ -1,7 +1,7 @@
 /**
  * Created by drox2014 on 7/10/2017.
  */
-const {LectureModuleSocket} = require('./../socket/lecturer-module-socket');
+const {LectureModuleSocket} = require('../socket/lecturer-module-socket');
 const {LectureResultSocket} = require('./../socket/lecturer-result-socket');
 const {ReceptionStudentSocket} = require('./../socket/reception-student-socket');
 
@@ -21,4 +21,4 @@ module.exports = {
     getLecturerModuleSocket,
     getLecturerResultSocket,
     getReceptionStudentSocket
-}
+};

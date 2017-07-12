@@ -21,14 +21,7 @@ var getAllModules = () => {
 };
 
 var getModuleCodes = () => {
-    return new Promise((resolve, reject) => {
-        Modules.find().select("moduleCode batch").exec((error, modules) => {
-            if (error) {
-                reject(error.errors);
-            }
-            resolve(modules);
-        });
-    });
+    return Module.find().select("moduleCode batch");
 };
 
 module.exports = {

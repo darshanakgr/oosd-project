@@ -20,10 +20,6 @@ var moduleDetailSchema = new mongoose.Schema({
     semester:{
         type:Number,
         required:true
-    },
-    dueDate:{
-        type:Date,
-        required:true
     }
 });
 
