@@ -38,11 +38,15 @@ const updateResultHistory = (resultId, resultHistory) => {
 
 const searchResultHistoryById = (userId) => {
     return ResultHistory.find({user:userId});
-}
+};
 
 const searchResultsByStudnetId = (studentId) => {
     return Result.find({index:studentId});
-}
+};
+
+const searchResultHistoryByModuleDetailId = (moduleDetailId) => {
+    return ResultHistory.findOne({moduleDetailId});
+};
 
 module.exports = {
     createNewResultHistory,
@@ -51,6 +55,7 @@ module.exports = {
     updateResultHistory,
     removeResults,
     searchResultHistoryById,
-    searchResultsByStudnetId
+    searchResultsByStudnetId,
+    searchResultHistoryByModuleDetailId
 }
 

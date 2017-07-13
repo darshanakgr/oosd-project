@@ -1,6 +1,7 @@
-const moduleControlelr = require('./../controller/module-controller');
-const moduleDetailControlelr = require('./../controller/module-detail-controller');
+const moduleController = require('./../controller/module-controller');
+const moduleDetailController = require('./../controller/module-detail-controller');
 const batchController = require('./../controller/batch-controller');
+const resultController = require('./../controller/result-controller');
 
 class LectureModuleSocket{
     constructor(io, socket){
@@ -11,7 +12,7 @@ class LectureModuleSocket{
         });
 
         socket.on('createNewModule', (module, callback) => {
-            moduleControlelr.createNewModule(module).then((res) => {
+            moduleController.createNewModule(module).then((res) => {
                 callback(undefined, res);
             }).catch((error) => {
                 callback(error);
@@ -19,7 +20,7 @@ class LectureModuleSocket{
         });
 
         socket.on('searchModule', (moduleCode, callback) => {
-           moduleControlelr.searchModule(moduleCode).then((res) => {
+           moduleController.searchModule(moduleCode).then((res) => {
                callback(undefined, res);
            }).catch((error) => {
                callback(error);
@@ -27,7 +28,7 @@ class LectureModuleSocket{
         });
 
         socket.on('updateModule', (moduleCode, module, callback) => {
-            moduleControlelr.updateModule(moduleCode, module).then((res) => {
+            moduleController.updateModule(moduleCode, module).then((res) => {
                 callback(undefined, res);
             }).catch((error) => {
                 callback(error);
@@ -35,7 +36,7 @@ class LectureModuleSocket{
         });
 
         socket.on('getAllModules', (callback) => {
-            moduleControlelr.getAllModules().then((res) => {
+            moduleController.getAllModules().then((res) => {
                 callback(undefined, res);
             }).catch((error) => {
                 callback(error);
@@ -43,7 +44,7 @@ class LectureModuleSocket{
         });
 
         socket.on('createNewModuleDetail', (moduleDetail, callback)=> {
-            moduleDetailControlelr.createNewModuleDetail(moduleDetail).then((res) => {
+            moduleDetailController.createNewModuleDetail(moduleDetail).then((res) => {
                 callback(undefined, res);
             }, (error) => {
                 callback(error);
@@ -51,7 +52,15 @@ class LectureModuleSocket{
         });
 
         socket.on('searchByLectureId', (lecturerId, callback)=> {
-            moduleDetailControlelr.searchByLectureId(lecturerId).then((res) => {
+            moduleDetailController.searchByLectureId(lecturerId).then((res) => {
+                callback(undefined, res);
+            }, (error) => {
+                callback(error);
+            });
+        });
+
+        socket.on('searchModuleDetailByLecturerIdAndCode', (moduleDetail, callback)=> {
+            moduleDetailController.searchModuleDetailByLecturerIdAndCode(moduleDetail).then((res) => {
                 callback(undefined, res);
             }, (error) => {
                 callback(error);
@@ -59,7 +68,7 @@ class LectureModuleSocket{
         });
 
         socket.on('getModuleCodes', (callback) => {
-            moduleControlelr.getModuleCodes().exec((err, res) => {
+            moduleController.getModuleCodes().exec((err, res) => {
                 if(err){
                     return callback(err);
                 }
@@ -77,7 +86,15 @@ class LectureModuleSocket{
         });
 
         socket.on('removeModuleDetail', (moduleDetail, callback) => {
-            moduleDetailControlelr.removeModuleDetail(moduleDetail).then((res) =>{
+            moduleDetailController.removeModuleDetail(moduleDetail).then((res) =>{
+                callback(undefined, res);
+            }, (error) => {
+                callback(error);
+            });
+        });
+
+        socket.on('searchResultHistoryByModuleDetailId', (moduleDetailId, callback) => {
+            resultController.searchResultHistoryByModuleDetailId(moduleDetailId).then((res) => {
                 callback(undefined, res);
             }, (error) => {
                 callback(error);

@@ -5,6 +5,7 @@ const {LectureModuleSocket} = require('../socket/lecturer-module-socket');
 const {LectureResultSocket} = require('./../socket/lecturer-result-socket');
 const {ReceptionStudentSocket} = require('./../socket/reception-student-socket');
 const {StudentSocket} = require('./../socket/student-socket');
+const {LecturerStatisticSocket} = require('./../socket/lecturer-statistic-socket');
 
 const getLecturerModuleSocket = (io, socket) => {
     return new LectureModuleSocket(io, socket);
@@ -22,9 +23,14 @@ const getStudentSocket = (io, socket) => {
     return new StudentSocket(io, socket);
 };
 
+const getLecturerStatisticsSocket = (io, socket) => {
+    return new LecturerStatisticSocket(io, socket);
+};
+
 module.exports = {
     getLecturerModuleSocket,
     getLecturerResultSocket,
     getReceptionStudentSocket,
-    getStudentSocket
+    getStudentSocket,
+    getLecturerStatisticsSocket
 };

@@ -3,7 +3,7 @@
  */
 var socket = io('/lecturer-result');
 
-var lecturerId = "5966148e298f80f23a2f2bf2";
+var lecturerId = "59675c9396fcbd01bbcb3271";
 // var lecturerId = "5966fcbd96fcbd01bbcb1450";
 
 socket.on('connect', function () {
@@ -101,15 +101,15 @@ $('[name=uf-file-path]').on('change', function (e) {
 });
 
 $('#upoload-file').on('submit', function (e) {
+    var moduleDetailId = $('[name=uf-module-code]').val();
     e.preventDefault();
-    socket.emit('searchModuleDetailById', $('[name=uf-module-code]').val(), function (err, res) {
+    socket.emit('searchModuleDetailById', moduleDetailId, function (err, res) {
         if (err) {
             return alert('Unable to connect to server')
         }
         var moduleCode = res.moduleCode;
         socket.emit('checkExistence', {
-            moduleCode: moduleCode,
-            batch: $('[name=uf-batch]').val()
+            moduleDetailId:moduleDetailId
         }, function (err, res) {
             if (err) {
                 return alert(err);
@@ -126,7 +126,7 @@ $('#upoload-file').on('submit', function (e) {
                         var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
                         console.log(data);
                         socket.emit('updateResult', res[0]._id, {
-                            batch: $('[name=uf-batch]').val(),
+                            moduleDetailId: moduleDetailId,
                             date: new Date(),
                             user: lecturerId
                         }, data, function (err, res) {
@@ -152,7 +152,7 @@ $('#upoload-file').on('submit', function (e) {
                     var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
                     socket.emit('uploadResult', {
                         moduleCode: moduleCode,
-                        batch: $('[name=uf-batch]').val(),
+                        moduleDetailId: moduleDetailId,
                         date: new Date(),
                         user: lecturerId
                     }, data, function (err, res) {
@@ -187,16 +187,16 @@ $('[name=submit-btn]').on('click', function () {
 });
 
 $('#enter-manually-form').on('submit', function (e) {
+    var moduleDetailId = $('[name=um-module-code]').val();
     e.preventDefault();
     var data = traveseResultTable();
-    socket.emit('searchModuleDetailById', $('[name=um-module-code]').val(), function (err, res) {
+    socket.emit('searchModuleDetailById', moduleDetailId, function (err, res) {
         if (err) {
             return alert('Unable to connect to server')
         }
         var moduleCode = res.moduleCode;
         socket.emit('checkExistence', {
-            moduleCode: moduleCode,
-            batch: $('[name=um-batch]').val()
+            moduleDetailId: moduleDetailId,
         }, function (err, res) {
             if (err) {
                 return alert(err);
@@ -204,7 +204,7 @@ $('#enter-manually-form').on('submit', function (e) {
             if (res.length) {
                 if (confirm('Previous records available. Do you want to replace existing results?')) {
                     socket.emit('updateResult', res[0]._id, {
-                        batch: $('[name=uf-batch]').val(),
+                        moduleDetailId: moduleDetailId,
                         date: new Date(),
                         user: lecturerId
                     }, data, function (err, res) {
@@ -220,7 +220,7 @@ $('#enter-manually-form').on('submit', function (e) {
             } else {
                 socket.emit('uploadResult', {
                     moduleCode: moduleCode,
-                    batch: $('[name=uf-batch]').val(),
+                    moduleDetailId: moduleDetailId,
                     date: new Date(),
                     user: lecturerId
                 }, data, function (err, res) {
@@ -294,12 +294,18 @@ function fillResultHistoryTable() {
                 if (error) {
                     return console.log(error);
                 }
-                var row = table.insertRow(-1);
-                row.insertCell(0).innerHTML = resultHistory.date.split('T')[0];
-                row.insertCell(1).innerHTML = module.moduleCode;
-                row.insertCell(2).innerHTML = module.moduleName;
-                row.insertCell(3).innerHTML = module.credits;
-                row.insertCell(4).innerHTML = resultHistory.batch;
+                socket.emit('searchModuleDetailById', resultHistory.moduleDetailId, function (error, moduleDetail) {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    var row = table.insertRow(-1);
+                    row.insertCell(0).innerHTML = resultHistory.date.split('T')[0];
+                    row.insertCell(1).innerHTML = module.moduleCode;
+                    row.insertCell(2).innerHTML = module.moduleName;
+                    row.insertCell(3).innerHTML = module.credits;
+                    row.insertCell(4).innerHTML = moduleDetail.batch;
+                    row.insertCell(5).innerHTML = moduleDetail.semester;
+                });
             });
         });
 

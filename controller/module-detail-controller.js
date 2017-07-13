@@ -9,7 +9,7 @@ var createNewModuleDetail = (moduleDetail) => {
 };
 
 var searchByLectureId = (lecturerId) => {
-    return ModuleDetail.find(lecturerId);
+    return ModuleDetail.find({lecturerId});
 };
 
 var removeModuleDetail = (moduleDetail) => {
@@ -20,9 +20,14 @@ var searchById = (id) => {
     return ModuleDetail.findById(id);
 }
 
+var searchModuleDetailByLecturerIdAndCode = (moduleDetail) => {
+    return ModuleDetail.findOne(moduleDetail);
+};
+
 module.exports = {
     createNewModuleDetail,
     searchByLectureId,
     removeModuleDetail,
-    searchById
+    searchById,
+    searchModuleDetailByLecturerIdAndCode
 }

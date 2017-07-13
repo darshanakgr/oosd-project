@@ -24,6 +24,8 @@ var getModuleCodes = () => {
     return Module.find().select("moduleCode batch");
 };
 
+
+
 module.exports = {
     createNewModule,
     searchModule,

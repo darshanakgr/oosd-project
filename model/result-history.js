@@ -10,11 +10,9 @@ var resultHistory = new mongoose.Schema({
         trim:true,
         minlength:6
     },
-    batch:{
+    moduleDetailId:{
         type:String,
-        required:true,
-        trim:true,
-        minlength:5
+        required:true
     },
     date:{
         type:Date,
@@ -26,7 +24,7 @@ var resultHistory = new mongoose.Schema({
     }
 });
 
-resultHistory.index({moduleCode:1, batch:1},{unique:true});
+resultHistory.index({moduleCode:1, moduleDetailId:1},{unique:true});
 
 var ResultHistory = mongoose.model('ResultHistory', resultHistory);
 

@@ -1,31 +1,5 @@
 type = ['', 'info', 'success', 'warning', 'danger'];
-// var data = {
-//     labels: ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'F', 'I-WE'],
-//     series: [
-//         [5, 10, 7, 30, 8, 3, 6, 4, 8, 0, 0, 1]
-//     ]
-// };
-//
-// var options = {
-//     seriesBarDistance: 1,
-//     axisX: {
-//         showGrid: false
-//     },
-//     height: "245px"
-// };
-//
-// var responsiveOptions = [
-//     ['screen and (max-width: 640px)', {
-//         seriesBarDistance: 5,
-//         axisX: {
-//             labelInterpolationFnc: function (value) {
-//                 return value[0];
-//             }
-//         }
-//     }]
-// ];
 
-// Chartist.Bar('#chartActivity', data, options, responsiveOptions);
 
 // demo = {
 //     // initPickColor: function(){
