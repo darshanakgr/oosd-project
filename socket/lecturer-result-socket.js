@@ -20,10 +20,21 @@ class LectureResultSocket {
             })
         });
 
+        socket.on('updateResult', (resultId, resultHistory, data, callback) => {
+            resultControllr.updateResultHistory(resultId, resultHistory).then((res) => {
+                resultControllr.removeResults(res._id).then((doc) => {
+                    resultControllr.addResults(data, res.moduleCode, res._id ,callback);
+                }, (error) => {
+                    callback(error, undefined);
+                })
+            }, (error) => {
+                callback(error, undefined);
+            });
+        });
+
         socket.on('uploadResult', (resultHistory, data, callback) => {
             resultControllr.createNewResultHistory(resultHistory).then((res) => {
-                resultControllr.addResults(data, resultHistory);
-                callback(undefined, res);
+                resultControllr.addResults(data, res.moduleCode, res._id ,callback);
             }, (error) => {
                 callback(error, undefined);
             });
@@ -47,6 +58,14 @@ class LectureResultSocket {
 
         socket.on('searchModuleDetailById', (id, callback) => {
             moduleDetailController.searchById(id).then((res) =>{
+                callback(undefined, res);
+            }, (error) => {
+                callback(error);
+            });
+        });
+
+        socket.on('getResultHistoryById', (userId, callback) => {
+            resultControllr.searchResultHistoryById(userId).then((res) =>{
                 callback(undefined, res);
             }, (error) => {
                 callback(error);

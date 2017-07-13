@@ -28,6 +28,7 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/pe-icon-7-stroke.css" rel="stylesheet"/>
 
 </head>
@@ -44,13 +45,13 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="/student">
                         <i class="pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/student-result">
                         <i class="pe-7s-upload"></i>
                         <p>Result</p>
@@ -121,7 +122,52 @@
 
         <div class="content">
             <div class="container-fluid">
+                <div class="card">
+                    <div class="content">
+                        <table class="table table-hover table-striped" id="result-table">
+                            <thead>
+                            <tr>
+                                <th>Module Code</th>
+                                <th>Name</th>
+                                <th>Credits</th>
+                                <th>Grade</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="form-control">Total GPA</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="total-gpa" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Statistics</h4>
+                    </div>
+                    <div class="content text-center">
+                        <div class="content">
+                            <div id="chartActivity" class="ct-chart">
+                            </div>
 
+                            <div class="footer">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-check"></i> Data information certified
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -158,21 +204,8 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="js/demo.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
+<script src="/socket.io/socket.io.js"></script>
 
-//        	demo.initChartist();
-
-        $.notify({
-            icon: 'pe-7s-gift',
-            message: "Welcome to <b>Smart Notice Board</b>"
-
-        }, {
-            type: 'info',
-            timer: 4000
-        });
-
-    });
-</script>
+<script src="js/usr/student-result.js"></script>
 
 </html>

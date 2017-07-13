@@ -179,7 +179,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Module Name</label>
-                                                        <input type="text" class="form-control" placeholder="" name="uf-module-name" readonly>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               name="uf-module-name" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,7 +189,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Credits</label>
-                                                        <input type="text" class="form-control" placeholder="2.0" name="uf-credits" readonly>
+                                                        <input type="text" class="form-control" placeholder="2.0"
+                                                               name="uf-credits" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,7 +199,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Batch</label>
-                                                        <input type="text" class="form-control" placeholder="BSC15" name="uf-batch" readonly>
+                                                        <input type="text" class="form-control" placeholder="BSC15"
+                                                               name="uf-batch" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,7 +209,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Semester</label>
-                                                        <input type="text" class="form-control" placeholder="Semester 1" name="uf-semester" readonly>
+                                                        <input type="text" class="form-control" placeholder="Semester 1"
+                                                               name="uf-semester" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,7 +219,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Result File</label>
-                                                        <input type="file" class="form-control" name="uf-file-path" id="file-path">
+                                                        <input type="file" class="form-control" name="uf-file-path"
+                                                               id="file-path">
                                                     </div>
                                                 </div>
                                             </div>
@@ -223,7 +228,8 @@
                                             <div class="card" id="result-preview" style="display: none;">
                                                 <div class="content">
                                                     <div class="table-responsive table-full-width">
-                                                        <table class="table table-hover table-striped" id="preview-table">
+                                                        <table class="table table-hover table-striped"
+                                                               id="preview-table">
                                                             <thead>
                                                             <tr>
                                                                 <th>Index</th>
@@ -253,16 +259,12 @@
                                         <h4 class="title">Enter Manually</h4>
                                     </div>
                                     <div class="content">
-                                        <form>
+                                        <form id="enter-manually-form">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Module Code</label>
-                                                        <select class="form-control">
-                                                            <option value="CS001">CS001</option>
-                                                            <option value="CS002">CS002</option>
-                                                            <option value="CS003">CS003</option>
-                                                        </select>
+                                                        <select class="form-control" name="um-module-code"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -271,7 +273,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Module Name</label>
-                                                        <input type="text" class="form-control" placeholder="">
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               name="um-module-name">
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,7 +283,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Credits</label>
-                                                        <input type="text" class="form-control" placeholder="2.0">
+                                                        <input type="text" class="form-control" placeholder="2.0"
+                                                               name="um-credits">
                                                     </div>
                                                 </div>
                                             </div>
@@ -289,7 +293,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Batch</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" name="um-batch">
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,84 +302,61 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Semester</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" name="um-semester">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="card">
                                                 <div class="content">
-                                                    <form>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Index No</label>
-                                                                    <input type="text" class="form-control" placeholder="150528X">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Name</label>
-                                                                    <input type="text" class="form-control" placeholder="K.G.R.D.Rathnayake">
-                                                                </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Index No</label>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="000000X" name="index-no">
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Grade</label>
-                                                                    <select class="form-control">
-                                                                        <option value="4.2">A+</option>
-                                                                        <option value="4.0">A</option>
-                                                                        <option value="3.7">A-</option>
-                                                                        <option value="3.3">B+</option>
-                                                                        <option value="3.0">B</option>
-                                                                        <option value="2.7">B-</option>
-                                                                        <option value="2.3">C+</option>
-                                                                        <option value="2.0">C</option>
-                                                                        <option value="1.5">C-</option>
-                                                                        <option value="1.0">D</option>
-                                                                        <option value="0.0">I-we</option>
-                                                                        <option value="0.0">F</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label>Credit</label>
-                                                                    <input type="text" class="form-control" placeholder="4.2">
-                                                                </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Grade</label>
+                                                                <select class="form-control" name="grade">
+                                                                    <option value="A+">A+</option>
+                                                                    <option value="A">A</option>
+                                                                    <option value="A-">A-</option>
+                                                                    <option value="B+">B+</option>
+                                                                    <option value="B">B</option>
+                                                                    <option value="B-">B-</option>
+                                                                    <option value="C+">C+</option>
+                                                                    <option value="C">C</option>
+                                                                    <option value="C-">C-</option>
+                                                                    <option value="D">D</option>
+                                                                    <option value="I-WE">I-we</option>
+                                                                    <option value="F">F</option>
+                                                                </select>
                                                             </div>
                                                         </div>
-                                                        <div class="table-responsive table-full-width">
-                                                            <table class="table table-hover table-striped">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>Index</th>
-                                                                    <th>Name</th>
-                                                                    <th>Grade</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>150500A</td>
-                                                                    <td>Darshana</td>
-                                                                    <td>A-</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>150500A</td>
-                                                                    <td>Darshana</td>
-                                                                    <td>A-</td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </form>
+                                                    </div>
+                                                    <input type="button" value="Submit" name="submit-btn" class="btn btn-fill btn-success">
+                                                    <div class="table-responsive table-full-width">
+                                                        <table class="table table-hover table-striped"
+                                                               id="result-entry-table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Index</th>
+                                                                <th>Grade</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <button type="submit" class="btn btn-info btn-fill">
-                                                <i class="material-icons">insert_drive_file</i>
                                                 Upload
                                             </button>
                                             <div class="clearfix"></div>
@@ -389,7 +370,7 @@
                                         <h4 class="title">Result History</h4>
                                     </div>
                                     <div class="content table-responsive table-full-width">
-                                        <table class="table table-hover table-striped">
+                                        <table class="table table-hover table-striped" id="history-table">
                                             <thead>
                                             <tr>
                                                 <th>Date</th>
@@ -397,26 +378,9 @@
                                                 <th>Name</th>
                                                 <th>Credits</th>
                                                 <th>Batch</th>
-                                                <th>Semester</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>2016/01/01</td>
-                                                <td>CS001</td>
-                                                <td>Operating System</td>
-                                                <td>2.5</td>
-                                                <td>BSC15</td>
-                                                <td>Sem 2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2017/02/31</td>
-                                                <td>CS002</td>
-                                                <td>Graph Theory</td>
-                                                <td>20</td>
-                                                <td>BSC15</td>
-                                                <td>Sem 3</td>
-                                            </tr>
                                             </tbody>
                                         </table>
 
