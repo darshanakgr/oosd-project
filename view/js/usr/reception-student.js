@@ -30,7 +30,9 @@ $('#register-new-student-form').on('submit', function (e) {
     socket.emit('registerNewStudent', {
         index: $('[name=st-index-no]').val(),
         batch: $('[name=st-batch]').val(),
-        name: $('[name=st-name]').val()
+        name: $('[name=st-name]').val(),
+        address: $('[name=st-address]').val(),
+        contact: $('[name=st-contact]').val()
     }, function (err, res) {
         if (err) {
             return alert('Unable to register new student');
@@ -38,7 +40,32 @@ $('#register-new-student-form').on('submit', function (e) {
         alert('New student registered successfully');
         clearStudentForm();
     });
-})
+});
+
+$('#search-student-form').on('submit', function (e) {
+    e.preventDefault();
+    socket.emit('searchStudentByIndex', $('[name=sc-index-no]').val(), function (err, res) {
+        if(err){
+            return console.log(err);
+        }
+        if(res){
+            $('[name=sc-name]').val(res.name);
+            $('[name=sc-batch]').val(res.batch);
+            $('[name=sc-address]').val(res.address);
+            $('[name=sc-contact]').val(res.contact);
+        }else{
+            clearSearchForm();
+            alert('Incorrect Index Number. PLease check again')
+        }
+    });
+});
+
+function clearSearchForm() {
+    $('[name=sc-name]').val("");
+    $('[name=sc-batch]').val("");
+    $('[name=sc-address]').val("");
+    $('[name=sc-contact]').val("");
+}
 
 function fillBatchComobo() {
     socket.emit('getAllBatches', function (err, res) {

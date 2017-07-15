@@ -5,6 +5,10 @@
 const mongoose = require('mongoose');
 
 var lecturerSchema = new mongoose.Schema({
+    res:{
+        type:String,
+        required:true
+    },
     name:{
         type:String,
         required:true
@@ -17,4 +21,4 @@ var lecturerSchema = new mongoose.Schema({
 
 var Lecturer = mongoose.model('Lecturer', lecturerSchema);
 
-module.export = {Lecturer};
+module.exports = {Lecturer};

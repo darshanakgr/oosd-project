@@ -33,6 +33,14 @@ class ReceptionStudentSocket {
             });
         });
 
+        socket.on('searchStudentByIndex', (index, callback) => {
+            studentController.searchByIndex(index).then((res) => {
+                callback(undefined, res);
+            }, (error) => {
+                callback(error);
+            });
+        });
+
     }
 }
 

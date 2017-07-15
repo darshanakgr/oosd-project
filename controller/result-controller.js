@@ -48,6 +48,14 @@ const searchResultHistoryByModuleDetailId = (moduleDetailId) => {
     return ResultHistory.findOne({moduleDetailId});
 };
 
+const getAllHistories = () => {
+    return ResultHistory.find();
+};
+
+const searchResultsByHistoryId = (resultId) => {
+    return Result.find({resultId});
+};
+
 module.exports = {
     createNewResultHistory,
     addResults,
@@ -56,6 +64,8 @@ module.exports = {
     removeResults,
     searchResultHistoryById,
     searchResultsByStudnetId,
-    searchResultHistoryByModuleDetailId
+    getAllHistories,
+    searchResultHistoryByModuleDetailId,
+    searchResultsByHistoryId
 }
 

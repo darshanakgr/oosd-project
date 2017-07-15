@@ -8,6 +8,11 @@ const registerNewStudent = (student) => {
     return new Student(student).save();
 }
 
+const searchByIndex = (index) => {
+    return Student.findOne({index});
+}
+
 module.exports = {
-    registerNewStudent
+    registerNewStudent,
+    searchByIndex
 }

@@ -16,6 +16,14 @@ var Student = mongoose.model('Student', {
     name:{
         type:String,
         required:true
+    },
+    address:{
+        type:String,
+        required:true
+    },
+    contact:{
+        type:Number,
+        required:true
     }
 });
 

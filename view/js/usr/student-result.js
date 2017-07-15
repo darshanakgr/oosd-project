@@ -3,7 +3,7 @@
  */
 var socket = io('/student-result');
 
-var studentId = "150528X";
+var studentId = "150501A";
 
 socket.on('connect', function () {
     console.log('Connected to server');

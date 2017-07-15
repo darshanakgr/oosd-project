@@ -3,7 +3,7 @@
  */
 var socket = io('/lecturer-module');
 
-var lecturerId = "59675c9396fcbd01bbcb3271";
+var lecturerId = "596841d175487a521b3d2a46";
 // var lecturerId = "5966fcbd96fcbd01bbcb1450";
 
 socket.on('connect', function () {

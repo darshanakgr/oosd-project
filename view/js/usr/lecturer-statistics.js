@@ -8,243 +8,122 @@ var lecturerId = "59675c9396fcbd01bbcb3271";
 
 socket.on('connect', function () {
     console.log('Connected to server');
+    $('#chartActivity').empty();
 });
 
 socket.on('disconnect', function () {
     console.log('Disconnected from server');
 });
 
+$('[name=module-code]').on('change', function () {
+    var id = $("[name=module-code]").val();
+    var table = document.getElementById('module-detail-table');
+    while(table.rows.length > 0){
+        table.deleteRow(-1);
+    }
+    var resultTable = document.getElementById('result-table');
+    while(resultTable.rows.length > 1){
+        resultTable.deleteRow(-1);
+    }
+    socket.emit('searchModuleDetailById', id, function (err, res) {
+        if (err) {
+            return console.log(err);
+        }
+        if (res) {
+            socket.emit('searchModule', res.moduleCode, function (error, module) {
+                if (err) {
+                    return console.log(error);
+                }
+                var moduleCode = table.insertRow(-1);
+                moduleCode.insertCell(0).innerHTML = "Module Code";
+                moduleCode.insertCell(1).innerHTML = module.moduleCode;
+                var moduleName= table.insertRow(-1);
+                moduleName.insertCell(0).innerHTML = "Module Name";
+                moduleName.insertCell(1).innerHTML = module.moduleName;
+                var credits= table.insertRow(-1);
+                credits.insertCell(0).innerHTML = "Credits";
+                credits.insertCell(1).innerHTML = module.credits;
+                var batch = table.insertRow(-1);
+                batch.insertCell(0).innerHTML = "Batch";
+                batch.insertCell(1).innerHTML = res.batch;
+                var semester= table.insertRow(-1);
+                semester.insertCell(0).innerHTML = "Semester";
+                semester.insertCell(1).innerHTML = res.semester;
+            });
+            socket.emit('getResultId', id, function (error, resultHistory) {
+                if (err) {
+                    return console.log(error);
+                }
+                if(resultHistory){
+                    var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    socket.emit('getResultsByResultId', resultHistory._id, function (error, res) {
+                        if (err) {
+                            return console.log(error);
+                        }
+                        res.forEach(function (result) {
+                            var row = resultTable.insertRow(-1);
+                            row.insertCell(0).innerHTML = result.index;
+                            row.insertCell(1).innerHTML = "dadsa";
+                            row.insertCell(2).innerHTML = result.grade;
+                            fillArray(result.grade, arr);
+                            plotGraph(arr);
+                        });
+                    });
+                }
+            });
 
-// $('[name=uf-module-code]').on('change', function () {
-//     var id = $("[name=uf-module-code]").val();
-//     socket.emit('searchModuleDetailById', id, function (err, res) {
-//         if (err) {
-//             return console.log(err);
-//         }
-//         if (res) {
-//             socket.emit('searchModule', res.moduleCode, function (error, module) {
-//                 if (err) {
-//                     return console.log(error);
-//                 }
-//                 $('[name=uf-module-name]').val(module.moduleName);
-//                 $('[name=uf-credits]').val(module.credits);
-//                 $('[name=uf-batch]').val(res.batch);
-//                 $('[name=uf-semester]').val('Semester ' + res.semester);
-//             });
-//         }
-//     });
-// });
-//
-// $('[name=um-module-code]').on('change', function () {
-//     var id = $("[name=um-module-code]").val();
-//     socket.emit('searchModuleDetailById', id, function (err, res) {
-//         if (err) {
-//             return console.log(err);
-//         }
-//         if (res) {
-//             socket.emit('searchModule', res.moduleCode, function (error, module) {
-//                 if (error) {
-//                     return console.log(error);
-//                 }
-//                 $('[name=um-module-name]').val(module.moduleName);
-//                 $('[name=um-credits]').val(module.credits);
-//                 $('[name=um-batch]').val(res.batch);
-//                 $('[name=um-semester]').val('Semester ' + res.semester);
-//             });
-//         }
-//     });
-// });
-//
-// $('[name=uf-file-path]').on('change', function (e) {
-//     var file = e.target.files[0];
-//     var table = document.getElementById('preview-table');
-//     while (table.rows.length > 1) {
-//         table.deleteRow(-1);
-//     }
-//     if (!file.name.endsWith('.xlsx')) {
-//         alert("Please select valid document format");
-//         $('[name=uf-file-path]').val("");
-//         $('#result-preview').hide();
-//     } else {
-//         var file = $('[name=uf-file-path]')[0].files[0];
-//         var reader = new FileReader();
-//         var name = file.name;
-//         reader.onload = function (e) {
-//             var data = e.target.result;
-//             var workbook = XLSX.read(data, {type: 'binary'});
-//             var sheetName = workbook.Workbook.Sheets[0].name;
-//             var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-//             if (data.length > 0) {
-//                 if (data[0].Index && data[0].Grade) {
-//                     $('#result-preview').show();
-//                     data.forEach(function (res) {
-//                         var row = table.insertRow(-1);
-//                         row.insertCell(0).innerHTML = res.Index;
-//                         row.insertCell(1).innerHTML = res.Grade;
-//                     });
-//                 } else {
-//                     $('[name=uf-file-path]').val("");
-//                     alert('Not a Valid Format')
-//                 }
-//
-//             } else {
-//                 alert("This file doesn't contain any data. Please check your file.");
-//             }
-//         };
-//         reader.readAsBinaryString(file);
-//     }
-// });
-//
-// $('#upoload-file').on('submit', function (e) {
-//     var moduleDetailId = $('[name=uf-module-code]').val();
-//     e.preventDefault();
-//     socket.emit('searchModuleDetailById', moduleDetailId, function (err, res) {
-//         if (err) {
-//             return alert('Unable to connect to server')
-//         }
-//         var moduleCode = res.moduleCode;
-//         socket.emit('checkExistence', {
-//             moduleDetailId:moduleDetailId
-//         }, function (err, res) {
-//             if (err) {
-//                 return alert(err);
-//             }
-//             if (res.length) {
-//                 if (confirm('Previous records available. Do you want to replace existing results?')) {
-//                     var file = $('[name=uf-file-path]')[0].files[0];
-//                     var reader = new FileReader();
-//                     var name = file.name;
-//                     reader.onload = function (e) {
-//                         var data = e.target.result;
-//                         var workbook = XLSX.read(data, {type: 'binary'});
-//                         var sheetName = workbook.Workbook.Sheets[0].name;
-//                         var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-//                         console.log(data);
-//                         socket.emit('updateResult', res[0]._id, {
-//                             moduleDetailId: moduleDetailId,
-//                             date: new Date(),
-//                             user: lecturerId
-//                         }, data, function (err, res) {
-//                             if (err) {
-//                                 console.log(err);
-//                                 return alert("Unable to save result");
-//                             }
-//                             alert(res.insertedCount + " results saved")
-//                         });
-//                     };
-//                     reader.readAsBinaryString(file);
-//                 } else {
-//                     alert('Process aborted')
-//                 }
-//             } else {
-//                 var file = $('[name=uf-file-path]')[0].files[0];
-//                 var reader = new FileReader();
-//                 var name = file.name;
-//                 reader.onload = function (e) {
-//                     var data = e.target.result;
-//                     var workbook = XLSX.read(data, {type: 'binary'});
-//                     var sheetName = workbook.Workbook.Sheets[0].name;
-//                     var data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-//                     socket.emit('uploadResult', {
-//                         moduleCode: moduleCode,
-//                         moduleDetailId: moduleDetailId,
-//                         date: new Date(),
-//                         user: lecturerId
-//                     }, data, function (err, res) {
-//                         if (err) {
-//                             console.log(err);
-//                             return alert("Unable to save result");
-//                         }
-//                         alert(res.insertedCount + " results saved")
-//                     });
-//                 };
-//                 reader.readAsBinaryString(file);
-//             }
-//         });
-//     });
-// });
-//
-// $('[name=submit-btn]').on('click', function () {
-//     var indexNo = $('[name=index-no]').val();
-//     var grade = $('[name=grade]').val();
-//     var res = findDuplicate(indexNo);
-//     if (res == -1) {
-//         var table = document.getElementById('result-entry-table');
-//         var row = table.insertRow(-1);
-//         row.insertCell(0).innerHTML = indexNo;
-//         row.insertCell(1).innerHTML = grade;
-//     } else {
-//         if (confirm('Do you want to replace the previous result?')) {
-//             var table = document.getElementById('result-entry-table');
-//             table.rows[res].cells[1].innerHTML = grade;
-//         }
-//     }
-// });
-//
-// $('#enter-manually-form').on('submit', function (e) {
-//     var moduleDetailId = $('[name=um-module-code]').val();
-//     e.preventDefault();
-//     var data = traveseResultTable();
-//     socket.emit('searchModuleDetailById', moduleDetailId, function (err, res) {
-//         if (err) {
-//             return alert('Unable to connect to server')
-//         }
-//         var moduleCode = res.moduleCode;
-//         socket.emit('checkExistence', {
-//             moduleDetailId: moduleDetailId,
-//         }, function (err, res) {
-//             if (err) {
-//                 return alert(err);
-//             }
-//             if (res.length) {
-//                 if (confirm('Previous records available. Do you want to replace existing results?')) {
-//                     socket.emit('updateResult', res[0]._id, {
-//                         moduleDetailId: moduleDetailId,
-//                         date: new Date(),
-//                         user: lecturerId
-//                     }, data, function (err, res) {
-//                         if (err) {
-//                             console.log(err);
-//                             return alert("Unable to save result");
-//                         }
-//                         alert(res.insertedCount + " results saved")
-//                     });
-//                 } else {
-//                     alert('Process aborted')
-//                 }
-//             } else {
-//                 socket.emit('uploadResult', {
-//                     moduleCode: moduleCode,
-//                     moduleDetailId: moduleDetailId,
-//                     date: new Date(),
-//                     user: lecturerId
-//                 }, data, function (err, res) {
-//                     if (err) {
-//                         console.log(err);
-//                         return alert("Unable to save result");
-//                     }
-//                     alert(res.insertedCount + " results saved")
-//                 });
-//             }
-//         });
-//     });
-// });
-//
+        }
+    });
+});
+
 function fillModuleCodeCombo() {
-    socket.emit('searchByLectureId', lecturerId, function (err, res) {
+    socket.emit('getAllModules', function (err, res) {
         if (err) {
             return console.log(err);
         }
         if (res) {
             res.forEach(function (module) {
-                $("[name=module-code]").append($('<option>', {
-                    val: module._id,
-                    text: module.moduleCode + " : " + module.batch
-                }));
-                $('[name=uf-module-code]').trigger('change');
+                socket.emit('searchModuleDetailById', module.moduleDetailId, function (err, moduleDetail) {
+                    $("[name=module-code]").append($('<option>', {
+                        val: module.moduleDetailId,
+                        text: module.moduleCode + " : " + moduleDetail.batch
+                    }));
+
+                });
             });
         }
+        setTimeout(function () {
+            $('[name=module-code]').trigger('change');
+        }, 1000);
     });
+}
+
+function plotGraph(arr) {
+    $('#chartActivity').empty();
+    var data = {
+        labels: ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'F', 'I-WE'],
+        series: [arr]
+    };
+
+    var options = {
+        seriesBarDistance: 5,
+        axisX: {
+            showGrid: false
+        },
+        height: "245px"
+    };
+
+    var responsiveOptions = [
+        ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+                labelInterpolationFnc: function (value) {
+                    return value[0];
+                }
+            }
+        }]
+    ];
+    Chartist.Bar('#chartActivity', data, options, responsiveOptions);
 }
 //
 // function findDuplicate(indexNo) {
@@ -303,5 +182,47 @@ function fillModuleCodeCombo() {
 //
 // }
 //
-// fillModuleCodeCombo();
+
+function fillArray(grade, arr) {
+    switch (grade){
+        case "A+":
+            arr[0]++;
+            break;
+        case "A":
+            arr[1]++;
+            break;
+        case "A-":
+            arr[2]++;
+            break;
+        case "B+":
+            arr[3]++;
+            break;
+        case "B":
+            arr[4]++;
+            break;
+        case "B-":
+            arr[5]++;
+            break;
+        case "C+":
+            arr[6]++;
+            break;
+        case "C":
+            arr[7]++;
+            break;
+        case "C-":
+            arr[8]++;
+            break;
+        case "D":
+            arr[9]++;
+            break;
+        case "F":
+            arr[10]++;
+            break;
+        default:
+            arr[11]++;
+            break;
+    }
+}
+
+fillModuleCodeCombo();
 // fillResultHistoryTable();
