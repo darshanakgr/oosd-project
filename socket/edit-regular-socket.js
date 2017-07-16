@@ -37,6 +37,10 @@ class EditRegularSocket {
         socket.on('editNotice', (notice) => {
             noticeController.editNotice(notice)
         });
+
+        socket.on('updateApproveronCreate', (notice) => {
+            userController.updateApproveronCreate(notice.trgt,notice.noticeID)
+        });
     }
 }
 

@@ -4,8 +4,6 @@
 const mongoose = require('mongoose');
 const validator=require('validator');
 
-const {ObjectID} = require('mongodb').ObjectID;
-
 var User = mongoose.model('User', {
     iD: {
         type: String,

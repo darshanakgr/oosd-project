@@ -108,53 +108,6 @@
 
 	<div class="main main-raised">
 		<div class="section">
-			<!--<nav class="navbar navbar-default navbar-fixed" style="color: white">-->
-				<!--<div class="container-fluid">-->
-					<!--<div class="navbar-header">-->
-						<!--<button type="button" class="navbar-toggle" data-toggle="collapse"-->
-								<!--data-target="#navigation-example-2">-->
-							<!--<span class="sr-only">Toggle navigation</span>-->
-							<!--<span class="icon-bar"></span>-->
-							<!--<span class="icon-bar"></span>-->
-							<!--<span class="icon-bar"></span>-->
-						<!--</button>-->
-						<!--&lt;!&ndash;<a class="navbar-brand" href="#"></a>&ndash;&gt;-->
-					<!--</div>-->
-					<!--<div class="collapse navbar-collapse">-->
-						<!--<ul class="nav navbar-nav navbar-left">-->
-							<!--<li class="dropdown">-->
-								<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-									<!--<i class="fa fa-globe"></i>-->
-									<!--<b class="caret"></b>-->
-									<!--<span class="notification" id="notificationsNumber" style="visibility: hidden"></span>-->
-								<!--</a>-->
-								<!--<ul class="dropdown-menu" id="globalNotifications">-->
-								<!--</ul>-->
-							<!--</li>-->
-							<!--<li>-->
-								<!--<a onclick="searchView()">-->
-									<!--<i class="fa fa-search"></i>-->
-								<!--</a>-->
-							<!--</li>-->
-						<!--</ul>-->
-
-						<!--<ul class="nav navbar-nav navbar-right">-->
-							<!--<li>-->
-								<!--<a href="">-->
-									<!--Account-->
-								<!--</a>-->
-							<!--</li>-->
-							<!--<li>-->
-								<!--<a href="#">-->
-									<!--Log out-->
-								<!--</a>-->
-							<!--</li>-->
-						<!--</ul>-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</nav>-->
-
-
 			<div class="content">
 				<div class="container-fluid" id="loaderDiv" style="align-content: center" >
 					<img src="img/Double%20Ring.gif" style="margin-left: auto;	margin-right: auto;	display: block; margin-top:2%; ">
@@ -318,7 +271,10 @@
 						<div class="content">
 							<div class="tab-content">
 								<div class="tab-pane active animated fadeIn" id="inbox">
-									<div class="card">
+                                    <div class="card" id="noInbox">
+                                        <h3 align="center">There are no notices in inbox.</h3>
+                                    </div>
+									<div class="card" id="yesInbox" style="display: none">
 										<div class="content table-responsive table-full-width">
 											<table id="noticeTable" class="table table-hover table-striped">
 												<thead>
@@ -334,7 +290,10 @@
 									</div>
 								</div>
 								<div class="tab-pane animated fadeIn" id="update">
-									<div class="card">
+                                    <div class="card" id="noSent">
+                                        <h3 align="center">List of sent notices is empty</h3>
+                                    </div>
+									<div class="card" id="yesSent" style="display: none">
 										<div class="content table-responsive table-full-width">
 											<table id="sentTable" class="table table-hover table-striped">
 												<thead>
@@ -352,14 +311,16 @@
 									</div>
 								</div>
 								<div class="tab-pane animated fadeIn" id="view-all">
-									<div class="card">
+                                    <div class="card" id="noAuth">
+                                        <h3 align="center">No Notices to Authorize</h3>
+                                    </div>
+									<div class="card" id="yesAuth" style="display: none">
 										<div class="content table-responsive table-full-width">
 											<table id="authTable" class="table table-hover table-striped">
 												<thead>
 												<tr><th onclick="sortATable(0)" style="cursor: pointer">Title</th>
 													<th onclick="sortATable(1)" style="cursor: pointer">Type</th>
 													<th onclick="sortADateTable(2)" style="cursor: pointer">Date</th>
-													<th onclick="sortATable(3)" style="cursor: pointer">State</th>
 													<th></th>
 													<th></th>
 													<th></th>
@@ -462,7 +423,7 @@
                 <p id="noticeSender">Sender: </p>
                 <p id="noticeDate">Date: </p>
                 <div id="quillDisp">
-
+                    <h1 align="center">No Advertisements to be displayed</h1>
                 </div>
 
                 <script>

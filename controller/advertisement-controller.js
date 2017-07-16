@@ -46,9 +46,7 @@ var createAdvertisement= (newADNotice) => {
         exDate: newADNotice.exDate
     });
     return newAD.save().then((doc) => {
-        userController.updateUseronADCreate(newADNotice.receivers, doc._id);
-        userController.updateSenderonADCreate(newADNotice.senderID, doc._id);
-        userController.updateApproveronADCreate(newADNotice.approver, doc._id);
+        return doc._id
     }, (e) => {
         return console.log('Unable to insert - createAD', e);
     });
@@ -67,9 +65,6 @@ var editAdvertisement=(editRegNotice)=>{
     }, {
         overwrite: true
     }, (e, doc) => {
-        if (editRegNotice.state != "new") {
-            userController.updateApproveronCreate(doc.approver, doc._id);
-        }
         if (e) {
             console.log('Unable to remove auth notice', e);
         }

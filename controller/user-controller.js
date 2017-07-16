@@ -305,7 +305,6 @@ var updateUseronADCreate=(receivers, noticeID)=> {
         var recei = receivers[indx1];
         updateADSeparteUsers(recei, noticeID);
     }
-
 };
 
 var updateADSeparteUsers=(recei, noticeID) =>{

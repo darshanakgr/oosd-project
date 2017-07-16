@@ -39,10 +39,7 @@ var createNotice= (newRegNotice) => {
         receivers: newRegNotice.receivers
     });
      return newNotice.save().then((doc) => {
-        userController.updateUseronCreate(newRegNotice.receivers, doc._id);
-        userController.updateSenderonCreate(newRegNotice.senderID, doc._id);
-        console.log(newRegNotice.approver);
-        userController.updateApproveronCreate(newRegNotice.approver, doc._id);
+         return doc._id;
     }, (e) => {
         return console.log('Unable to insert - createNotice', e);
     });
@@ -61,17 +58,14 @@ var createTempNotice= (newRegNotice) => {
         exDate: endDate
     });
     return newNotice.save().then((doc) => {
-        userController.updateUseronCreate(newRegNotice.receivers, doc._id);
-        userController.updateSenderonCreate(newRegNotice.senderID, doc._id);
-        console.log(newRegNotice.approver);
-        userController.updateApproveronCreate(newRegNotice.approver, doc._id);
+        return doc._id;
     }, (e) => {
         return console.log('Unable to insert - createNotice', e);
     });
 };
 
 var editNotice=(editRegNotice)=>{
-    return Notice.findOneAndUpdate({
+    Notice.findOneAndUpdate({
         _id: ObjectID(editRegNotice.iD)
     }, {
         $set: {
@@ -84,9 +78,6 @@ var editNotice=(editRegNotice)=>{
     }, (e, doc) => {
         if (e) {
             console.log('Unable to remove auth notice', e);
-        }
-        if (editRegNotice.state != "new") {
-            userController.updateApproveronCreate(doc.approver, doc._id);
         }
     });
 };

@@ -25,9 +25,16 @@ function finish() {
             senderID: loggedID,
             receivers: targetgrp,
             approver:sessionStorage.getItem('approverID')
+        }, function (err, res) {
+            if(err){
+                return console.log(err);
+            }
+            socket.emit('updateUseronCreate',{trgt:targetgrp,noticeID:res});
+            socket.emit('updateSenderonCreate',{trgt:loggedID,noticeID:res});
+            socket.emit('updateApproveronCreate',{trgt:sessionStorage.getItem('approverID'),noticeID:res});
         });
 
-        location.href='main-notices.html';
+        location.href='index.html';
     }
 }
 
@@ -185,16 +192,18 @@ function getSelectionList() {
         if(err){
             return console.log(err);
         }
-        for (var indx = 0; indx < listItems.department.length; ++indx) {
-            var deptListItem = '<option>'+listItems.department[indx]+'</option>';
-            $("#crtRegularDepartment").append(deptListItem);
-            //console.log(listItems.departments[indx]);
-        }
+        if(listItems!=undefined) {
+            for (var indx = 0; indx < listItems.department.length; ++indx) {
+                var deptListItem = '<option>' + listItems.department[indx] + '</option>';
+                $("#crtRegularDepartment").append(deptListItem);
+                //console.log(listItems.departments[indx]);
+            }
 
-        for (var indx2 = 0; indx2 < listItems.year.length; ++indx2) {
-            var batchListItem = '<option>'+listItems.year[indx2]+'</option>';
-            $("#crtRegularBatch").append(batchListItem);
-            //console.log(listItems.years[indx2]);
+            for (var indx2 = 0; indx2 < listItems.year.length; ++indx2) {
+                var batchListItem = '<option>' + listItems.year[indx2] + '</option>';
+                $("#crtRegularBatch").append(batchListItem);
+                //console.log(listItems.years[indx2]);
+            }
         }
     });
 }
@@ -309,5 +318,9 @@ function doType() {
 
 function forceReturn(){
     alert("Restricted Access!");
-    location.href='main-notices.html';
+    location.href='index.html';
+}
+
+function sortTbl() {
+    sortSelecTable(1);
 }

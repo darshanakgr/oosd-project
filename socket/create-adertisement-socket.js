@@ -72,7 +72,7 @@ class CreateAdvertisementSocket {
         });
 
         //Create Advertisement
-        socket.on('createAdvertisement', (notice) => {
+        socket.on('createAdvertisement', (notice,callback) => {
             advertisementController.createAdvertisement(notice).then((res) =>{
                 callback(undefined, res);
             }, (error) => {
@@ -88,6 +88,18 @@ class CreateAdvertisementSocket {
             }, (error) => {
                 callback(error);
             });
+        });
+
+        socket.on('updateUseronCreate', (notice) => {
+            userController.updateUseronADCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateSenderonCreate', (notice) => {
+            userController.updateSenderonADCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateApproveronCreate', (notice) => {
+            userController.updateApproveronADCreate(notice.trgt,notice.noticeID)
         });
     }
 }

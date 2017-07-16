@@ -46,9 +46,10 @@ var createEvent = (newEventNotice) =>{
         exDate: newEventNotice.exDate
     });
     return newEvent.save().then((doc) => {
-        userController.updateUseronEventCreate(newEventNotice.receivers, doc._id);
-        userController.updateSenderonEventCreate(newEventNotice.senderID, doc._id);
-        userController.updateApproveronEventCreate(newEventNotice.approver, doc._id);
+        return doc._id;
+        // userController.updateUseronEventCreate(newEventNotice.receivers, doc._id);
+        // userController.updateSenderonEventCreate(newEventNotice.senderID, doc._id);
+        // userController.updateApproveronEventCreate(newEventNotice.approver, doc._id);
     }, (e) => {
         return console.log('Unable to insert - createAD', e);
     });
@@ -67,9 +68,6 @@ var editEvent=(editRegNotice)=>{
     }, {
         overwrite: true
     }, (e, doc) => {
-        if (editRegNotice.state != "new") {
-            userController.updateApproveronCreate(doc.approver, doc._id);
-        }
         if (e) {
             console.log('Unable to edit notice -EventEdit', e);
         }

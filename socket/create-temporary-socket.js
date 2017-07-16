@@ -72,7 +72,7 @@ class CreateTemporarySocket {
         });
 
         //Create Notice
-        socket.on('createTempNotice', (notice) => {
+        socket.on('createTempNotice', (notice,callback) => {
             noticeController.createTempNotice(notice).then((res) =>{
                 callback(undefined, res);
             }, (error) => {
@@ -88,6 +88,18 @@ class CreateTemporarySocket {
             }, (error) => {
                 callback(error);
             });
+        });
+
+        socket.on('updateUseronCreate', (notice) => {
+            userController.updateUseronCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateSenderonCreate', (notice) => {
+            userController.updateSenderonCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateApproveronCreate', (notice) => {
+            userController.updateApproveronCreate(notice.trgt,notice.noticeID)
         });
     }
 }

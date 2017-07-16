@@ -81,6 +81,9 @@ socket.emit('getNoticeUser', {
 //Refresh Notices
 function  refresh() {
     clearLists();
+    noInbox();
+    noSent();
+    noAuth();
 
     socket.emit('getNoticeUser', {
         index: loggedID,
@@ -185,11 +188,11 @@ function  refresh() {
         //     document.getElementById("globalNotifications").innerHTML = "";
         //
         //     if(notis!=0) {
-        //         var notiNot = '<li><a href="main-notices.html">' + notis + ' New Notices in Inbox</a></li>';
+        //         var notiNot = '<li><a href="index.html">' + notis + ' New Notices in Inbox</a></li>';
         //         $("#globalNotifications").append(notiNot);
         //     }
         //     if(auths!=0) {
-        //         var authNot = '<li><a href="main-notices.html">' + auths + ' New Notices to be Approved</a></li>';
+        //         var authNot = '<li><a href="index.html">' + auths + ' New Notices to be Approved</a></li>';
         //         $("#globalNotifications").append(authNot);
         //     }
         //     document.getElementById("notificationsNumber").innerHTML = cnt;
@@ -218,6 +221,9 @@ function  refresh() {
 //Search for new notices
 function searchNotice() {
     clearLists();
+    noInbox();
+    noSent();
+    noAuth();
 
     socket.emit('getNoticeUser', {
         index: loggedID,
@@ -297,7 +303,8 @@ function clearLists(){
 }
 
 function loadNoticesList(user){
-    if(user.intended_ID!=undefined) {
+    if((user.intended_ID!=undefined)&&(user.intended_ID.length>0)) {
+        yesInbox();
         for (var indx = 0; indx < user.intended_ID.length; ++indx) {
             socket.emit('getBriefNoticeWithRead', {
                 iD: user.intended_ID[indx].iD,
@@ -324,7 +331,7 @@ function loadNoticesList(user){
         }
     }
 
-    if(user.aD_ID!=undefined) {
+    if((user.aD_ID!=undefined)&&(user.aD_ID.length>0)) {
         for (var indx4 = 0; indx4 < user.aD_ID.length; ++indx4) {
             //console.log(noticeList.intended[indx]);
             socket.emit('getBriefAdvertisement', {
@@ -346,7 +353,8 @@ function loadNoticesList(user){
         }
     }
 
-    if(user.event_ID!=undefined) {
+    if((user.event_ID!=undefined)&&(user.event_ID.length>0)) {
+        yesInbox();
         for (var indx7 = 0; indx7 < user.event_ID.length; ++indx7) {
             //console.log(noticeList.intended[indx]);
             socket.emit('getBriefEventWithRead', {
@@ -381,7 +389,8 @@ function loadNoticesList(user){
 }
 
 function loadSentNoticesList(user) {
-    if(user.sent!=undefined) {
+    if((user.sent!=undefined)&&(user.sent.length>0)) {
+        yesSent();
         for (var indx2 = 0; indx2 < user.sent.length; ++indx2) {
             //console.log(noticeList.sent[indx]);
             socket.emit('getBriefNotice', {
@@ -408,7 +417,8 @@ function loadSentNoticesList(user) {
         }
     }
 
-    if(user.sent_AD!=undefined) {
+    if((user.sent_AD!=undefined)&&(user.sent_AD.length>0)) {
+        yesSent();
         for (var indx5 = 0; indx5 < user.sent_AD.length; ++indx5) {
             //console.log(noticeList.sent[indx]);
             socket.emit('getBriefAdvertisement', {
@@ -435,7 +445,8 @@ function loadSentNoticesList(user) {
         }
     }
 
-    if(user.sent_Event!=undefined) {
+    if((user.sent_Event!=undefined)&&(user.sent_Event.length>0)) {
+        yesSent();
         for (var indx8 = 0; indx8 < user.sent_Event.length; ++indx8) {
             socket.emit('getBriefEvent', {
                 iD: user.sent_Event[indx8]
@@ -464,7 +475,8 @@ function loadSentNoticesList(user) {
 
 function loadAuthNoticesList(user){
 
-    if(user.w8nApproval!=undefined) {
+    if((user.w8nApproval!=undefined)&&(user.w8nApproval.length>0)) {
+        yesAuth();
         for (var indx = 0; indx < user.w8nApproval.length; ++indx) {
             //console.log( user.intended_ID[indx].iD,"A");
             socket.emit('getBriefNoticeWithRead', {
@@ -491,7 +503,8 @@ function loadAuthNoticesList(user){
         }
     }
 
-    if(user.w8nApproval_AD!=undefined) {
+    if((user.w8nApproval_AD!=undefined)&&(user.w8nApproval_AD.length>0)) {
+        yesAuth();
         for (var indx6 = 0; indx6 < user.w8nApproval_AD.length; ++indx6) {
             socket.emit('getBriefAdvertisementWithRead', {
                 iD: user.w8nApproval_AD[indx6].iD,
@@ -516,7 +529,8 @@ function loadAuthNoticesList(user){
         }
     }
 
-    if(user.w8nApproval_Event!=undefined) {
+    if((user.w8nApproval_Event!=undefined)&&(user.w8nApproval_Event.length>0)) {
+        yesAuth();
         for (var indx9 = 0; indx9 < user.w8nApproval_Event.length; ++indx9) {
             socket.emit('getBriefEventWithRead', {
                 iD: user.w8nApproval_Event[indx9].iD,
@@ -543,7 +557,8 @@ function loadAuthNoticesList(user){
 }
 
 function searchNoticesList(user,searchedby){
-    if(user.intended_ID!=undefined) {
+    if((user.intended_ID!=undefined)&&(user.intended_ID.length>0)) {
+        yesInbox();
         for (var indx = 0; indx < user.intended_ID.length; ++indx) {
             //console.log(noticeList.intended[indx]);
             socket.emit('searchBriefNoticeWithRead', {
@@ -572,7 +587,8 @@ function searchNoticesList(user,searchedby){
         }
     }
 
-    if(user.event_ID!=undefined) {
+    if((user.event_ID!=undefined)&&(user.event_ID.length>0)) {
+        yesInbox();
         for (var indx7 = 0; indx7 < user.event_ID.length; ++indx7) {
             socket.emit('searchBriefEventWithRead', {
                 iD: user.event_ID[indx7].iD,
@@ -607,7 +623,8 @@ function searchNoticesList(user,searchedby){
 
 function searchSentNoticesList(user,searchedby){
 
-    if(user.sent!=undefined) {
+    if((user.sent!=undefined)&&(user.sent.length>0)) {
+        yesSent();
         for (var indx2 = 0; indx2 < user.sent.length; ++indx2) {
             //console.log(noticeList.sent[indx]);
             socket.emit('searchBriefNotice', {
@@ -635,7 +652,8 @@ function searchSentNoticesList(user,searchedby){
         }
     }
 
-    if(user.sent_AD!=undefined) {
+    if((user.sent_AD!=undefined)&&(user.sent_AD.length>0)) {
+        yesSent();
         for (var indx5 = 0; indx5 < user.sent_AD.length; ++indx5) {
             socket.emit('searchBriefAdvertisement', {
                 iD: user.sent_AD[indx5],
@@ -662,7 +680,8 @@ function searchSentNoticesList(user,searchedby){
         }
     }
 
-    if(user.sent_Event!=undefined) {
+    if((user.sent_Event!=undefined)&&(user.sent_Event.length>0)) {
+        yesSent();
         for (var indx8 = 0; indx8 < user.sent_Event.length; ++indx8) {
             //console.log(noticeList.sent[indx]);
             socket.emit('searchBriefEvent', {
@@ -693,7 +712,8 @@ function searchSentNoticesList(user,searchedby){
 
 function searchAuthNoticesList(user,searchedby){
 
-    if(user.w8nApproval!=undefined) {
+    if((user.w8nApproval!=undefined)&&(user.w8nApproval.length>0)) {
+        yesAuth();
         for (var indx3 = 0; indx3 < user.w8nApproval.length; ++indx3) {
             //console.log(noticeList.toApprove[indx3]);
             socket.emit('searchBriefNoticeWithRead', {
@@ -721,7 +741,8 @@ function searchAuthNoticesList(user,searchedby){
         }
     }
 
-    if(user.w8nApproval_AD!=undefined) {
+    if((user.w8nApproval_AD!=undefined)&&(user.w8nApproval_AD.length>0)) {
+        yesAuth();
         for (var indx6 = 0; indx6 < user.w8nApproval_AD.length; ++indx6) {
             //console.log(noticeList.toApprove[indx3]);
             socket.emit('searchBriefAdvertisementWithRead', {
@@ -748,7 +769,8 @@ function searchAuthNoticesList(user,searchedby){
         }
     }
 
-    if(user.w8nApproval_Event!=undefined) {
+    if((user.w8nApproval_Event!=undefined)&&(user.w8nApproval_Event.length>0))  {
+        yesAuth();
         for (var indx9 = 0; indx9 < user.w8nApproval_Event.length; ++indx9) {
             //console.log(noticeList.toApprove[indx3]);
             socket.emit('searchBriefEventWithRead', {
@@ -1559,8 +1581,6 @@ function searchView() {
     document.getElementById("buttonDiv").style.display="none";},500);
 }
 
-
-
 function normalView() {
     document.getElementById("searchDiv").style.display="none";
     document.getElementById("caroselDiv").style.display="block";
@@ -1602,4 +1622,34 @@ function removeFromApproval(ind){
     document.getElementById("loaderDiv").style.display = "block";
     document.getElementById("showDiv").style.display = "none";
     setTimeout(refresh,500);
+}
+
+function noInbox() {
+    document.getElementById('noInbox').style.display="block";
+    document.getElementById('yesInbox').style.display="none";
+}
+
+function yesInbox() {
+    document.getElementById('noInbox').style.display="none";
+    document.getElementById('yesInbox').style.display="block";
+}
+
+function noSent() {
+    document.getElementById('noSent').style.display="block";
+    document.getElementById('yesSent').style.display="none";
+}
+
+function yesSent() {
+    document.getElementById('noSent').style.display="none";
+    document.getElementById('yesSent').style.display="block";
+}
+
+function noAuth() {
+    document.getElementById('noAuth').style.display="block";
+    document.getElementById('yesAuth').style.display="none";
+}
+
+function yesAuth() {
+    document.getElementById('noAuth').style.display="none";
+    document.getElementById('yesAuth').style.display="block";
 }

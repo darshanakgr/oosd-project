@@ -72,7 +72,7 @@ class CreateEventSocket {
         });
 
         //Create Event
-        socket.on('createEvent', (notice) => {
+        socket.on('createEvent', (notice,callback) => {
             eventController.createEvent(notice).then((res) =>{
                 callback(undefined, res);
             }, (error) => {
@@ -88,6 +88,18 @@ class CreateEventSocket {
             }, (error) => {
                 callback(error);
             });
+        });
+
+        socket.on('updateUseronCreate', (notice) => {
+            userController.updateUseronEventCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateSenderonCreate', (notice) => {
+            userController.updateSenderonEventCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateApproveronCreate', (notice) => {
+            userController.updateApproveronEventCreate(notice.trgt,notice.noticeID)
         });
     }
 }

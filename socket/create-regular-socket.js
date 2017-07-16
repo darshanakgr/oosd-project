@@ -72,7 +72,7 @@ class CreateRegularSocket {
         });
 
         //Create Notice
-        socket.on('createNotice', (notice) => {
+        socket.on('createNotice', (notice,callback) => {
             noticeController.createNotice(notice).then((res) =>{
                 callback(undefined, res);
             }, (error) => {
@@ -88,6 +88,18 @@ class CreateRegularSocket {
             }, (error) => {
                 callback(error);
             });
+        });
+
+        socket.on('updateUseronCreate', (notice) => {
+            userController.updateUseronCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateSenderonCreate', (notice) => {
+            userController.updateSenderonCreate(notice.trgt,notice.noticeID)
+        });
+
+        socket.on('updateApproveronCreate', (notice) => {
+            userController.updateApproveronCreate(notice.trgt,notice.noticeID)
         });
     }
 }

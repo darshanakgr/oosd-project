@@ -29,8 +29,15 @@ function finishEvent() {
             receivers: targetgrp,
             approver:sessionStorage.getItem('approverID'),
             exDate:newExpDate
+        }, function (err, res) {
+            if(err){
+                return console.log(err);
+            }
+            socket.emit('updateUseronCreate',{trgt:targetgrp,noticeID:res});
+            socket.emit('updateSenderonCreate',{trgt:loggedID,noticeID:res});
+            socket.emit('updateApproveronCreate',{trgt:sessionStorage.getItem('approverID'),noticeID:res});
         });
-        location.href='main-notices.html';
+        location.href='index.html';
     }
 }
 
@@ -312,5 +319,9 @@ function doTarget(inex){
 
 function forceReturn(){
     alert("Restricted Access!");
-    location.href='main-notices.html';
+    location.href='index.html';
+}
+
+function sortTbl() {
+    sortSelecTable(1);
 }

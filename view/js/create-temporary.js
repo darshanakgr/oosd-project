@@ -15,7 +15,7 @@ socket.on('connect',function(){
 function finishTemp() {
     if(confirm('Do you want to finalize the notice?'))
     {
-        location.href='main-notices.html';
+        location.href='index.html';
         var newTitile = document.getElementById("inputTitle").value;
         var newContent = quill.getContents();
 
@@ -26,6 +26,13 @@ function finishTemp() {
             senderID: loggedID,
             receivers: targetgrp,
             approver:sessionStorage.getItem('approverID')
+        }, function (err, res) {
+            if(err){
+                return console.log(err);
+            }
+            socket.emit('updateUseronCreate',{trgt:targetgrp,noticeID:res});
+            socket.emit('updateSenderonCreate',{trgt:loggedID,noticeID:res});
+            socket.emit('updateApproveronCreate',{trgt:sessionStorage.getItem('approverID'),noticeID:res});
         });
     }
 }
@@ -308,6 +315,10 @@ function doTarget(inex){
 
 function forceReturn(){
     alert("Restricted Access!");
-    location.href='main-notices.html';
+    location.href='index.html';
+}
+
+function sortTbl() {
+    sortSelecTable(1);
 }
 

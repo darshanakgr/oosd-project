@@ -28,7 +28,7 @@ function finishEditAD() {
             exDate:newExpDate,
             state:thisState
         });
-        location.href='main-notices.html';
+        location.href='index.html';
     }
 }
 
@@ -68,7 +68,7 @@ function  getEdtAD() {
 
 function forceReturn(){
     alert("Restricted Access!");
-    location.href='main-notices.html';
+    location.href='index.html';
 }
 
 

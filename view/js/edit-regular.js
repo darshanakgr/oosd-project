@@ -5,6 +5,7 @@
 var thiseidtuser;
 var noticeID = sessionStorage.getItem('editID');
 var thisState;
+var thisAuth;
 
 var socket=io('/edit-regular');
 socket.on('connect',function(){
@@ -23,7 +24,8 @@ function finishEdit() {
             iD:noticeID,
             state:thisState
         });
-        location.href='main-notices.html';
+
+        location.href='index.html';
     }
 }
 
@@ -55,12 +57,13 @@ function  getEdtNotice() {
         }
         quilledt.setContents(notice.content);
         thisState=notice.state;
+        thisAuth=notice.approver;
     });
 }
 
 function forceReturn(){
     alert("Restricted Access!");
-    location.href='main-notices.html';
+    location.href='index.html';
 }
 
 
