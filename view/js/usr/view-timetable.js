@@ -82,6 +82,9 @@ $('[name=sc-find-btn]').on('click', function () {
                     var cell = rowData.insertCell(i);
                     cell.innerHTML = res.rows[key][i];
                     cell.setAttribute('contentEditable', 'true');
+                    if(!res.rows[key][i]){
+                        cell.setAttribute('style', "background-color:#2ecc71");
+                    }
                 }
             }
         }
