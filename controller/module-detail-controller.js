@@ -14,11 +14,15 @@ var searchByLectureId = (lecturerId) => {
 
 var removeModuleDetail = (moduleDetail) => {
     return ModuleDetail.findOneAndRemove(moduleDetail);
-}
+};
 
 var searchById = (id) => {
     return ModuleDetail.findById(id);
-}
+};
+
+var getAllEnrollments = () => {
+    return ModuleDetail.find();
+};
 
 var searchModuleDetailByLecturerIdAndCode = (moduleDetail) => {
     return ModuleDetail.findOne(moduleDetail);
@@ -29,5 +33,7 @@ module.exports = {
     searchByLectureId,
     removeModuleDetail,
     searchById,
-    searchModuleDetailByLecturerIdAndCode
-}
+    searchModuleDetailByLecturerIdAndCode,
+    getAllEnrollments
+
+};

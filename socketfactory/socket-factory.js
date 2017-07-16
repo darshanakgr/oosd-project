@@ -9,6 +9,8 @@ const {LecturerStatisticSocket} = require('./../socket/lecturer-statistic-socket
 const {ContactDetailSocket} = require('./../socket/contact-detail-socket');
 const {ReceptionTimetableSocket} = require('./../socket/reception-timetable-socket');
 const {ReceptionLecturerSocket} = require('./../socket/reception-lecturer-socket');
+const {ViewTimetableSocket} = require('./../socket/view-timetable-socket');
+const {ReceptionModuleSocket} = require('./../socket/reception-module-socket');
 
 const getLecturerModuleSocket = (io, socket) => {
     return new LectureModuleSocket(io, socket);
@@ -38,6 +40,14 @@ const getReceptionTimetableSocket = (io, socket) => {
     return new ReceptionTimetableSocket(io, socket)
 };
 
+const getViewTimetableSocket = (io, socket) => {
+    return new ViewTimetableSocket(io, socket);
+};
+
+const getReceptionModuleSocket = (io, socket) => {
+    return new ReceptionModuleSocket(io, socket);
+};
+
 const getReceptionLecturerSocket = (io, socket) => {
     return new ReceptionLecturerSocket(io, socket);
 };
@@ -50,5 +60,7 @@ module.exports = {
     getLecturerStatisticsSocket,
     getContactDetailSocket,
     getReceptionTimetableSocket,
-    getReceptionLecturerSocket
+    getReceptionLecturerSocket,
+    getViewTimetableSocket,
+    getReceptionModuleSocket
 };

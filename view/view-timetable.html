@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-    <title>Lecturer</title>
+    <title>Reception</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="viewport" content="width=device-width"/>
@@ -20,16 +20,16 @@
     <!--  Light Bootstrap Table core CSS    -->
     <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
+
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="css/demo.css" rel="stylesheet"/>
 
+
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' type='text/css'/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="css/pe-icon-7-stroke.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="css/pe-icon-7-stroke.css"/>
 
 </head>
 <body>
@@ -40,51 +40,39 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
-                    Lecturer
+                    Reception
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="/lecturer">
+                    <a href="/reception">
                         <i class="pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/lecturer-module">
-                        <i class="pe-7s-note2"></i>
-                        <p>Module</p>
+                    <a href="/reception-student">
+                        <i class="pe-7s-id"></i>
+                        <p>Manage Student</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/lecturer-result">
-                        <i class="pe-7s-upload"></i>
-                        <p>Result</p>
+                    <a href="/reception-lecturer">
+                        <i class="pe-7s-users"></i>
+                        <p>Manage Lecturer</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/lecturer-contact">
+                    <a href="/contact-detail">
                         <i class="pe-7s-phone"></i>
                         <p>Contacts</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="/lecturer-statistics">
-                        <i class="pe-7s-graph"></i>
-                        <p>Statistics</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/lecturer-timetable">
+                    <a href="/reception-timetable">
                         <i class="pe-7s-timer"></i>
-                        <p>Timetable</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="lecturer-notification.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
+                        <p>Manage Timetable</p>
                     </a>
                 </li>
             </ul>
@@ -146,66 +134,100 @@
 
         <div class="content">
             <div class="container-fluid">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Select Module</h4>
-                    </div>
+                <div class="card" id="search">
                     <div class="content">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <select name="module-code" class="form-control"></select>
+                                    <label>Time Table Type</label>
+                                    <select name="sc-time-table-type" class="form-control">
+                                        <option value="SEM">Semester</option>
+                                        <option value="LEC">Lecturer</option>
+                                        <option value="LAB">Lab</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Module Details</h4>
+                        <div id="sc-sem-time-table">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Batch</label>
+                                        <select name="sc-batch" class="form-control"></select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped" id="module-detail-table">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Semester</label>
+                                        <select name="sc-semester" class="form-control">
+                                            <option value="1">Semester 1</option>
+                                            <option value="2">Semester 2</option>
+                                            <option value="3">Semester 3</option>
+                                            <option value="4">Semester 4</option>
+                                            <option value="5">Semester 5</option>
+                                            <option value="6">Semester 6</option>
+                                            <option value="7">Semester 7</option>
+                                            <option value="8">Semester 8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sc-lec-time-table">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Lecturer</label>
+                                        <select name="sc-lecturer" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sc-lab-time-table">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Location</label>
+                                        <input type="text" name="sc-location" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="button" name="sc-find-btn" value="Find"
+                                               class="btn btn-info btn-fill">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <table class="table" id="sc-timetable">
+                                    <thead>
                                     <tr>
-                                        <td>Module Name</td>
-                                        <td>Graph Theory</td>
+                                        <td>Time</td>
+                                        <td>Monday</td>
+                                        <td>Tuesday</td>
+                                        <td>Wednesday</td>
+                                        <td>Thursday</td>
+                                        <td>Friday</td>
+                                        <td>Saturday</td>
+                                        <td>Sunday</td>
                                     </tr>
+                                    </thead>
+                                    <tbody></tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">Analysis</h4>
-                            </div>
-                            <div class="content">
-                                <div id="chartActivity" class="ct-chart">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Results</h4>
-                    </div>
-                    <div class="content table-full-width table-responsive">
-                        <table class="table" id="result-table">
-                            <thead>
-                            <tr>
-                                <td>Index</td>
-                                <td>Name</td>
-                                <td>Grade</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -218,6 +240,7 @@
                 </p>
             </div>
         </footer>
+
     </div>
 </div>
 
@@ -233,35 +256,6 @@
 
 <!--  Charts Plugin -->
 <script src="js/chartist.min.js"></script>
-<script>
-    var data = {
-        labels: ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'F', 'I-WE'],
-        series: [
-            [5, 10, 7, 30, 8, 3, 6, 4, 8, 0, 0, 1]
-        ]
-    };
-
-    var options = {
-        seriesBarDistance: 1,
-        axisX: {
-            showGrid: false
-        },
-        height: "245px"
-    };
-
-    var responsiveOptions = [
-        ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-                labelInterpolationFnc: function (value) {
-                    return value[0];
-                }
-            }
-        }]
-    ];
-
-    Chartist.Bar('#chartActivity', data, options, responsiveOptions);
-</script>
 
 <!--  Notifications Plugin    -->
 <script src="js/bootstrap-notify.js"></script>
@@ -272,10 +266,8 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="js/demo.js"></script>
 
-<script src="js/xlsx.full.min.js"></script>
-
 <script src="/socket.io/socket.io.js"></script>
 
-<script src="js/usr/lecturer-statistics.js"></script>
+<script src="js/usr/view-timetable.js"></script>
 
 </html>

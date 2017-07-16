@@ -23,12 +23,18 @@ app.get('/lecturer', (req, res) => res.sendFile(path.join(publicPath, '/lecturer
 app.get('/lecturer-module', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-module.html')));
 app.get('/lecturer-result', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-result.html')));
 app.get('/lecturer-statistics', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-statistics.html')));
+app.get('/lecturer-contact', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-contact.html')));
+app.get('/lecturer-timetable', (req, res) => res.sendFile(path.join(publicPath, '/lecturer-timetable.html')));
 app.get('/reception', (req, res) => res.sendFile(path.join(publicPath, '/reception-main.html')));
 app.get('/reception-student', (req, res) => res.sendFile(path.join(publicPath, '/reception-student.html')));
 app.get('/reception-lecturer', (req, res) => res.sendFile(path.join(publicPath, '/reception-lecturer.html')));
 app.get('/reception-timetable', (req, res) => res.sendFile(path.join(publicPath, '/reception-timetable.html')));
+app.get('/reception-module', (req, res) => res.sendFile(path.join(publicPath, '/reception-module.html')));
+app.get('/reception-contact', (req, res) => res.sendFile(path.join(publicPath, '/reception-contact.html')));
 app.get('/student', (req, res) => res.sendFile(path.join(publicPath, '/student-main.html')));
 app.get('/student-result', (req, res) => res.sendFile(path.join(publicPath, '/student-result.html')));
+app.get('/student-contact', (req, res) => res.sendFile(path.join(publicPath, '/student-contact.html')));
+app.get('/student-timetable', (req, res) => res.sendFile(path.join(publicPath, '/student-timetable.html')));
 app.get('/contact-detail', (req, res) => res.sendFile(path.join(publicPath, '/manage-contact.html')));
 
 io.of('/lecturer-module').on('connection', (socket) => socketFactory.getLecturerModuleSocket(io, socket));
@@ -38,7 +44,9 @@ io.of('/student-result').on('connection', (socket) => socketFactory.getStudentSo
 io.of('/reception-student').on('connection', (socket) => socketFactory.getReceptionStudentSocket(io, socket));
 io.of('/reception-lecturer').on('connection', (socket) => socketFactory.getReceptionLecturerSocket(io, socket));
 io.of('/reception-timetable').on('connection', (socket) => socketFactory.getReceptionTimetableSocket(io, socket));
+io.of('/reception-module').on('connection', (socket) => socketFactory.getReceptionModuleSocket(io, socket));
 io.of('/contact-detail').on('connection', (socket) => socketFactory.getContactDetailSocket(io, socket));
+io.of('/view-timetable').on('connection', (socket) => socketFactory.getViewTimetableSocket(io, socket));
 
 server.listen(port, () => console.log('Server is up on ' + port));
 
