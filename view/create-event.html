@@ -1,378 +1,328 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <link rel="icon" type="image/png" href="img/favicon.ico">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>And@6eraya</title>
+    <title>Smart Notice Board</title>
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="css/pe-icon-7-stroke.css" rel="stylesheet"/>
 
-    <!-- Bootstrap core CSS     -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!-- Animation library for notifications   -->
-    <link href="css/animate.min.css" rel="stylesheet"/>
-
-    <!--CSS for material kit-->
+    <!-- CSS Files -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/material-kit.css" rel="stylesheet"/>
-
-    <!--  Light Bootstrap Table core CSS    -->
-    <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-
-    <!--  CSS for the current Page  -->
     <link href="css/crtRegular.css" rel="stylesheet"/>
-
-    <!--<link href="css/bootstrap-datetimepicker.css" rel="stylesheet"/>-->
-    <!--<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>-->
-
-
-    <!--&lt;!&ndash;  CSS for the current Page  &ndash;&gt;-->
-    <!--<link href="css/demo.css" rel="stylesheet"/>-->
+    <link href="css/animate.min.css" rel="stylesheet"/>
+    <script src="css/animate.css"></script>
 
     <!-- Quill CSS -->
     <link href="quill/quill.core.css" rel="stylesheet">
     <link href="quill/quill.snow.css" rel="stylesheet">
-    <!--<link href="quill/quill.bubble.css" rel="stylesheet">-->
-
-    <!--<link href="css/material-datetime-picker.css" rel="stylesheet">-->
-
     <!-- Quill JavaScript -->
     <script src="quill/quill.js"></script>
     <script src="quill/quill.min.js"></script>
 
-    <!--&lt;!&ndash;js for the page&ndash;&gt;-->
-    <!--<script src="js/create-regular.js"></script>-->
 
-    <!--&lt;!&ndash;JS for material&ndash;&gt;-->
-    <!--<script src="js/material-kit.js"></script>-->
-    <!--<script src="js/material.min.js"></script>-->
-
-    <!-- Animate CSS -->
-    <script src="css/animate.css"></script>
-
-    <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="css/pe-icon-7-stroke.css" rel="stylesheet"/>
-
-
-
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="css/demo.css" rel="stylesheet" />
 </head>
+
 <body onload="genText()">
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var loggedID=sessionStorage.getItem('loggedID');
 </script>
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
+<nav class="navbar navbar-info navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#">
+                <div class="logo-container">
+                    <div class="logo">
+                        <img src="img/logo.png" rel="tooltip" title="" data-placement="bottom" data-html="true">
+                    </div>
+                    <div class="brand">
+                        Department of Computer Science and Engineering
+                    </div>
+                </div>
+            </a>
+        </div>
 
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="#" class="simple-text">
-                    And@6eraya
-                </a>
-            </div>
-
-            <ul class="nav">
+        <div class="collapse navbar-collapse" id="navigation-index">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <a href="/index.html">
+                        <i class="material-icons">content_paste</i>
+                        Notice
+                    </a>
+                </li>
                 <li>
-                    <a href="index.html">
-                        <i class="pe-7s-notebook"></i>
-                        <p>Notices</p>
+                    <a href="/timetable.html">
+                        <i class="material-icons">av_timer</i>
+                        Timetable
+                    </a>
+                </li>
+                <li>
+                    <a href="/map.html">
+                        <i class="material-icons">location_on</i>
+                        Map
+                    </a>
+                </li>
+                <li>
+                    <a href="/contact.html">
+                        <i class="material-icons">contacts</i>
+                        Contact
+                    </a>
+                </li>
+                <li>
+                    <a href="/sign-in.html">
+                        <i class="material-icons">person</i>
+                        Sign In
                     </a>
                 </li>
             </ul>
         </div>
     </div>
+</nav>
+<!-- End Navbar -->
 
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!--<a class="navbar-brand" href="#"></a>-->
-                </div>
-                <div class="collapse navbar-collapse">
+<div class="wrapper content">
+    <div class="header header-filter" style="background-image: url('img/background.jpg');">
+    </div>
 
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="">
-                                Account
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Log out
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-        <div class="content animated fadeInDown" >
-            <div class="container" style=" padding: 25px 25px 25px 25px; color: black; background-color: #f1f1f1; border-radius: 25px">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group label-floating is-empty" style="margin-top: 0%">
-                            <label class="control-label" style="color: black;">Enter Title :</label>
-                            <input id="inputTitle" type="text" class="form-control" onchange="setTitle()">
-                            <span class="material-input"></span>
+    <div class="main main-raised animated fadeInDown">
+        <div class="section">
+            <div class="content animated fadeInDown" >
+                <div class="container" style=" padding: 25px 25px 25px 25px; color: black;  border-radius: 25px; width: 90%">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group label-floating is-empty" style="margin-top: 0%">
+                                <label class="control-label" style="color: black;">Enter Title :</label>
+                                <input id="inputTitle" type="text" class="form-control" onchange="setTitle()">
+                                <span class="material-input"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group label-static" style="margin-top: 0%">
-                            <label class="control-label" style="color: black;">Choose the the date of the Event(not inclusive) :</label>
-                            <input type="text" class="datepicker form-control" id="expDate">
-                            <!--<input type="text" class="form-control datetimepicker" value="10/05/2016">-->
-                            <!--<input type="time" name="usr_time">-->
-                            <span class="material-input"></span>
+                        <div class="col-sm-4">
+                            <div class="form-group label-static" style="margin-top: 0%">
+                                <label class="control-label" style="color: black;">Choose the the date of the Event(not inclusive) :</label>
+                                <input type="text" class="datepicker form-control" id="expDate">
+                                <!--<input type="text" class="form-control datetimepicker" value="10/05/2016">-->
+                                <!--<input type="time" name="usr_time">-->
+                                <span class="material-input"></span>
+                            </div>
+
+                            <!--</di<div class="col-sm-3 pull-right">v>-->
                         </div>
 
-                        <!--</di<div class="col-sm-3 pull-right">v>-->
-                    </div>
+                        <div class="col-sm-4">
+                            <div class="togglebutton" style="margin-top:20px">
+                                <label>
+                                    <input type="checkbox" id="cbType" onclick="doType()">
+                                    <span id="typeText" style="color: black;">Make a General Event</span>
+                                </label>
 
-                    <div class="col-sm-4">
-                        <div class="togglebutton" style="margin-top:20px">
-                            <label>
-                                <input type="checkbox" id="cbType" onclick="doType()">
-                                <span id="typeText" style="color: black;">Make a General Event</span>
-                            </label>
-
-                            <script>
-                                function genText(){
-                                    document.getElementById("typeText").innerHTML="Make a General Event";
-                                }
-
-                                function spcText(){
-                                    document.getElementById("typeText").innerHTML="Make a Specific Event";
-                                }
-
-                                function doType() {
-                                    //var sectionSelect = document.getElementById("specificOptions");
-                                    if (document.getElementById("cbType").checked)
-                                    {
-                                        spcText();
-                                        showSpeci();
-                                        //sectionSelect.setAttribute("class","container animated fadeInDown");
-                                    }
-                                    else
-                                    {
-                                        genText();
-                                        hideSpeci();
-                                        //sectionSelect.setAttribute("class","container animated fadeOutUp");
+                                <script>
+                                    function genText(){
+                                        document.getElementById("typeText").innerHTML="Make a General Event";
                                     }
 
-                                }
+                                    function spcText(){
+                                        document.getElementById("typeText").innerHTML="Make a Specific Event";
+                                    }
 
-                                function showSpeci() {
-                                    document.getElementById("specificOptions").style.display='block';
-                                }
+                                    function doType() {
+                                        //var sectionSelect = document.getElementById("specificOptions");
+                                        if (document.getElementById("cbType").checked)
+                                        {
+                                            spcText();
+                                            showSpeci();
+                                            //sectionSelect.setAttribute("class","container animated fadeInDown");
+                                        }
+                                        else
+                                        {
+                                            genText();
+                                            hideSpeci();
+                                            //sectionSelect.setAttribute("class","container animated fadeOutUp");
+                                        }
 
-                                function hideSpeci() {
-                                    document.getElementById("specificOptions").style.display='none';
-                                }
+                                    }
 
-                            </script>
+                                    function showSpeci() {
+                                        document.getElementById("specificOptions").style.display='block';
+                                    }
+
+                                    function hideSpeci() {
+                                        document.getElementById("specificOptions").style.display='none';
+                                    }
+
+                                </script>
+
+                            </div>
+
+
 
                         </div>
 
 
-
                     </div>
 
 
-                </div>
+                    <div class="container" >
+                        <div id="quillEdit">
+                            <h1 align="center"><u>Notice</u></h1><br>
+                            <p align="center">Main <strong>content</strong> of the intended notice</p><br><br>
+                            <p align="right" style="padding-right: 20px">Sender</p><br>
+                        </div>
+
+                        <script>
+                            var toolbarOptions=[
+                                [{ 'font': [] }],
+                                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                ['bold','italic','underline'],
+                                [{ 'align': [] }],
+                                [{ 'color': [] }, { 'background': [] }],
+                                [{'list':'ordered'},{'list':'bullet'}],
+                                [{'script':'sub'},{'script':'super'}],
+                                ['link','image','video','formula']
+                            ];
+
+                            var quill = new Quill('#quillEdit', {
+                                modules : {
+                                    toolbar: toolbarOptions
+                                },
+
+                                theme:'snow'
+                            });
+
+                            function psome() {
+                                var delta=quill1.getContents();
+                                quill.setContents(delta);
+                            }
 
 
-                <div class="container" style="width: 95%">
-                    <div id="quillEdit">
-                        <h1 align="center"><u>Notice</u></h1><br>
-                        <p align="center">Main <strong>content</strong> of the intended notice</p><br><br>
-                        <p align="right" style="padding-right: 20px">Sender</p><br>
+                        </script>
                     </div>
-
-                    <script>
-                        var toolbarOptions=[
-                            [{ 'font': [] }],
-                            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                            ['bold','italic','underline'],
-                            [{ 'align': [] }],
-                            [{ 'color': [] }, { 'background': [] }],
-                            [{'list':'ordered'},{'list':'bullet'}],
-                            [{'script':'sub'},{'script':'super'}],
-                            ['link','image','video','formula']
-                        ];
-
-                        var quill = new Quill('#quillEdit', {
-                            modules : {
-                                toolbar: toolbarOptions
-                            },
-
-                            theme:'snow'
-                        });
-
-                        function psome() {
-                            var delta=quill1.getContents();
-                            quill.setContents(delta);
-                        }
-
-
-                    </script>
                 </div>
-            </div>
 
 
-            <div class="container animated fadeInDown" id="specificOptions" style="margin-top: 25px; padding: 25px 0px 25px 0px; color: black; background-color: #f1f1f1;  border-radius: 25px; display: none">
-                <div class="container" style="margin-bottom: 10px;">
-                    <div class="dropdown col-sm-3">
-                        <div class="form-group">
-                            <label for="crtRegularDepartment" style="color: black">Select a department:</label>
-                            <select class="form-control" id="crtRegularDepartment" onchange="onListChange()">
-                                <option>All</option>
-                                <!--<option>2</option>-->
-                            </select>
+                <div class="container animated fadeInDown" id="specificOptions" style="margin-top: 25px; padding: 25px 0px 25px 0px; color: black;  border-radius: 25px; display: none;width: 90%">
+                    <div class="container" style="margin-bottom: 10px;">
+                        <div class="dropdown col-sm-3">
+                            <div class="form-group">
+                                <label for="crtRegularDepartment" style="color: black">Select a department:</label>
+                                <select class="form-control" id="crtRegularDepartment" onchange="onListChange()">
+                                    <option>All</option>
+                                    <!--<option>2</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="dropdown col-sm-3 col-sm-offset-1">
+                            <div class="form-group">
+                                <label for="crtRegularBatch" style="color: black">Select a batch:</label>
+                                <select class="form-control" id="crtRegularBatch" onchange="onListChange()">
+                                    <option>All</option>
+                                    <!--<option>2</option>-->
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="dropdown col-sm-3 col-sm-offset-1">
-                        <div class="form-group">
-                            <label for="crtRegularBatch" style="color: black">Select a batch:</label>
-                            <select class="form-control" id="crtRegularBatch" onchange="onListChange()">
-                                <option>All</option>
-                                <!--<option>2</option>-->
-                            </select>
+                    <div class="container-fluid" id="loaderBody" style="align-content: center" >
+                        <img src="img/Double%20Ring.gif" style="margin-left: auto;	margin-right: auto;	display: block; ">
+                    </div>
+                    <div class="card" id="selectionBody" style="display: none">
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped" id="noticeSelectionTbl">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th onclick="sortSelecTable(1)" style="cursor: pointer">Index No.</th>
+                                    <th onclick="sortSelecTable(2)" style="cursor: pointer">Name</th>
+                                    <th onclick="sortSelecTable(3)" style="cursor: pointer">Deparment</th>
+                                    <th onclick="sortSelecTable(4)" style="cursor: pointer">Batch</th>
+                                    <th onclick="sortSelecTable(5)" style="cursor: pointer">Type</th>
+                                </tr></thead>
+                                <tbody id="checkGrp" >
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid" id="loaderBody" style="align-content: center" >
-                    <img src="img/Double%20Ring.gif" style="margin-left: auto;	margin-right: auto;	display: block; ">
-                </div>
-                <div class="card" id="selectionBody" style="display: none">
-                    <div class="content table-responsive table-full-width">
-                        <table class="table table-hover table-striped" id="noticeSelectionTbl">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th onclick="sortSelecTable(1)" style="cursor: pointer">Index No.</th>
-                                <th onclick="sortSelecTable(2)" style="cursor: pointer">Name</th>
-                                <th onclick="sortSelecTable(3)" style="cursor: pointer">Deparment</th>
-                                <th onclick="sortSelecTable(4)" style="cursor: pointer">Batch</th>
-                                <th onclick="sortSelecTable(5)" style="cursor: pointer">Type</th>
-                            </tr></thead>
-                            <tbody id="checkGrp" >
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
 
-            <div class="contaiiner animated fadeInDown" style="margin-top: 25px; padding: 25px 0px 25px 0px; color: black; background-color: #f1f1f1; text-align: center; border-radius: 25px">
-                <button id="finish" class="btn btn-danger" type="button" onclick="finishEvent()" >Create new Event</button>
+                <div class="contaiiner animated fadeInDown" style="margin-top: 25px; padding: 25px 0px 25px 0px; color: black;  text-align: center; border-radius: 25px">
+                    <button id="finish" class="btn btn-danger" type="button" onclick="finishEvent()" >Create new Event</button>
+                </div>
+
             </div>
 
         </div>
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <p class="copyright pull-right">
-                    &copy; 2017 <a href="#">Smart Notice Board</a> | CERIS
-                </p>
-            </div>
-        </footer>
-
     </div>
+    <footer class="footer">
+        <div class="container">
+            <nav class="pull-left">
+                <ul>
+                    <li>
+                        <a href="#">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright pull-right">
+                &copy; 2017 | developed by CERIS &trade;
+            </div>
+        </div>
+    </footer>
 </div>
 
 
-
-
-
 </body>
-
 <!--   Core JS Files   -->
 <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-<!--<script src="js/jquery.min.js" type="text/javascript"></script>-->
-<script src="js/bootstrap.js" type="text/javascript"></script>
-<script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
 <script src="js/collapse.js" type="text/javascript"></script>
 <script src="js/transition.js" type="text/javascript"></script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
-
-<!--Moment-->
-<!--<script src="js/moment.js"></script>-->
-
-<!--<script src="https://unpkg.com/babel-polyfill@6.2.0/dist/polyfill.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.standalone.js"></script>-->
-
-<!--&lt;!&ndash;  Checkbox, Radio & Switch Plugins &ndash;&gt;-->
-<!--<script src="js/bootstrap-checkbox-radio-switch.js"></script>-->
-
-<!--&lt;!&ndash;  Charts Plugin &ndash;&gt;-->
-<!--<script src="js/chartist.min.js"></script>-->
-
-<!--&lt;!&ndash;  Notifications Plugin    &ndash;&gt;-->
-<!--<script src="js/bootstrap-notify.js"></script>-->
-
-<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-<script src="js/light-bootstrap-dashboard.js"></script>
 
 
+<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+<script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
 
-<!--<script src="js/bootstrap-datetimepicker.min.js"></script>-->
-
+<!--JS for the current page-->
+<script src="js/create-event.js" type="text/javascript"></script>
 
 <!--JS for material-->
 <script src="js/material-kit.js"></script>
 <script src="js/material.min.js"></script>
-
-<!--js for the page-->
-<script src="js/create-event.js"></script>
 
 <script>
     window.onload=function(){
         getCreator();
         loadAll();
         getSelectionList();
-        //setTimeout(sortTbl,500);
     };
 
     function sortTbl() {
         sortSelecTable(1);
     }
+
 </script>
-
-<!--<script type="text/javascript">-->
-<!--$(function () {-->
-<!--$('#datetimepicker1').datetimepicker();-->
-<!--});-->
-<!--</script>-->
-<!--<script type="text/javascript">-->
-<!--$(document).ready(function () {-->
-
-<!--//        	demo.initChartist();-->
-
-<!--$.notify({-->
-<!--icon: 'pe-7s-gift',-->
-<!--message: "Welcome to <b>Smart Notice Board</b>"-->
-
-<!--}, {-->
-<!--type: 'info',-->
-<!--timer: 4000-->
-<!--});-->
-
-<!--});-->
-<!--</script>-->
-
 </html>
