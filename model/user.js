@@ -60,32 +60,32 @@ var User = mongoose.model('User', {
     },
     intended_ID: [{
         iD:{
-            type:ObjectID
+
         },
         read:{
             type: Boolean
         }
     }],
     sent: [{
-        type:ObjectID
+
     }],
     w8nApproval: [{
-        iD:{
-            type:ObjectID
+        iD: {
+
         },
         read:{
             type: Boolean
         }
     }],
     aD_ID: [{
-        type:ObjectID
+
     }],
     sent_AD: [{
-        type: ObjectID
+
     }],
     w8nApproval_AD:[{
         iD:{
-            type:ObjectID
+
         },
         read:{
             type: Boolean
@@ -93,18 +93,18 @@ var User = mongoose.model('User', {
     }],
     event_ID:[{
         iD:{
-            type:ObjectID
+
         },
         read:{
             type: Boolean
         }
     }],
     sent_Event: [{
-        type: ObjectID
+
     }],
     w8nApproval_Event:[{
         iD:{
-            type:ObjectID
+
         },
         read:{
             type: Boolean

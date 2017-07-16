@@ -179,24 +179,24 @@ function  refresh() {
             }
         }
 
-        function giveNotifics() {
-            //console.log(notis, auths);
-            var cnt=notis+auths;
-            document.getElementById("globalNotifications").innerHTML = "";
-
-            if(notis!=0) {
-                var notiNot = '<li><a href="main-notices.html">' + notis + ' New Notices in Inbox</a></li>';
-                $("#globalNotifications").append(notiNot);
-            }
-            if(auths!=0) {
-                var authNot = '<li><a href="main-notices.html">' + auths + ' New Notices to be Approved</a></li>';
-                $("#globalNotifications").append(authNot);
-            }
-            document.getElementById("notificationsNumber").innerHTML = cnt;
-            document.getElementById("notificationsNumber").style.visibility = 'visible';
-        }
-
-        setTimeout(giveNotifics, 500);
+        // function giveNotifics() {
+        //     //console.log(notis, auths);
+        //     var cnt=notis+auths;
+        //     document.getElementById("globalNotifications").innerHTML = "";
+        //
+        //     if(notis!=0) {
+        //         var notiNot = '<li><a href="main-notices.html">' + notis + ' New Notices in Inbox</a></li>';
+        //         $("#globalNotifications").append(notiNot);
+        //     }
+        //     if(auths!=0) {
+        //         var authNot = '<li><a href="main-notices.html">' + auths + ' New Notices to be Approved</a></li>';
+        //         $("#globalNotifications").append(authNot);
+        //     }
+        //     document.getElementById("notificationsNumber").innerHTML = cnt;
+        //     document.getElementById("notificationsNumber").style.visibility = 'visible';
+        // }
+        //
+        // setTimeout(giveNotifics, 500);
 
 
         if((res.type=="Dean")||(res.type=="HoD")){
@@ -1551,10 +1551,15 @@ function sortFADateTable(n) {
 }
 
 function searchView() {
-    document.getElementById("searchDiv").style.display="block";
+    document.getElementById("loaderDiv").style.display = "block";
+    document.getElementById("showDiv").style.display = "none";
+    setTimeout(showPage,500);
+    setTimeout(()=>{document.getElementById("searchDiv").style.display="block";
     document.getElementById("caroselDiv").style.display="none";
-    document.getElementById("buttonDiv").style.display="none";
+    document.getElementById("buttonDiv").style.display="none";},500);
 }
+
+
 
 function normalView() {
     document.getElementById("searchDiv").style.display="none";

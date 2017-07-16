@@ -36,6 +36,14 @@ app.get('/student-result', (req, res) => res.sendFile(path.join(publicPath, '/st
 app.get('/student-contact', (req, res) => res.sendFile(path.join(publicPath, '/student-contact.html')));
 app.get('/student-timetable', (req, res) => res.sendFile(path.join(publicPath, '/student-timetable.html')));
 app.get('/contact-detail', (req, res) => res.sendFile(path.join(publicPath, '/manage-contact.html')));
+app.get('/main-notices', (req, res) => {res.sendFile(path.join(publicPath, 'main-notices.html'))});
+app.get('/create-regular', (req, res) => {res.sendFile(path.join(publicPath, 'create-regular.html'))});
+app.get('/create-temporary', (req, res) => {res.sendFile(path.join(publicPath, 'create-temporary.html'))});
+app.get('/create-advertisement', (req, res) => {res.sendFile(path.join(publicPath, 'create-advertisement.html'))});
+app.get('/create-event', (req, res) => {res.sendFile(path.join(publicPath, 'create-event.html'))});
+app.get('/edit-regular', (req, res) => {res.sendFile(path.join(publicPath, 'edit-regular.html'))});
+app.get('/edit-advertisement', (req, res) => {res.sendFile(path.join(publicPath, 'edit-advertisement.html'))});
+app.get('/edit-event', (req, res) => {res.sendFile(path.join(publicPath, 'edit-event.html'))});
 
 io.of('/lecturer-module').on('connection', (socket) => socketFactory.getLecturerModuleSocket(io, socket));
 io.of('/lecturer-result').on('connection', (socket) => socketFactory.getLecturerResultSocket(io, socket));
@@ -47,6 +55,14 @@ io.of('/reception-timetable').on('connection', (socket) => socketFactory.getRece
 io.of('/reception-module').on('connection', (socket) => socketFactory.getReceptionModuleSocket(io, socket));
 io.of('/contact-detail').on('connection', (socket) => socketFactory.getContactDetailSocket(io, socket));
 io.of('/view-timetable').on('connection', (socket) => socketFactory.getViewTimetableSocket(io, socket));
+io.of('/main-notices', (socket) => {socketFactory.getMainNoticeSocket(io, socket)});
+io.of('/create-regular', (socket) => {socketFactory.getCreateRegularSocket(io, socket)});
+io.of('/create-temporary', (socket) => {socketFactory.getCreateTemporarySocket(io, socket)});
+io.of('/create-advertisement', (socket) => {socketFactory.getCreateAdvertisementSocket(io, socket)});
+io.of('/create-event', (socket) => {socketFactory.getCreateEventSocket(io, socket)});
+io.of('/edit-regular', (socket) => {socketFactory.getEditRegularSocket(io, socket)});
+io.of('/edit-advertisement', (socket) => {socketFactory.getEditAdvertisementSocket(io, socket)});
+io.of('/edit-event', (socket) => {socketFactory.getEditEventSocket(io, socket)});
 
 server.listen(port, () => console.log('Server is up on ' + port));
 
