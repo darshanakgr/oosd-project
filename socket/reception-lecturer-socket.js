@@ -1,5 +1,5 @@
 const lecturerController = require('./../controller/lecturer-controller');
-const userController=require('./../controller/lecturer-controller');
+const userController=require('./../controller/user-controller');
 
 class ReceptionLecturerSocket {
     constructor(io, socket) {
@@ -18,9 +18,16 @@ class ReceptionLecturerSocket {
         });
 
 
-
         socket.on('getAllLecturers', (callback) => {
             lecturerController.getAllLecturers().then((res) => {
+                callback(undefined, res);
+            }, (error) => {
+                callback(error);
+            });
+        });
+
+        socket.on('createUser', (user,callback) => {
+            userController.createUser(user).then((res) => {
                 callback(undefined, res);
             }, (error) => {
                 callback(error);

@@ -10,6 +10,37 @@ const noticeController = require('./../controller/notice-controller');
 const advertisementController = require('./../controller/advertisement-controller');
 const eventController = require('./../controller/event-controller');
 
+
+const generator = require('generate-password');
+const jwt=require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+//const xoauth2 = require('xoauth2');
+
+// var transproter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth:{
+//         xoauth2: xoauth2.createXOAuth2Generator({
+//             user: 'damitha.15@cse.mrt.ac.lk',
+//             clientId:'270181058492-l1dr86q9agkmav716etglog6hdjm856c.apps.googleusercontent.com',
+//             clientSecret:'zjUwUC-3xNbDG_niGu9JLQYa',
+//             refreshToken:''
+//         })
+//     }}
+// );
+
+let transproter = nodemailer.createTransport({
+    service: 'gmail',
+    secure:false,
+    port:25,
+    auth:{
+        user: 'damitha.15@cse.mrt.ac.lk',
+        pass: 'An@nda10'
+    },
+    tls:{
+        rejectUnauthorized:false
+    }
+});
+
 // const authorityController = require('./../controller/authority-controller');
 
 var getNoticeUser = (user) => {
@@ -416,6 +447,45 @@ var updateApproveronEventCreate=(approverID, noticeID)=> {
     });
 };
 
+function createUser(user) {
+    var password = generator.generate({
+        length: 10,
+        numbers: true
+    });
+
+    var newUser = new User({
+        iD:user.iD,
+        name:user.name,
+        email:user.email,
+        password: jwt.sign(password,'SaltToTheWound'),
+        type:user.type,
+        batch:user.batch
+    });
+
+    var mailOptions={
+        from: 'Damitha <damitha.15@cse.mrt.ac.lk>',
+        //to: 'damitha.15@cse.mrt.ac.lk',
+        to: user.email,
+        subject:'Login Password for Smart Notices',
+        text: password
+    };
+
+    transproter.sendMail(mailOptions,function (err,res) {
+        if(err){
+            return console.log(err);
+        }
+        console.log('Message was sent');
+        console.log(res);
+    });
+
+    return newUser.save().then((doc) => {
+        return doc;
+    }, (e) => {
+        return console.log('Unable to insert', e);
+    });
+} 
+
+
 module.exports ={
     getNoticeUser,
     readInboxNotice,
@@ -435,5 +505,6 @@ module.exports ={
     updateApproveronADCreate,
     updateUseronEventCreate,
     updateSenderonEventCreate,
-    updateApproveronEventCreate
+    updateApproveronEventCreate,
+    createUser
 };

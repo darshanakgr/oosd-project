@@ -11,8 +11,8 @@ var User = mongoose.model('User', {
         minlength: 4
     },
     name: {
-        type: String,
-        trim: true
+        // type: String,
+        // trim: true
     },
     email:{
         type:String,
@@ -26,54 +26,54 @@ var User = mongoose.model('User', {
         }
     },
     password: {
-        type: String,
-        required: true,
-        minlength: 8,
+        // type: String,
+        // required: true,
+        // minlength: 8,
     },
     tokens:[{
-        access:{
-            type:String
-        },token:{
-            type:String
-        }
+        // access:{
+        //     // type:String
+        // },token:{
+        //     type:String
+        // }
     }],
     type: {
-        type: String,
-        trim: true,
-        required:true,
-        minlength: 3,
+        // type: String,
+        // trim: true,
+        // required:true,
+        // minlength: 3,
 
     },
     batch: {
-        department: {
-            type: String,
-            trim: true,
-            minlength: 1
-        },
-        year: {
-            type: String,
-            trim: true,
-            minlength: 1
-        }
+        // department: {
+        //     type: String,
+        //     trim: true,
+        //     minlength: 1
+        // },
+        // year: {
+        //     type: String,
+        //     trim: true,
+        //     minlength: 1
+        // }
     },
     intended_ID: [{
-        iD:{
-
-        },
-        read:{
-            type: Boolean
-        }
+        // iD:{
+        //
+        // },
+        // read:{
+        //     type: Boolean
+        // }
     }],
     sent: [{
 
     }],
     w8nApproval: [{
-        iD: {
-
-        },
-        read:{
-            type: Boolean
-        }
+        // iD: {
+        //
+        // },
+        // read:{
+        //     type: Boolean
+        // }
     }],
     aD_ID: [{
 
@@ -82,31 +82,31 @@ var User = mongoose.model('User', {
 
     }],
     w8nApproval_AD:[{
-        iD:{
-
-        },
-        read:{
-            type: Boolean
-        }
+        // iD:{
+        //
+        // },
+        // read:{
+        //     type: Boolean
+        // }
     }],
     event_ID:[{
-        iD:{
-
-        },
-        read:{
-            type: Boolean
-        }
+        // iD:{
+        //
+        // },
+        // read:{
+        //     type: Boolean
+        // }
     }],
     sent_Event: [{
 
     }],
     w8nApproval_Event:[{
-        iD:{
-
-        },
-        read:{
-            type: Boolean
-        }
+        // iD:{
+        //
+        // },
+        // read:{
+        //     type: Boolean
+        // }
     }]
 });
 

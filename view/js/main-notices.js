@@ -304,7 +304,6 @@ function clearLists(){
 
 function loadNoticesList(user){
     if((user.intended_ID!=undefined)&&(user.intended_ID.length>0)) {
-        yesInbox();
         for (var indx = 0; indx < user.intended_ID.length; ++indx) {
             socket.emit('getBriefNoticeWithRead', {
                 iD: user.intended_ID[indx].iD,
@@ -314,6 +313,7 @@ function loadNoticesList(user){
                     return console.log(err);
                 }
                 if (res.notice.state =="approved"){
+                    yesInbox();
                     var noticeDetailItem;
                     if(res.read) {
                         noticeDetailItem = "<tr data-toggle='modal' data-target='#displayModal' style='cursor: pointer;font-weight:bolder' onclick='clickDetail(this," + indNum + ")'><td>" + res.notice.sender + "</td><td>" + res.notice.title + "</td> <td>" + res.notice.type + "</td><td>" + dateFromObjectId(res.notice._id).toLocaleString() + "</td> </tr>";
@@ -354,7 +354,6 @@ function loadNoticesList(user){
     }
 
     if((user.event_ID!=undefined)&&(user.event_ID.length>0)) {
-        yesInbox();
         for (var indx7 = 0; indx7 < user.event_ID.length; ++indx7) {
             //console.log(noticeList.intended[indx]);
             socket.emit('getBriefEventWithRead', {
@@ -367,6 +366,7 @@ function loadNoticesList(user){
                 //console.log(res.event);
                 // if ((res.event.state =="approved")||(res.event.state =="new")){
                 if ((res.event.state =="approved")){
+                    yesInbox();
                     var noticeDetailItem;
                     if(res.read) {
                         noticeDetailItem = "<tr data-toggle='modal' data-target='#displayModal' style='cursor: pointer; font-weight:bolder' onclick='clickEventDetail(this," + indEvent + ")'><td>" + res.event.sender + "</td><td>" + res.event.title + "</td> <td>" + res.event.type + "</td><td>" + dateFromObjectId(res.event._id).toLocaleString() + "</td> </tr>";
@@ -390,7 +390,6 @@ function loadNoticesList(user){
 
 function loadSentNoticesList(user) {
     if((user.sent!=undefined)&&(user.sent.length>0)) {
-        yesSent();
         for (var indx2 = 0; indx2 < user.sent.length; ++indx2) {
             //console.log(noticeList.sent[indx]);
             socket.emit('getBriefNotice', {
@@ -401,6 +400,7 @@ function loadSentNoticesList(user) {
                 }
                 //console.log(res.notice);
                 if ((res.state =="new")||(res.state =="approved")) {
+                    yesSent();
                     var noticeDetailItem;
                     if (res.state =="approved") {
                         noticeDetailItem = "<tr style='cursor: pointer'><td>" + res.title + "</td><td>" + res.type + "</td> <td>" + dateFromObjectId(res._id).toLocaleString() + "</td><td>Approved</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickSentDetail(" + indSent + ")'>View</button></td><td><button class='btn btn-warning pull-right' onclick='gotoEdit(" + indSent + ")' >Edit</button></td><td><button class='btn btn-danger pull-right' onclick='noticeRemove(" + indSent + ")'>Remove</button></td></tr>";
@@ -429,6 +429,7 @@ function loadSentNoticesList(user) {
                 }
                 //console.log(res.notice);
                 if ((res.state =="new")||(res.state =="approved")) {
+                    yesSent();
                     var noticeDetailItem;
                     if (res.state =="approved") {
                         noticeDetailItem = "<tr style='cursor: pointer'><td>" + res.title + "</td><td>" + res.type + "</td> <td>" + dateFromObjectId(res._id).toLocaleString() + "</td><td>Approved</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickSentADDetail(" + indADSent + ")'>View</button></td><td><button class='btn btn-warning pull-right' onclick='gotoEditAD(" + indADSent + ")' >Edit</button></td><td><button class='btn btn-danger pull-right' onclick='aDRemove(" + indADSent + ")'>Remove</button></td></tr>";
@@ -455,6 +456,7 @@ function loadSentNoticesList(user) {
                     return console.log(err);
                 }
                 if ((res.state =="new")||(res.state =="approved")) {
+                    yesSent();
                     var noticeDetailItem;
                     if (res.state =="approved") {
                         noticeDetailItem = "<tr style='cursor: pointer'><td>" + res.title + "</td><td>" + res.type + "</td> <td>" + dateFromObjectId(res._id).toLocaleString() + "</td><td>Approved</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickSentEventDetail(" + indEventSent + ")'>View</button></td><td><button class='btn btn-warning pull-right' onclick='gotoEditEvent(" + indEventSent + ")' >Edit</button></td><td><button class='btn btn-danger pull-right' onclick='eventRemove(" + indEventSent + ")'>Remove</button></td></tr>";
@@ -476,7 +478,6 @@ function loadSentNoticesList(user) {
 function loadAuthNoticesList(user){
 
     if((user.w8nApproval!=undefined)&&(user.w8nApproval.length>0)) {
-        yesAuth();
         for (var indx = 0; indx < user.w8nApproval.length; ++indx) {
             //console.log( user.intended_ID[indx].iD,"A");
             socket.emit('getBriefNoticeWithRead', {
@@ -488,6 +489,7 @@ function loadAuthNoticesList(user){
                 }
                 //console.log(res.notice);
                 if ((res.notice.state =="new")) {
+                    yesAuth();
                     var noticeDetailItem;
                     if (res.read) {
                         noticeDetailItem = "<tr style='cursor: pointer; font-weight:bolder' ><td>" + res.notice.title + "</td> <td>" + res.notice.type + "</td><td>" + dateFromObjectId(res.notice._id).toLocaleString() + "</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickAuthDetail(this," + indAuth + ")'>View</button></td><td><button class='btn btn-info pull-right' onclick='approveNotice(" + indAuth + ")'><i class='material-icons'>thumb_up</i> Approve</button></td><td><button class='btn btn-danger pull-right' onclick='diapproveNotice(" + indAuth + ")' ><i class='material-icons'>thumb_down</i> Disapprove</button></td></tr>";
@@ -504,7 +506,6 @@ function loadAuthNoticesList(user){
     }
 
     if((user.w8nApproval_AD!=undefined)&&(user.w8nApproval_AD.length>0)) {
-        yesAuth();
         for (var indx6 = 0; indx6 < user.w8nApproval_AD.length; ++indx6) {
             socket.emit('getBriefAdvertisementWithRead', {
                 iD: user.w8nApproval_AD[indx6].iD,
@@ -515,6 +516,7 @@ function loadAuthNoticesList(user){
                 }
                 //console.log(res.notice);
                 if ((res.aD.state =="new")) {
+                    yesAuth();
                     var noticeDetailItem;
                     if (res.read) {
                         noticeDetailItem = "<tr style='cursor: pointer; font-weight:bolder' ><td>" + res.aD.title + "</td> <td>" + res.aD.type + "</td><td>" + dateFromObjectId(res.aD._id).toLocaleString() + "</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickAuthADDetail(this," + indADAuth + ")'>View</button></td><td><button class='btn btn-info pull-right' onclick='approveAD(" + indADAuth + ")'><i class='material-icons'>thumb_up</i> Approve</button></td><td><button class='btn btn-danger pull-right' onclick='diapproveAD(" + indADAuth + ")' ><i class='material-icons'>thumb_down</i> Disapprove</button></td></tr>";
@@ -530,7 +532,6 @@ function loadAuthNoticesList(user){
     }
 
     if((user.w8nApproval_Event!=undefined)&&(user.w8nApproval_Event.length>0)) {
-        yesAuth();
         for (var indx9 = 0; indx9 < user.w8nApproval_Event.length; ++indx9) {
             socket.emit('getBriefEventWithRead', {
                 iD: user.w8nApproval_Event[indx9].iD,
@@ -541,6 +542,7 @@ function loadAuthNoticesList(user){
                 }
                 //console.log(res.notice);
                 if ((res.event.state =="new")) {
+                    yesAuth();
                     var noticeDetailItem;
                     if (res.read) {
                         noticeDetailItem = "<tr style='cursor: pointer; font-weight:bolder' ><td>" + res.event.title + "</td> <td>" + res.event.type + "</td><td>" + dateFromObjectId(res.event._id).toLocaleString() + "</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickAuthEventDetail(this," + indEventAuth + ")'>View</button></td><td><button class='btn btn-info pull-right' onclick='approveEvent(" + indEventAuth + ")'><i class='material-icons'>thumb_up</i> Approve</button></td><td><button class='btn btn-danger pull-right' onclick='diapproveEvent(" + indEventAuth + ")' ><i class='material-icons'>thumb_down</i> Disapprove</button></td></tr>";
@@ -558,7 +560,6 @@ function loadAuthNoticesList(user){
 
 function searchNoticesList(user,searchedby){
     if((user.intended_ID!=undefined)&&(user.intended_ID.length>0)) {
-        yesInbox();
         for (var indx = 0; indx < user.intended_ID.length; ++indx) {
             //console.log(noticeList.intended[indx]);
             socket.emit('searchBriefNoticeWithRead', {
@@ -571,6 +572,7 @@ function searchNoticesList(user,searchedby){
                 }
                 //console.log(res);
                 if ((res.isIn)&&(res.notice.state =="approved")){
+                    yesInbox();
                     var noticeDetailItem;
                     if(res.read) {
                         noticeDetailItem = "<tr data-toggle='modal' data-target='#displayModal' style='cursor: pointer;font-weight:bolder' onclick='clickDetail(this," + indNum + ")'><td>" + res.notice.sender + "</td><td>" + res.notice.title + "</td> <td>" + res.notice.type + "</td><td>" + dateFromObjectId(res.notice._id).toLocaleString() + "</td> </tr>";
@@ -588,7 +590,6 @@ function searchNoticesList(user,searchedby){
     }
 
     if((user.event_ID!=undefined)&&(user.event_ID.length>0)) {
-        yesInbox();
         for (var indx7 = 0; indx7 < user.event_ID.length; ++indx7) {
             socket.emit('searchBriefEventWithRead', {
                 iD: user.event_ID[indx7].iD,
@@ -600,6 +601,7 @@ function searchNoticesList(user,searchedby){
                 }
                 //console.log(res.notice);
                 if (((res.event.state =="approved"))&&(res.isIn)){
+                    yesInbox();
                     var noticeDetailItem;
                     if(res.read) {
                         noticeDetailItem = "<tr data-toggle='modal' data-target='#displayModal' style='cursor: pointer; font-weight:bolder' onclick='clickEventDetail(this," + indEvent + ")'><td>" + res.event.sender + "</td><td>" + res.event.title + "</td> <td>" + res.event.type + "</td><td>" + dateFromObjectId(res.event._id).toLocaleString() + "</td> </tr>";
@@ -624,7 +626,6 @@ function searchNoticesList(user,searchedby){
 function searchSentNoticesList(user,searchedby){
 
     if((user.sent!=undefined)&&(user.sent.length>0)) {
-        yesSent();
         for (var indx2 = 0; indx2 < user.sent.length; ++indx2) {
             //console.log(noticeList.sent[indx]);
             socket.emit('searchBriefNotice', {
@@ -636,6 +637,7 @@ function searchSentNoticesList(user,searchedby){
                 }
                 //console.log(res.notice);
                 if (((res.notice.state =="new")||(res.notice.state =="approved"))&&(res.isIn)) {
+                    yesSent();
                     var noticeDetailItem;
                     if (res.notice.state =="approved") {
                         noticeDetailItem = "<tr style='cursor: pointer'><td>" + res.notice.title + "</td><td>" + res.notice.type + "</td> <td>" + dateFromObjectId(res.notice._id).toLocaleString() + "</td><td>Approved</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickSentDetail(" + indSent + ")'>View</button></td><td><button class='btn btn-warning pull-right' onclick='gotoEdit(" + indSent + ")' >Edit</button></td><td><button class='btn btn-danger pull-right' onclick='noticeRemove(" + indSent + ")'>Remove</button></td></tr>";
@@ -653,7 +655,6 @@ function searchSentNoticesList(user,searchedby){
     }
 
     if((user.sent_AD!=undefined)&&(user.sent_AD.length>0)) {
-        yesSent();
         for (var indx5 = 0; indx5 < user.sent_AD.length; ++indx5) {
             socket.emit('searchBriefAdvertisement', {
                 iD: user.sent_AD[indx5],
@@ -664,6 +665,7 @@ function searchSentNoticesList(user,searchedby){
                 }
                 //console.log(res.notice);
                 if (((res.aD.state =="new")||(res.aD.state =="approved"))&&(res.isIn)) {
+                    yesSent();
                     var noticeDetailItem;
                     if (res.aD.state =="approved") {
                         noticeDetailItem = "<tr style='cursor: pointer'><td>" + res.aD.title + "</td><td>" + res.aD.type + "</td> <td>" + dateFromObjectId(res.aD._id).toLocaleString() + "</td><td>Approved</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickSentADDetail(" + indADSent + ")'>View</button></td><td><button class='btn btn-warning pull-right' onclick='gotoEditAD(" + indADSent + ")' >Edit</button></td><td><button class='btn btn-danger pull-right' onclick='aDRemove(" + indADSent + ")'>Remove</button></td></tr>";
@@ -681,7 +683,6 @@ function searchSentNoticesList(user,searchedby){
     }
 
     if((user.sent_Event!=undefined)&&(user.sent_Event.length>0)) {
-        yesSent();
         for (var indx8 = 0; indx8 < user.sent_Event.length; ++indx8) {
             //console.log(noticeList.sent[indx]);
             socket.emit('searchBriefEvent', {
@@ -692,6 +693,7 @@ function searchSentNoticesList(user,searchedby){
                     return console.log(err);
                 }
                 if (((res.event.state =="new")||(res.event.state =="approved"))&&(res.isIn)) {
+                    yesSent();
                     var noticeDetailItem;
                     if (res.event.state =="approved") {
                         noticeDetailItem = "<tr style='cursor: pointer'><td>" + res.event.title + "</td><td>" + res.event.type + "</td> <td>" + dateFromObjectId(res.event._id).toLocaleString() + "</td><td>Approved</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickSentEventDetail(" + indEventSent + ")'>View</button></td><td><button class='btn btn-warning pull-right' onclick='gotoEditEvent(" + indEventSent + ")' >Edit</button></td><td><button class='btn btn-danger pull-right' onclick='eventRemove(" + indEventSent + ")'>Remove</button></td></tr>";
@@ -713,7 +715,6 @@ function searchSentNoticesList(user,searchedby){
 function searchAuthNoticesList(user,searchedby){
 
     if((user.w8nApproval!=undefined)&&(user.w8nApproval.length>0)) {
-        yesAuth();
         for (var indx3 = 0; indx3 < user.w8nApproval.length; ++indx3) {
             //console.log(noticeList.toApprove[indx3]);
             socket.emit('searchBriefNoticeWithRead', {
@@ -726,6 +727,7 @@ function searchAuthNoticesList(user,searchedby){
                 }
                 //console.log(res.notice);
                 if((res.isIn)&&(res.notice.state =="new")) {
+                    yesAuth();
                     var noticeDetailItem;
                     if (res.read) {
                         noticeDetailItem = "<tr style='cursor: pointer; font-weight:bolder' ><td>" + res.notice.title + "</td> <td>" + res.notice.type + "</td><td>" + dateFromObjectId(res.notice._id).toLocaleString() + "</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickAuthDetail(this," + indAuth + ")'>View</button></td><td><button class='btn btn-info pull-right' onclick='approveNotice(" + indAuth + ")'><i class='material-icons'>thumb_up</i> Approve</button></td><td><button class='btn btn-danger pull-right' onclick='diapproveNotice(" + indAuth + ")' ><i class='material-icons'>thumb_down</i> Disapprove</button></td></tr>";
@@ -742,7 +744,6 @@ function searchAuthNoticesList(user,searchedby){
     }
 
     if((user.w8nApproval_AD!=undefined)&&(user.w8nApproval_AD.length>0)) {
-        yesAuth();
         for (var indx6 = 0; indx6 < user.w8nApproval_AD.length; ++indx6) {
             //console.log(noticeList.toApprove[indx3]);
             socket.emit('searchBriefAdvertisementWithRead', {
@@ -755,6 +756,7 @@ function searchAuthNoticesList(user,searchedby){
                 }
                 //console.log(res.notice);
                 if((res.isIn)&&(res.aD.state =="new")) {
+                    yesAuth();
                     var noticeDetailItem;
                     if (res.read) {
                         noticeDetailItem = "<tr style='cursor: pointer; font-weight:bolder' ><td>" + res.aD.title + "</td> <td>" + res.aD.type + "</td><td>" + dateFromObjectId(res.aD._id).toLocaleString() + "</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickAuthADDetail(this," + indADAuth + ")'>View</button></td><td><button class='btn btn-info pull-right' onclick='approveAD(" + indADAuth + ")'><i class='material-icons'>thumb_up</i> Approve</button></td><td><button class='btn btn-danger pull-right' onclick='diapproveAD(" + indADAuth + ")' ><i class='material-icons'>thumb_down</i> Disapprove</button></td></tr>";
@@ -770,7 +772,6 @@ function searchAuthNoticesList(user,searchedby){
     }
 
     if((user.w8nApproval_Event!=undefined)&&(user.w8nApproval_Event.length>0))  {
-        yesAuth();
         for (var indx9 = 0; indx9 < user.w8nApproval_Event.length; ++indx9) {
             //console.log(noticeList.toApprove[indx3]);
             socket.emit('searchBriefEventWithRead', {
@@ -783,6 +784,7 @@ function searchAuthNoticesList(user,searchedby){
                 }
                 //console.log(res.notice);
                 if((res.isIn)&&(res.event.state =="new")) {
+                    yesAuth();
                     var noticeDetailItem;
                     if (res.read) {
                         noticeDetailItem = "<tr style='cursor: pointer; font-weight:bolder' ><td>" + res.event.title + "</td> <td>" + res.event.type + "</td><td>" + dateFromObjectId(res.event._id).toLocaleString() + "</td><td><button class='btn btn-success pull-right' data-toggle='modal' data-target='#displayModal' onclick='clickAuthEventDetail(this," + indADAuth + ")'>View</button></td><td><button class='btn btn-info pull-right' onclick='approveEvent(" + indADAuth + ")'><i class='material-icons'>thumb_up</i> Approve</button></td><td><button class='btn btn-danger pull-right' onclick='diapproveEvent(" + indADAuth + ")' ><i class='material-icons'>thumb_down</i> Disapprove</button></td></tr>";
