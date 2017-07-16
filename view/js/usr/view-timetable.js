@@ -70,7 +70,7 @@ $('[name=sc-find-btn]').on('click', function () {
     }, function (err, res) {
         if (err) {
             console.log(err);
-            return alert(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (!res) {
             alert('Unable to find timetable')

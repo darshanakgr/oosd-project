@@ -22,8 +22,8 @@ $('#create-new-form').on('submit', function (e) {
         contact: $('[name=cn-contact]').val()
     }, function (err, res) {
         if (err) {
-            console.log(err);
-            return alert('Unable to save contact detail');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
+            //return alert('Unable to save contact detail');
         }
         alert('Contact detail saved successfully');
         fillNameCombos();
@@ -50,7 +50,7 @@ $('[name=up-remove]').on('click', function (e) {
     socket.emit('removeContactDetail', $('[name=up-name]').val(), function (err, res) {
         if (err) {
             console.log(err);
-            return alert('Unable to remove contact detail');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         fillNameCombos();
         fillTable();
@@ -63,7 +63,7 @@ function fillNameCombos() {
     $('[name=sc-name]').find('option').remove();
     socket.emit('getContactDetail', function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         res.forEach(function (contactDetail) {
             $('[name=up-name]').append($('<option>', {
@@ -87,7 +87,7 @@ function fillTable() {
     }
     socket.emit('getContactDetail', function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         res.forEach(function (contactDetail) {
             var row = table.insertRow(-1);
@@ -103,7 +103,7 @@ $('[name=up-name]').on('change', function (e) {
     clearUpdateForm();
     socket.emit('searchContactDetail', $('[name=up-name]').val(), function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         $('[name=up-designation]').val(res.designation);
         $('[name=up-email]').val(res.email);
@@ -115,7 +115,7 @@ $('[name=sc-name]').on('change', function (e) {
     clearUpdateForm();
     socket.emit('searchContactDetail', $('[name=sc-name]').val(), function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         $('[name=sc-designation]').val(res.designation);
         $('[name=sc-email]').val(res.email);

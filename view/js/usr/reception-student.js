@@ -17,7 +17,7 @@ $('#create-new-batch-form').on('submit', function (e) {
         batchName: $('[name=cn-batch-id]').val()
     }, function (err, res) {
         if (err) {
-            return alert('Unable to register new batch');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         alert('New batch registered successfully');
     });
@@ -35,7 +35,7 @@ $('#register-new-student-form').on('submit', function (e) {
         contact: $('[name=st-contact]').val()
     }, function (err, res) {
         if (err) {
-            return alert('Unable to register new student');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         alert('New student registered successfully');
         clearStudentForm();
@@ -70,7 +70,7 @@ function clearSearchForm() {
 function fillBatchComobo() {
     socket.emit('getAllBatches', function (err, res) {
         if (err) {
-            return alert('Unable to register new batch');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         $('[name=st-batch]').find('option').remove();
 
@@ -86,7 +86,8 @@ function fillBatchComobo() {
 function fillBatchTable() {
     socket.emit('getAllBatches', function (err, res) {
         if (err) {
-            return alert('Unable to register new batch');
+            //return alert('Unable to register new batch');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         var table = document.getElementById('batch-table');
         while (table.rows.length > 0) {

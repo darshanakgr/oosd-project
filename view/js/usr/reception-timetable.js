@@ -131,8 +131,8 @@ $('#create-new-timetabele-form').on('submit', function (e) {
             rows: rows
         }, function (err, res) {
             if (err) {
-                console.log(err);
-                return alert(err);
+                //console.log(err);
+                return alert(err.errors[Object.keys(err.errors)[0]].message);;
             }
             alert("Timetable saved successfully")
         });
@@ -182,7 +182,7 @@ $('[name=up-find-btn]').on('click', function () {
     }, function (err, res) {
         if (err) {
             console.log(err);
-            return alert(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (!res) {
             alert('Unable to find timetable')
@@ -218,7 +218,7 @@ $('[name=sc-find-btn]').on('click', function () {
     }, function (err, res) {
         if (err) {
             console.log(err);
-            return alert(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (!res) {
             alert('Unable to find timetable')
@@ -304,7 +304,7 @@ function traverseUPTimeTable() {
 function loadbatchCombo() {
     socket.emit('getAllBatches', function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         res.forEach(function (batch) {
             $('[name=cn-batch]').append($('<option>', {
