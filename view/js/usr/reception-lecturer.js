@@ -1,6 +1,9 @@
 /**
  * Created by drox2014 on 7/11/2017.
  */
+const generator = require('generate-password');
+const jwt=require('jsonwebtoken');
+
 var socket = io('/reception-lecturer');
 
 socket.on('connect', function () {
@@ -24,6 +27,25 @@ $('#register-new-lecturer-form').on('submit', function (e) {
         }
         fillLecturerTable();
         alert('Lecturer registered successfully');
+    });
+
+    var password = generator.generate({
+        length: 10,
+        numbers: true
+    });
+
+    socket.emit('createUser', {
+        iD:$('[name=cn-index]').val(),
+        name:$('[name=cn-name]').val(),
+        email:$('[name=cn-email]').val(),
+        password: jwt(password,'SaltToTheWound'),
+        type:'Lecturer',
+        batch:{department:$('[name=cn-department]'),year:'Staff'}
+    }, function (err, res) {
+        if(err){
+            console.log(err);
+            return alert(err);
+        }
     });
 });
 

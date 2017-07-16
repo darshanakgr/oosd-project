@@ -1,4 +1,5 @@
 const lecturerController = require('./../controller/lecturer-controller');
+const userController=require('./../controller/lecturer-controller');
 
 class ReceptionLecturerSocket {
     constructor(io, socket) {
@@ -16,6 +17,8 @@ class ReceptionLecturerSocket {
             });
         });
 
+
+
         socket.on('getAllLecturers', (callback) => {
             lecturerController.getAllLecturers().then((res) => {
                 callback(undefined, res);
@@ -23,9 +26,6 @@ class ReceptionLecturerSocket {
                 callback(error);
             });
         });
-
-
-
     }
 }
 
