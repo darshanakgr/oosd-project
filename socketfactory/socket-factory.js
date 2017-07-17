@@ -24,6 +24,8 @@ const {LecturerMainSocket}= require('./../socket/lecturer-main-socket');
 const {LecturerCreateEventSocket}= require('./../socket/lecturer-create-event-socket');
 const {LecturerCreateRegularSocket}= require('./../socket/lecturer-create-regular-socket');
 const {LecturerCreateTemporarySocket}= require('./../socket/lecturer-create-temporary-socket');
+const {LecturerEditRegularSocket}= require('./../socket/lecturer-edit-regular-socket');
+const {LecturerEditEventSocket}= require('./../socket/lecturer-edit-event-socket');
 
 const getLecturerModuleSocket = (io, socket) => {
     return new LectureModuleSocket(io, socket);
@@ -117,6 +119,14 @@ const getLecturerCreateTemporarySocket = (io, socket) => {
     return new LecturerCreateTemporarySocket(io, socket);
 };
 
+const getLecturerEditRegularSocket = (io, socket) => {
+    return new LecturerEditRegularSocket(io, socket);
+};
+
+const getLecturerEditEventSocket = (io, socket) => {
+    return new LecturerEditEventSocket(io, socket);
+};
+
 module.exports = {
     getLecturerModuleSocket,
     getLecturerResultSocket,
@@ -140,5 +150,7 @@ module.exports = {
     getLecturerMainSocket,
     getLecturerCreateEventSocket,
     getLecturerCreateRegularSocket,
-    getLecturerCreateTemporarySocket
+    getLecturerCreateTemporarySocket,
+    getLecturerEditEventSocket,
+    getLecturerEditRegularSocket
 };

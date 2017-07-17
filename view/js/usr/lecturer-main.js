@@ -592,7 +592,7 @@ function gotoEdit(ind) {
     if(confirm('Do you want to edit the notice?'))
     {
         sessionStorage.setItem('editID',arraySentNotices[ind]);
-        location.href='edit-regular.html';
+        location.href='lecturer-edit-regular.html';
     }
 }
 
@@ -600,7 +600,7 @@ function gotoEditAD(ind) {
     if(confirm('Do you want to edit the Advertisement?'))
     {
         sessionStorage.setItem('editID',arraySentADs[ind]);
-        location.href='edit-advertisement.html';
+        location.href='lecturer-edit-advertisement.html';
 
     }
 }
@@ -609,7 +609,7 @@ function gotoEditEvent(ind) {
     if(confirm('Do you want to edit the Event?'))
     {
         sessionStorage.setItem('editID',arraySentEvents[ind]);
-        location.href='edit-event.html';
+        location.href='lecturer-edit-event.html';
     }
 }
 
