@@ -21,7 +21,7 @@ function finishEvent() {
 
         //console.log(targetgrp,loggedID,sessionStorage.getItem('approverID'));
 
-        if(Date.parse(newExpDate)>=Date.parse(new Date())) {
+        if((Date.parse(newExpDate)>=Date.parse(new Date()))&&(Date.parse(newExpDate))) {
             if (targetgrp.length != 0) {
             socket.emit('createEvent', {
                 title: newTitile,

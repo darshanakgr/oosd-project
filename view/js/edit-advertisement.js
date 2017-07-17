@@ -21,7 +21,7 @@ function finishEditAD() {
         var newContent = quillEditAD.getContents();
         var newExpDate= document.getElementById("expDateEditAD").value;
 
-        if(Date.parse(newExpDate)>=Date.parse(new Date())) {
+        if((Date.parse(newExpDate)>=Date.parse(new Date()))&&(Date.parse(newExpDate))) {
             socket.emit('editAD',{
                 title: newTitile,
                 content: newContent,
