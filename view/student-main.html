@@ -136,7 +136,7 @@
             </div>
             <div class="container-fluid" id="showDiv" style="display: none">
                 <div id="buttonDiv" class="container" style=" margin: 0 auto; width: 100%;">
-                    <button class="btn btn-danger pull-left animated fadeIn" data-toggle="modal" data-target="#newTypeModal" id="createNewButton" style="display: none"><i class="pe-7s-pen"></i></button>
+                    <!--<button class="btn btn-danger pull-left animated fadeIn" data-toggle="modal" data-target="#newTypeModal" id="createNewButton" style="display: none"><i class="pe-7s-pen"></i></button>-->
                     <!--<button class="btn btn-default pull-left" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Refresh" onclick="location.href='index.html'"><i class="pe-7s-refresh-2"></i></button>-->
                     <button class="btn btn-default pull-left animated fadeIn" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Refresh" onclick="refresh()"><i class="pe-7s-refresh-2"></i></button>
                     <button class="btn btn-info pull-left animated fadeIn" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Search" onclick="searchView()"><i class="pe-7s-search"></i></button>
@@ -263,8 +263,6 @@
                                             Inbox
                                         </a>
                                     </li>
-
-
                                 </ul>
                             </div>
                         </div>
@@ -285,48 +283,6 @@
                                                 <th onclick="sortNDateTable(3)" style="cursor: pointer">Date</th>
                                             </tr></thead>
                                             <tbody id="noticeDetailTable" >
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane animated fadeIn" id="update">
-                                <div class="card" id="noSent">
-                                    <h3 align="center">List of sent notices is empty</h3>
-                                </div>
-                                <div class="card" id="yesSent" style="display: none">
-                                    <div class="content table-responsive table-full-width">
-                                        <table id="sentTable" class="table table-hover table-striped">
-                                            <thead>
-                                            <tr><th onclick="sortSTable(0)" style="cursor: pointer">Title</th>
-                                                <th onclick="sortSTable(1)" style="cursor: pointer">Type</th>
-                                                <th onclick="sortSDateTable(2)" style="cursor: pointer">Date</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr></thead>
-                                            <tbody id="sentDetailTable" >
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane animated fadeIn" id="view-all">
-                                <div class="card" id="noAuth">
-                                    <h3 align="center">No Notices to Authorize</h3>
-                                </div>
-                                <div class="card" id="yesAuth" style="display: none">
-                                    <div class="content table-responsive table-full-width">
-                                        <table id="authTable" class="table table-hover table-striped">
-                                            <thead>
-                                            <tr><th onclick="sortATable(0)" style="cursor: pointer">Title</th>
-                                                <th onclick="sortATable(1)" style="cursor: pointer">Type</th>
-                                                <th onclick="sortADateTable(2)" style="cursor: pointer">Date</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr></thead>
-                                            <tbody id="authDetailTable" >
                                             </tbody>
                                         </table>
                                     </div>
@@ -486,9 +442,7 @@
         refresh();
 
         function sortBoth() {
-            sortFSDateTable(2);
             sortFNDateTable(3);
-            sortFADateTable(2);
         }
 
 

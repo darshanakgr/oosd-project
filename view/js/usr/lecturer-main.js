@@ -727,6 +727,7 @@ function sortNTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("noticeTable");
     switching = true;
+    dir = "asc";
     while (switching) {
         switching = false;
         rows = table.getElementsByTagName("TR");
