@@ -14,7 +14,7 @@ class ReceptionTimetableSocket {
             console.log("Connection was interrupted on /reception-timetable @", new Date().getTime());
         });
 
-        socket.on('createSemTimeTable', (timeTable, callback) => {
+        socket.on('createTimeTable', (timeTable, callback) => {
             timetableController.createNewTimetable(timeTable).then((res) => {
                 callback(undefined, res);
             }, (error) => {

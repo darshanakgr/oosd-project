@@ -125,7 +125,7 @@ $('#create-new-timetabele-form').on('submit', function (e) {
         } else {
             data.location = $('[name=cn-location]').val();
         }
-        socket.emit('createSemTimeTable', {
+        socket.emit('createTimeTable', {
             timetableType: timetableType,
             data: data,
             rows: rows
@@ -265,7 +265,7 @@ $('#update-timetable-form').on('submit', function (e) {
                         console.log(err);
                         return alert(err);
                     }
-                    alert("Timetable saved successfully")
+                    alert("Timetable saved successfully");
                 });
             }
         });

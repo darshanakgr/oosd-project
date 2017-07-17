@@ -30,11 +30,8 @@ var Module = mongoose.model('Module', {
     credits:{
         type:Number,
         required:[true,'credit field cannot be empty'],
-        validate:{
-            validator:function(value){
-                return validator.isDecimal(value)
-            },message:'{VALUE} is not a valid credit value '
-        }
+        min:0.0,
+        max:10.0
 
     }
 });
