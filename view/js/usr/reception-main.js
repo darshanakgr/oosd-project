@@ -3,7 +3,7 @@
 //  */
 // // Get the modal
 
-var socket=io('/main-notices');
+var socket=io('/reception');
 socket.on('connect',function(){
     console.log('Connected to server');
 });
@@ -53,25 +53,7 @@ socket.emit('getNoticeUser', {
     }
     if(res.type!="Student"){
         document.getElementById("createNewButton").setAttribute("style","display:block");
-        if(res.type=="Dean"){
-            document.getElementById("nTRBReg").setAttribute("checked","checked");
-        }
-        else if(res.type=="HoD"){
-            document.getElementById("nTRBReg").setAttribute("checked","checked");
-        }
-        else if(res.type=="Reception"){
-            document.getElementById("nTRBReg").setAttribute("checked","checked");
-        }
-        else if(res.type=="Lecturer"){
-            document.getElementById("nTRBAD").setAttribute("style","display:none");
-            document.getElementById("nTRBReg").setAttribute("checked","checked");
-        }
-        else if(res.type=="Rep"){
-            document.getElementById("nTRBTemp").setAttribute("checked","checked");
-            document.getElementById("nTRBReg").setAttribute("style","display:block");
-            document.getElementById("nTRBAD").setAttribute("style","display:none");
-            document.getElementById("nTRBEvent").setAttribute("style","display:none");
-        }
+        document.getElementById("nTRBReg").setAttribute("checked","checked");
     }
     else{
         document.getElementById("sentTab").setAttribute("style","visibility: hidden");
@@ -986,7 +968,7 @@ function gotoEdit(ind) {
     if(confirm('Do you want to edit the notice?'))
     {
         sessionStorage.setItem('editID',arraySentNotices[ind]);
-        location.href='edit-regular.html';
+        location.href='reception-edit-regular.html';
     }
 }
 
@@ -994,7 +976,7 @@ function gotoEditAD(ind) {
     if(confirm('Do you want to edit the Advertisement?'))
     {
         sessionStorage.setItem('editID',arraySentADs[ind]);
-        location.href='edit-advertisement.html';
+        location.href='reception-edit-advertisement.html';
 
     }
 }
@@ -1003,7 +985,7 @@ function gotoEditEvent(ind) {
     if(confirm('Do you want to edit the Event?'))
     {
         sessionStorage.setItem('editID',arraySentEvents[ind]);
-        location.href='edit-event.html';
+        location.href='reception-edit-event.html';
     }
 }
 
@@ -1604,19 +1586,19 @@ function showSearchPage() {
 function doNew() {
     if (document.getElementById("nTRBReg").checked)
     {
-        location.href='create-regular.html';
+        location.href='reception-create-regular.html';
     }
     else if(document.getElementById("nTRBTemp").checked)
     {
-        location.href='create-temporary.html';
+        location.href='reception-create-temporary.html';
     }
     else if(document.getElementById("nTRBEvent").checked)
     {
-        location.href='create-event.html';
+        location.href='reception-create-event.html';
     }
     else if(document.getElementById("nTRBAD").checked)
     {
-        location.href='create-advertisement.html';
+        location.href='reception-create-advertisement.html';
     }
 }
 

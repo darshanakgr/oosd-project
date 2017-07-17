@@ -158,7 +158,7 @@
             </div>
             <div class="container-fluid" id="showDiv" style="display: none">
             <div id="buttonDiv" class="container" style=" margin: 0 auto; width: 100%;">
-                <button class="btn btn-danger pull-left animated fadeIn" data-toggle="modal" data-target="#newTypeModal" id="createNewButton" style="display: none"><i class="pe-7s-pen"></i></button>
+                <!--<button class="btn btn-danger pull-left animated fadeIn" data-toggle="modal" data-target="#newTypeModal" id="createNewButton" style="display: none"><i class="pe-7s-pen"></i></button>-->
                 <!--<button class="btn btn-default pull-left" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Refresh" onclick="location.href='index.html'"><i class="pe-7s-refresh-2"></i></button>-->
                 <button class="btn btn-default pull-left animated fadeIn" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Refresh" onclick="refresh()"><i class="pe-7s-refresh-2"></i></button>
                 <button class="btn btn-warning pull-right animated fadeIn"data-toggle="modal" data-target="#genViewModal" onclick="genViewFunc()" ><i class="pe-7s-menu"></i></button>
@@ -285,19 +285,19 @@
                                         Inbox
                                     </a>
                                 </li>
-                                <li class="" id="sentTab">
-                                    <a href="#update" data-toggle="tab" aria-expanded="false">
-                                        <i class="material-icons">done_all</i>
-                                        Sent
-                                    </a>
-                                </li>
-                                <li class="" id="w8nApprovalTab" style="visibility: hidden">
-                                    <a href="#view-all" data-toggle="tab" aria-expanded="false">
-                                        <i class="material-icons">thumbs_up_down</i>
-                                        w8n approval
-                                    </a>
+                                <!--<li class="" id="sentTab">-->
+                                    <!--<a href="#update" data-toggle="tab" aria-expanded="false">-->
+                                        <!--<i class="material-icons">done_all</i>-->
+                                        <!--Sent-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class="" id="w8nApprovalTab" style="visibility: hidden">-->
+                                    <!--<a href="#view-all" data-toggle="tab" aria-expanded="false">-->
+                                        <!--<i class="material-icons">thumbs_up_down</i>-->
+                                        <!--w8n approval-->
+                                    <!--</a>-->
 
-                                </li>
+                                <!--</li>-->
                             </ul>
                         </div>
                     </div>
@@ -320,43 +320,43 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane animated fadeIn" id="update">
-                            <div class="card">
-                                <div class="content table-responsive table-full-width">
-                                    <table id="sentTable" class="table table-hover table-striped">
-                                        <thead>
-                                        <tr><th onclick="sortSTable(0)" style="cursor: pointer">Title</th>
-                                            <th onclick="sortSTable(1)" style="cursor: pointer">Type</th>
-                                            <th onclick="sortSDateTable(2)" style="cursor: pointer">Date</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr></thead>
-                                        <tbody id="sentDetailTable" >
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane animated fadeIn" id="view-all">
-                            <div class="card">
-                                <div class="content table-responsive table-full-width">
-                                    <table id="authTable" class="table table-hover table-striped">
-                                        <thead>
-                                        <tr><th onclick="sortATable(0)" style="cursor: pointer">Title</th>
-                                            <th onclick="sortATable(1)" style="cursor: pointer">Type</th>
-                                            <th onclick="sortADateTable(2)" style="cursor: pointer">Date</th>
-                                            <th onclick="sortATable(3)" style="cursor: pointer">State</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr></thead>
-                                        <tbody id="authDetailTable" >
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        <!--<div class="tab-pane animated fadeIn" id="update">-->
+                            <!--<div class="card">-->
+                                <!--<div class="content table-responsive table-full-width">-->
+                                    <!--<table id="sentTable" class="table table-hover table-striped">-->
+                                        <!--<thead>-->
+                                        <!--<tr><th onclick="sortSTable(0)" style="cursor: pointer">Title</th>-->
+                                            <!--<th onclick="sortSTable(1)" style="cursor: pointer">Type</th>-->
+                                            <!--<th onclick="sortSDateTable(2)" style="cursor: pointer">Date</th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                        <!--</tr></thead>-->
+                                        <!--<tbody id="sentDetailTable" >-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="tab-pane animated fadeIn" id="view-all">-->
+                            <!--<div class="card">-->
+                                <!--<div class="content table-responsive table-full-width">-->
+                                    <!--<table id="authTable" class="table table-hover table-striped">-->
+                                        <!--<thead>-->
+                                        <!--<tr><th onclick="sortATable(0)" style="cursor: pointer">Title</th>-->
+                                            <!--<th onclick="sortATable(1)" style="cursor: pointer">Type</th>-->
+                                            <!--<th onclick="sortADateTable(2)" style="cursor: pointer">Date</th>-->
+                                            <!--<th onclick="sortATable(3)" style="cursor: pointer">State</th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                        <!--</tr></thead>-->
+                                        <!--<tbody id="authDetailTable" >-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>

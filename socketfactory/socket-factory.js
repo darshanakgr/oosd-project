@@ -26,6 +26,15 @@ const {LecturerCreateRegularSocket}= require('./../socket/lecturer-create-regula
 const {LecturerCreateTemporarySocket}= require('./../socket/lecturer-create-temporary-socket');
 const {LecturerEditRegularSocket}= require('./../socket/lecturer-edit-regular-socket');
 const {LecturerEditEventSocket}= require('./../socket/lecturer-edit-event-socket');
+const {StudentMainSocket}= require('./../socket/student-main-socket');
+const {ReceptionMainSocket}= require('./../socket/reception-main-socket');
+const {ReceptionCreateAdvertisementSocket}= require('./../socket/reception-create-advertisement-socket');
+const {ReceptionCreateEventSocket}= require('./../socket/reception-create-event-socket');
+const {ReceptionCreateRegularSocket}= require('./../socket/reception-create-regular-socket');
+const {ReceptionCreateTemporarySocket}= require('./../socket/reception-create-temporary-socket');
+const {ReceptionEditAdvertisementSocket}= require('./../socket/reception-edit-advertisement-socket');
+const {ReceptionEditEventSocket}= require('./../socket/reception-edit-event-socket');
+const {ReceptionEditRegularSocket}= require('./../socket/reception-edit-regular-socket');
 
 const getLecturerModuleSocket = (io, socket) => {
     return new LectureModuleSocket(io, socket);
@@ -127,6 +136,42 @@ const getLecturerEditEventSocket = (io, socket) => {
     return new LecturerEditEventSocket(io, socket);
 };
 
+const getStudentMainSocket = (io, socket) => {
+    return new StudentMainSocket(io, socket);
+};
+
+const getReceptionMainSocket = (io, socket) => {
+    return new ReceptionMainSocket(io, socket);
+};
+
+const getReceptionCreateAdvertisementSocket = (io, socket) => {
+    return new ReceptionCreateAdvertisementSocket(io, socket);
+};
+
+const getReceptionCreateEventSocket = (io, socket) => {
+    return new ReceptionCreateEventSocket(io, socket);
+};
+
+const getReceptionCreateRegularSocket = (io, socket) => {
+    return new ReceptionCreateRegularSocket(io, socket);
+};
+
+const getReceptionCreateTemporarySocket = (io, socket) => {
+    return new ReceptionCreateTemporarySocket(io, socket);
+};
+
+const getReceptionEditAdvertisementSocket = (io, socket) => {
+    return new ReceptionEditAdvertisementSocket(io, socket);
+};
+
+const getReceptionEditEventSocket = (io, socket) => {
+    return new ReceptionEditEventSocket(io, socket);
+};
+
+const getReceptionEditRegularSocket = (io, socket) => {
+    return new ReceptionEditRegularSocket(io, socket);
+};
+
 module.exports = {
     getLecturerModuleSocket,
     getLecturerResultSocket,
@@ -152,5 +197,14 @@ module.exports = {
     getLecturerCreateRegularSocket,
     getLecturerCreateTemporarySocket,
     getLecturerEditEventSocket,
-    getLecturerEditRegularSocket
+    getLecturerEditRegularSocket,
+    getStudentMainSocket,
+    getReceptionMainSocket,
+    getReceptionCreateAdvertisementSocket,
+    getReceptionCreateEventSocket,
+    getReceptionCreateRegularSocket,
+    getReceptionCreateTemporarySocket,
+    getReceptionEditAdvertisementSocket,
+    getReceptionEditEventSocket,
+    getReceptionEditRegularSocket
 };

@@ -3,22 +3,18 @@
 //  */
 // // Get the modal
 
-var socket=io('/main-notices');
+var socket=io('/student');
 socket.on('connect',function(){
     console.log('Connected to server');
 });
 
 var indNum=0;
-var indSent=0;
-var indAuth=0;
 var indAD=0;
 var indADSent=0;
 var indADAuth=0;
 var indEvent=0;
 var indEventSent=0;
 var indEventAuth=0;
-var indGenView=0;
-var isgenView=false;
 var intervalScope;
 
 var arrayDetailNotices=[];
