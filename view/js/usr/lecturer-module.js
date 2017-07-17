@@ -23,7 +23,7 @@ $('#create-new-module').on('submit', function (e) {
         credits: parseFloat($('[name=cn-credits]').val())
     }, function (err, res) {
         if (err) {
-            return alert('Unable to create new module');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
 
         alert("New module is created successfully");
@@ -41,7 +41,7 @@ $('#search-btn').on('click', function () {
     clearUpdateModule();
     socket.emit('searchModule', moduleCode, function (err, res) {
         if (err) {
-            return alert('Unable to find module');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (res) {
             $('[name=up-moduleName]').val(res.moduleName);
@@ -60,7 +60,7 @@ $('#update-module').on('submit', function (e) {
         credits: parseFloat($('[name=up-credits]').val())
     }, function (err, res) {
         if (err) {
-            return alert('Failed to update module details');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         alert("Updated module successfully");
     });
@@ -71,7 +71,7 @@ $('[name=me-module-code]').on('change', function () {
     var moduleCode = $('[name=me-module-code]').val();
     socket.emit('searchModule', moduleCode, function (err, res) {
         if (err) {
-            return alert('Unable to find module');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (res) {
             $('[name=me-module-name]').val(res.moduleName);
@@ -91,7 +91,8 @@ $('#new-enrollment-form').on('submit', function (e) {
         semester: $('[name=me-semester]').val()
     }, function (err, res) {
         if (err) {
-            return alert('Failed to complete enrollment');
+            //return alert('Failed to complete enrollment');
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         alert("Module enrollment completed");
         fillEnrollmentTable();
@@ -113,7 +114,8 @@ function fillModuleCombo() {
         var moduleCode = $('[name=me-module-code]').val();
         socket.emit('searchModule', moduleCode, function (err, res) {
             if (err) {
-                return alert('Unable to find module');
+                return alert(err.errors[Object.keys(err.errors)[0]].message);
+                //return alert('Unable to find module');
             }
             if (res) {
                 $('[name=me-module-name]').val(res.moduleName);
@@ -203,7 +205,8 @@ function fillBatchCombo() {
     $('[name=me-batch]').find('option').remove();
     socket.emit('getAllBatches', function (err, res) {
         if (err) {
-            return console.log(err);
+            //return console.log(err);
+            return alert('Unable to load all Batches');
         }
         res.forEach(function (batch) {
             $('[name=me-batch]').append($('<option>', {

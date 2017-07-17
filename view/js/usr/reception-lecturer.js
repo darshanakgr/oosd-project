@@ -20,7 +20,7 @@ $('#register-new-lecturer-form').on('submit', function (e) {
     }, function (err, res) {
         if(err){
             console.log(err);
-            return alert(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         fillLecturerTable();
         alert('Lecturer registered successfully');

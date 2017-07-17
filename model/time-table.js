@@ -3,11 +3,13 @@
  */
 
 const mongoose = require('mongoose');
+const validator= require('validator');
 
 var Timetable = mongoose.model('Timetable', {
     timetableType:{
         type:String,
-        required:true
+        required:true,
+        enum:['SEM','LAB','LEC']
     },
     data:{
         type:Object

@@ -24,7 +24,7 @@ $('[name=uf-module-code]').on('change', function () {
     var id = $("[name=uf-module-code]").val();
     socket.emit('searchModuleDetailById', id, function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (res) {
             socket.emit('searchModule', res.moduleCode, function (error, module) {
@@ -44,7 +44,7 @@ $('[name=um-module-code]').on('change', function () {
     var id = $("[name=um-module-code]").val();
     socket.emit('searchModuleDetailById', id, function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (res) {
             socket.emit('searchModule', res.moduleCode, function (error, module) {
@@ -158,7 +158,7 @@ $('#upoload-file').on('submit', function (e) {
                     }, data, function (err, res) {
                         if (err) {
                             console.log(err);
-                            return alert("Unable to save result");
+                            return alert(err.errors[Object.keys(err.errors)[0]].message);
                         }
                         alert(res.insertedCount + " results saved")
                     });
@@ -199,7 +199,7 @@ $('#enter-manually-form').on('submit', function (e) {
             moduleDetailId: moduleDetailId,
         }, function (err, res) {
             if (err) {
-                return alert(err);
+                return alert(err.errors[Object.keys(err.errors)[0]].message);
             }
             if (res.length) {
                 if (confirm('Previous records available. Do you want to replace existing results?')) {
@@ -238,7 +238,7 @@ $('#enter-manually-form').on('submit', function (e) {
 function fillModuleCodeCombo() {
     socket.emit('searchByLectureId', lecturerId, function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (res) {
             res.forEach(function (module) {

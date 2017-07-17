@@ -27,7 +27,7 @@ $('[name=module-code]').on('change', function () {
     }
     socket.emit('searchModuleDetailById', id, function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert(err.errors[Object.keys(err.errors)[0]].message);
         }
         if (res) {
             socket.emit('searchModule', res.moduleCode, function (error, module) {
@@ -78,7 +78,7 @@ $('[name=module-code]').on('change', function () {
 function fillModuleCodeCombo() {
     socket.emit('getAllModules', function (err, res) {
         if (err) {
-            return console.log(err);
+            return alert('Unable to load all Modules')
         }
         if (res) {
             res.forEach(function (module) {

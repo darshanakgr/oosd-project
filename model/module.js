@@ -3,25 +3,36 @@
  */
 
 const mongoose = require('mongoose');
+const validator= require('validator');
 
 var Module = mongoose.model('Module', {
     moduleCode:{
         type:String,
-        required:true,
-        minlength:4,
+        required:[true,'Module Code cannot be empty'],
         trim:true,
-        unique:true
+        unique:[true,'Duplicate Module code'],
+        validate:{
+            validator:function(value){
+                return /^[A-Z]{2}[0-9]{4}$/.test(value)
+            },message:'{VALUE} is not a valid Module code '
+        }
     },
     moduleName:{
         type:String,
-        required:true,
-        minlength:1,
-        trim:true
+        required:[true,'Module Name cannot be empty'],
+        trim:true,
+        validate:{
+            validator:function(value){
+                return /^[A-Za-z\s]*$/.test(value)
+            },message:'{VALUE} is not a valid Module Name '
+        }
     },
     credits:{
         type:Number,
-        required:true,
-        minlength:1
+        required:[true,'credit field cannot be empty'],
+        min:0.0,
+        max:10.0
+
     }
 });
 

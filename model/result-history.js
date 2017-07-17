@@ -2,13 +2,19 @@
  * Created by drox2014 on 7/11/2017.
  */
 const mongoose = require('mongoose');
+const validator= require('validator');
 
 var resultHistory = new mongoose.Schema({
     moduleCode:{
         type:String,
-        required:true,
+        required:[true,'Module Code cannot be empty'],
         trim:true,
-        minlength:6
+        unique:[true,'Duplicate Module code'],
+        validate:{
+            validator:function(value){
+                return /^[A-Z]{2}[0-9]{4}$/.test(value)
+            },message:'{VALUE} is not a valid Module code '
+        }
     },
     moduleDetailId:{
         type:String,
@@ -16,7 +22,7 @@ var resultHistory = new mongoose.Schema({
     },
     date:{
         type:Date,
-        required:true
+        required:[true,'Date cannot be empty']
     },
     user:{
         type:String,
