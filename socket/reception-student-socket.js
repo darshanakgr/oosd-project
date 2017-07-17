@@ -1,5 +1,7 @@
 const batchController = require('./../controller/batch-controller');
 const studentController = require('./../controller/student-controller');
+const userController=require('./../controller/user-controller');
+
 
 class ReceptionStudentSocket {
     constructor(io, socket) {
@@ -35,6 +37,14 @@ class ReceptionStudentSocket {
 
         socket.on('searchStudentByIndex', (index, callback) => {
             studentController.searchByIndex(index).then((res) => {
+                callback(undefined, res);
+            }, (error) => {
+                callback(error);
+            });
+        });
+
+        socket.on('createUser', (user,callback) => {
+            userController.createUser(user).then((res) => {
                 callback(undefined, res);
             }, (error) => {
                 callback(error);

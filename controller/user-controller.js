@@ -464,7 +464,6 @@ function createUser(user) {
 
     var mailOptions={
         from: 'Damitha <damitha.15@cse.mrt.ac.lk>',
-        //to: 'damitha.15@cse.mrt.ac.lk',
         to: user.email,
         subject:'Login Password for Smart Notices',
         text: password

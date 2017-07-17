@@ -40,6 +40,22 @@ $('#register-new-student-form').on('submit', function (e) {
         alert('New student registered successfully');
         clearStudentForm();
     });
+
+    socket.emit('createUser', {
+        iD:$('[name=st-index-no]').val(),
+        name:$('[name=st-name]').val(),
+        email:$('[name=st-contact]').val(),
+        type:'Student',
+        batch:{department:document.getElementById('st-department').value,year: $('[name=st-batch]').val()}
+    }, function (err, res) {
+        if(err){
+            console.log(err);
+            return alert(err);
+        }
+        console.log(res);
+    });
+
+
 });
 
 $('#search-student-form').on('submit', function (e) {
