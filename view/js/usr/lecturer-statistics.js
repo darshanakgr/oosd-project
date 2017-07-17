@@ -63,8 +63,7 @@ $('[name=module-code]').on('change', function () {
                         res.forEach(function (result) {
                             var row = resultTable.insertRow(-1);
                             row.insertCell(0).innerHTML = result.index;
-                            row.insertCell(1).innerHTML = "dadsa";
-                            row.insertCell(2).innerHTML = result.grade;
+                            row.insertCell(1).innerHTML = result.grade;
                             fillArray(result.grade, arr);
                             plotGraph(arr);
                         });

@@ -22,7 +22,7 @@ const findById = (id) => {
 
 const removeById = (id) => {
     return ContactDetail.remove({_id:id});
-}
+};
 
 module.exports = {
     createNewContactDetail,
