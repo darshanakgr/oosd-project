@@ -25,25 +25,30 @@ function finishAD() {
         //console.log(targetgrp,loggedID,sessionStorage.getItem('approverID'));
 
         if(Date.parse(newExpDate)>=Date.parse(new Date())) {
-            socket.emit('createAdvertisement', {
-                title: newTitile,
-                content: newContent,
-                sender: thisuser.name,
-                senderID: loggedID,
-                receivers: targetgrp,
-                approver: sessionStorage.getItem('approverID'),
-                exDate: newExpDate
-            }, function (err, res) {
-                if (err) {
-                    return console.log(err);
-                }
-                socket.emit('updateUseronCreate', {trgt: targetgrp, noticeID: res});
-                socket.emit('updateSenderonCreate', {trgt: loggedID, noticeID: res});
-                socket.emit('updateApproveronCreate', {trgt: sessionStorage.getItem('approverID'), noticeID: res});
-            });
-            location.href = 'index.html';
+            if (targetgrp.length != 0) {
+                socket.emit('createAdvertisement', {
+                    title: newTitile,
+                    content: newContent,
+                    sender: thisuser.name,
+                    senderID: loggedID,
+                    receivers: targetgrp,
+                    approver: sessionStorage.getItem('approverID'),
+                    exDate: newExpDate
+                }, function (err, res) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    socket.emit('updateUseronCreate', {trgt: targetgrp, noticeID: res});
+                    socket.emit('updateSenderonCreate', {trgt: loggedID, noticeID: res});
+                    socket.emit('updateApproveronCreate', {trgt: sessionStorage.getItem('approverID'), noticeID: res});
+                });
+                location.href = 'index.html';
+            }
+            else {
+                alert("No recipients");
+            }
         }
-        else{
+        else {
             alert("Invalid expiry date");
         }
     }

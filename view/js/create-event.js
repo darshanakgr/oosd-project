@@ -22,6 +22,7 @@ function finishEvent() {
         //console.log(targetgrp,loggedID,sessionStorage.getItem('approverID'));
 
         if(Date.parse(newExpDate)>=Date.parse(new Date())) {
+            if (targetgrp.length != 0) {
             socket.emit('createEvent', {
                 title: newTitile,
                 content: newContent,
@@ -39,6 +40,10 @@ function finishEvent() {
                 socket.emit('updateApproveronCreate', {trgt: sessionStorage.getItem('approverID'), noticeID: res});
             });
             location.href = 'index.html';
+            }
+            else {
+                alert("No recipients");
+            }
         }
         else{
             alert("Invalid expiry date");

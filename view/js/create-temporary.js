@@ -15,10 +15,11 @@ socket.on('connect',function(){
 function finishTemp() {
     if(confirm('Do you want to finalize the notice?'))
     {
-        location.href='index.html';
+
         var newTitile = document.getElementById("inputTitle").value;
         var newContent = quill.getContents();
 
+        if (targetgrp.length != 0) {
         socket.emit('createTempNotice',{
             title: newTitile,
             content: newContent,
@@ -34,6 +35,11 @@ function finishTemp() {
             socket.emit('updateSenderonCreate',{trgt:loggedID,noticeID:res});
             socket.emit('updateApproveronCreate',{trgt:sessionStorage.getItem('approverID'),noticeID:res});
         });
+            location.href='index.html';
+        }
+        else {
+            alert("No recipients");
+        }
     }
 }
 

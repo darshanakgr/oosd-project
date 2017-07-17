@@ -18,6 +18,8 @@ function finish() {
         var newTitile = document.getElementById("inputTitle").value;
         var newContent = quill.getContents();
 
+
+        if (targetgrp.length != 0) {
         socket.emit('createNotice',{
             title: newTitile,
             content: newContent,
@@ -35,6 +37,10 @@ function finish() {
         });
 
         location.href='index.html';
+        }
+        else {
+            alert("No recipients");
+        }
     }
 }
 
