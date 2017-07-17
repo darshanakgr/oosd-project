@@ -482,7 +482,25 @@ function createUser(user) {
     }, (e) => {
         return console.log('Unable to insert', e);
     });
-} 
+}
+
+function createCompleteUser(user) {
+    console.log(user);
+    var newUser = new User({
+        iD:user.iD,
+        name:user.name,
+        email:user.email,
+        password: jwt.sign(user.password,'SaltToTheWound'),
+        type:user.type,
+        batch:user.batch
+    });
+
+    return newUser.save().then((doc) => {
+        return doc;
+    }, (e) => {
+        return console.log('Unable to insert', e);
+    });
+}
 
 
 module.exports ={
@@ -505,5 +523,6 @@ module.exports ={
     updateUseronEventCreate,
     updateSenderonEventCreate,
     updateApproveronEventCreate,
-    createUser
+    createUser,
+    createCompleteUser
 };

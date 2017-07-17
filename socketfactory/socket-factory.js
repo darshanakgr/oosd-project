@@ -19,6 +19,11 @@ const {CreateEventSocket}= require('./../socket/create-event-socket');
 const {EditRegularSocket} = require('./../socket/edit-regular-socket');
 const {EditAdvertisementSocket}= require('./../socket/edit-advertisement-socket');
 const {EditEventSocket} = require('./../socket/edit-event-socket');
+const {UserCreateSocket}= require('./../socket/user-complex-create-socket');
+const {LecturerMainSocket}= require('./../socket/lecturer-main-socket');
+const {LecturerCreateEventSocket}= require('./../socket/lecturer-create-event-socket');
+const {LecturerCreateRegularSocket}= require('./../socket/lecturer-create-regular-socket');
+const {LecturerCreateTemporarySocket}= require('./../socket/lecturer-create-temporary-socket');
 
 const getLecturerModuleSocket = (io, socket) => {
     return new LectureModuleSocket(io, socket);
@@ -92,6 +97,25 @@ const getEditEventSocket = (io, socket) => {
     return new EditEventSocket(io, socket);
 };
 
+const getUserCreateSocket = (io, socket) => {
+    return new UserCreateSocket(io, socket);
+};
+
+const getLecturerMainSocket = (io, socket) => {
+    return new LecturerMainSocket(io, socket);
+};
+
+const getLecturerCreateEventSocket = (io, socket) => {
+    return new LecturerCreateEventSocket(io, socket);
+};
+
+const getLecturerCreateRegularSocket = (io, socket) => {
+    return new LecturerCreateRegularSocket(io, socket);
+};
+
+const getLecturerCreateTemporarySocket = (io, socket) => {
+    return new LecturerCreateTemporarySocket(io, socket);
+};
 
 module.exports = {
     getLecturerModuleSocket,
@@ -111,5 +135,10 @@ module.exports = {
     getCreateEventSocket,
     getEditRegularSocket,
     getEditAdvertisementSocket,
-    getEditEventSocket
+    getEditEventSocket,
+    getUserCreateSocket,
+    getLecturerMainSocket,
+    getLecturerCreateEventSocket,
+    getLecturerCreateRegularSocket,
+    getLecturerCreateTemporarySocket
 };

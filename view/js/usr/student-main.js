@@ -205,7 +205,7 @@ function  refresh() {
         if((res.type=="Dean")||(res.type=="HoD")){
             loadAuthNoticesList(res);
             loadSentNoticesList(res);
-            }
+        }
         else if((res.type=="Reception")||(res.type=="Lecturer")||(res.type=="Rep")){
             loadSentNoticesList(res);
         }
@@ -1579,8 +1579,8 @@ function searchView() {
     document.getElementById("showDiv").style.display = "none";
     setTimeout(showPage,500);
     setTimeout(()=>{document.getElementById("searchDiv").style.display="block";
-    document.getElementById("caroselDiv").style.display="none";
-    document.getElementById("buttonDiv").style.display="none";},500);
+        document.getElementById("caroselDiv").style.display="none";
+        document.getElementById("buttonDiv").style.display="none";},500);
 }
 
 function normalView() {
