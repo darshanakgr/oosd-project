@@ -21,14 +21,19 @@ function finishEditEvent() {
         var newContent = quillEditEvent.getContents();
         var newExpDate= document.getElementById("expDateEditEvent").value;
 
-        socket.emit('editEvent',{
-            title: newTitile,
-            content: newContent,
-            iD:noticeID,
-            exDate:newExpDate,
-            state:thisState
-        });
-        location.href='index.html';
+        if(Date.parse(newExpDate)>=Date.parse(new Date())) {
+            socket.emit('editEvent',{
+                title: newTitile,
+                content: newContent,
+                iD:noticeID,
+                exDate:newExpDate,
+                state:thisState
+            });
+            location.href='index.html';
+        }
+        else{
+            alert("Invalid expiry date");
+        }
     }
 }
 

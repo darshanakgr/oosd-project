@@ -21,14 +21,19 @@ function finishEditAD() {
         var newContent = quillEditAD.getContents();
         var newExpDate= document.getElementById("expDateEditAD").value;
 
-        socket.emit('editAD',{
-            title: newTitile,
-            content: newContent,
-            iD:noticeID,
-            exDate:newExpDate,
-            state:thisState
-        });
-        location.href='index.html';
+        if(Date.parse(newExpDate)>=Date.parse(new Date())) {
+            socket.emit('editAD',{
+                title: newTitile,
+                content: newContent,
+                iD:noticeID,
+                exDate:newExpDate,
+                state:thisState
+            });
+            location.href='index.html';
+        }
+        else{
+            alert("Invalid expiry date");
+        }
     }
 }
 
