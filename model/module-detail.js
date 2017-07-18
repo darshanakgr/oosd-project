@@ -19,13 +19,7 @@ var moduleDetailSchema = new mongoose.Schema({
     },
     lecturerId:{
         type:String,
-        required:true,
-        validate:{
-            validator:function(value){
-                return /^[A-Z]{2}[0-9]{5}$/.test(value)
-            },message:'{VALUE} is not a valid Module code '
-        }
-
+        required:true
     },
     batch:{
         type:String,

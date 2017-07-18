@@ -43,16 +43,16 @@ var Student = mongoose.model('Student', {
         },
         required:[true,' Address field cannot be empty']
     },
-    contact:{
-        type:Number,
+    email:{
+        type:String,
         trim:true,
         unique:true,
         validate:{
-            validator:function(value){
-                return /^([0-9]{2,3})([- ]?)([0-9]{7})$/.test(value)
-            },message:'{VALUE} is not a valid Contact No: '
+            validator:function(value) {
+                return validator.isEmail(value)
+            },message:'{VALUE} is not a valid email '
         },
-        required:[true,' contact field cant be empty'],
+        required:[true,' Email field cant be empty']
      }
 });
 

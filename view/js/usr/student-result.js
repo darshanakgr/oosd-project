@@ -13,6 +13,7 @@ socket.on('disconnect', function () {
     console.log('Disconnected from server');
 });
 
+
 function fillResultTable() {
     var totalGPA = 0;
     var totalCredits = 0;

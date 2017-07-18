@@ -11,6 +11,7 @@ const {ReceptionTimetableSocket} = require('./../socket/reception-timetable-sock
 const {ReceptionLecturerSocket} = require('./../socket/reception-lecturer-socket');
 const {ViewTimetableSocket} = require('./../socket/view-timetable-socket');
 const {ReceptionModuleSocket} = require('./../socket/reception-module-socket');
+const {ManageUserSocket} = require('./../socket/manage-user-socket');
 
 const getLecturerModuleSocket = (io, socket) => {
     return new LectureModuleSocket(io, socket);
@@ -52,6 +53,10 @@ const getReceptionLecturerSocket = (io, socket) => {
     return new ReceptionLecturerSocket(io, socket);
 };
 
+const getManageUserSocket = (io, socket) => {
+    return new ManageUserSocket(io, socket);
+};
+
 module.exports = {
     getLecturerModuleSocket,
     getLecturerResultSocket,
@@ -62,5 +67,6 @@ module.exports = {
     getReceptionTimetableSocket,
     getReceptionLecturerSocket,
     getViewTimetableSocket,
-    getReceptionModuleSocket
+    getReceptionModuleSocket,
+    getManageUserSocket
 };

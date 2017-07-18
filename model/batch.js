@@ -15,7 +15,6 @@ var Batch = mongoose.model('Batch', {
             },message: '{VALUE} is not a validate Batch name'
         }
     }
-
 });
 
 

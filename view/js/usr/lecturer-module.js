@@ -3,8 +3,7 @@
  */
 var socket = io('/lecturer-module');
 
-var lecturerId = "596841d175487a521b3d2a46";
-// var lecturerId = "5966fcbd96fcbd01bbcb1450";
+var lecturerId = "596c701d04703f185493c851";
 
 socket.on('connect', function () {
     console.log('Connected to server')
@@ -13,6 +12,14 @@ socket.on('connect', function () {
 socket.on('disconnect', function () {
     console.log('Disconnected from server')
 });
+
+// $(document).ready(function () {
+//     $.post('http://localhost:3000/login-detail', function (res) {
+//         if(res){
+//             lecturerId = res.user.data;
+//         }
+//     });
+// });
 
 $('#create-new-module').on('submit', function (e) {
     e.preventDefault();
