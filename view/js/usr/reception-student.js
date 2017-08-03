@@ -32,7 +32,7 @@ $('#register-new-student-form').on('submit', function (e) {
         batch: $('[name=st-batch]').val(),
         name: $('[name=st-name]').val(),
         address: $('[name=st-address]').val(),
-        contact: $('[name=st-contact]').val()
+        email: $('[name=st-email]').val()
     }, function (err, res) {
         if (err) {
             return alert(err.errors[Object.keys(err.errors)[0]].message);
@@ -52,7 +52,7 @@ $('#search-student-form').on('submit', function (e) {
             $('[name=sc-name]').val(res.name);
             $('[name=sc-batch]').val(res.batch);
             $('[name=sc-address]').val(res.address);
-            $('[name=sc-contact]').val(res.contact);
+            $('[name=sc-email]').val(res.email);
         }else{
             clearSearchForm();
             alert('Incorrect Index Number. PLease check again')
@@ -64,7 +64,7 @@ function clearSearchForm() {
     $('[name=sc-name]').val("");
     $('[name=sc-batch]').val("");
     $('[name=sc-address]').val("");
-    $('[name=sc-contact]').val("");
+    $('[name=sc-email]').val("");
 }
 
 function fillBatchComobo() {
