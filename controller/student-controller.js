@@ -6,13 +6,20 @@ const {Student} = require('./../model/student');
 
 const registerNewStudent = (student) => {
     return new Student(student).save();
-}
+};
 
 const searchByIndex = (index) => {
     return Student.findOne({index});
-}
+};
+
+const getAllStudents = () => {
+    return Student.find();
+};
+
+
 
 module.exports = {
     registerNewStudent,
-    searchByIndex
+    searchByIndex,
+    getAllStudents
 }

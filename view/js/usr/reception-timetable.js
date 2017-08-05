@@ -134,10 +134,10 @@ $('#create-new-timetabele-form').on('submit', function (e) {
                 //console.log(err);
                 return alert(err.errors[Object.keys(err.errors)[0]].message);;
             }
-            alert("Timetable saved successfully")
+            alert("Timetable saved successfully");
         });
     } else {
-        alert('Please insert at least one record to create a timetable.')
+        alert('Please insert at least one record to create a timetable.');
     }
 
 });
@@ -147,7 +147,13 @@ $('[name=cn-add-btn]').on('click', function () {
     var rowData = timetable.insertRow(-1);
     var cell = rowData.insertCell(0);
     cell.setAttribute('contentEditable', 'true');
-    //cell.innerHTML = "XX:XX:AM<br />-<br />XX:XX:AM"
+    cell.addEventListener('focusout', function(){
+        var test = cell.innerHTML;
+        // if((/^([0-9]{2}:[0-9]{2}[AP][M]'<br>'[0-9]{2}:[0-9]{2}[AP][M])$/.test(test))){
+        //     console.log(test);
+        //
+        // }
+    });
     for (var i = 1; i < 8; i++) {
         rowData.insertCell(i).setAttribute('contentEditable', 'true');
     }

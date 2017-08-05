@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" type="image/png" href="img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <title>And@6eraya</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Animation library for notifications   -->
+    <link href="css/animate.min.css" rel="stylesheet"/>
+
+    <!--CSS for material kit-->
+    <link href="css/material-kit.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+    <!--  CSS for the current Page  -->
+    <link href="css/main-notices.css" rel="stylesheet"/>
+
+    <!--  CSS for the current Page  -->
+    <link href="css/demo.css" rel="stylesheet"/>
+
+    <!-- Quill CSS -->
+    <link href="quill/quill.core.css" rel="stylesheet">
+    <link href="quill/quill.snow.css" rel="stylesheet">
+    <!--<link href="quill/quill.bubble.css" rel="stylesheet">-->
+
+    <!-- Quill JavaScript -->
+    <script src="quill/quill.js"></script>
+    <script src="quill/quill.min.js"></script>
+
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/pe-icon-7-stroke.css" rel="stylesheet"/>
+
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+
+<div class="wrapper">
+    <script>
+        var numNot=0;
+        var loggedID="0000000";
+        sessionStorage.setItem('loggedID',loggedID);
+        sessionStorage.setItem('approverID',"0000000");
+    </script>
+    <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    And@6eraya
+                </a>
+            </div>
+
+            <ul class="nav">
+                <!--<li class="active">-->
+                    <!--<a href="lecturer-main.html">-->
+                        <!--<i class="pe-7s-home"></i>-->
+                        <!--<p>Home</p>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <li>
+                    <a href="main-notices.html">
+                        <i class="pe-7s-notebook"></i>
+                        <p>Notices</p>
+                    </a>
+                </li>
+                <!--<li>-->
+                    <!--<a href="table.html">-->
+                        <!--<i class="pe-7s-upload"></i>-->
+                        <!--<p>Result</p>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="notifications.html">-->
+                        <!--<i class="pe-7s-bell"></i>-->
+                        <!--<p>Notifications</p>-->
+                    <!--</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed" style="color: white">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--<a class="navbar-brand" href="#"></a>-->
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-globe"></i>
+                                <b class="caret"></b>
+                                <span class="notification" id="notificationsNumber" style="visibility: hidden"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="globalNotifications">
+                            </ul>
+                        </li>
+                        <li>
+                            <a onclick="searchView()">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="">
+                                Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid" id="loaderDiv" style="align-content: center" >
+                <img src="img/Double%20Ring.gif" style="margin-left: auto;	margin-right: auto;	display: block; margin-top:20%; ">
+            </div>
+            <div id="searchDiv" class="container animated fadeIn" style=" padding: 25px 25px 25px 25px; color: black; background-color: #f1f1f1; border-radius: 25px; width: 90%; display: none">
+                <p align="center"><a onclick="normalView()" style="cursor: pointer">Back to Notices</a></p>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-search" onclick="searchNotice()"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Search for Notices" id="searchInput" onchange="searchNotice()">
+                    </div>
+            </div>
+            <div class="container-fluid" id="showDiv" style="display: none">
+            <div id="buttonDiv" class="container" style=" margin: 0 auto; width: 100%;">
+                <!--<button class="btn btn-danger pull-left animated fadeIn" data-toggle="modal" data-target="#newTypeModal" id="createNewButton" style="display: none"><i class="pe-7s-pen"></i></button>-->
+                <!--<button class="btn btn-default pull-left" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Refresh" onclick="location.href='index.html'"><i class="pe-7s-refresh-2"></i></button>-->
+                <button class="btn btn-default pull-left animated fadeIn" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Refresh" onclick="refresh()"><i class="pe-7s-refresh-2"></i></button>
+                <button class="btn btn-warning pull-right animated fadeIn"data-toggle="modal" data-target="#genViewModal" onclick="genViewFunc()" ><i class="pe-7s-menu"></i></button>
+                <!--<button class="btn btn-default pull-right"><i class="pe-7s-angle-right"></i></button>-->
+                <!--<button class="btn btn-default pull-right" ><i class="pe-7s-angle-left"></i></button>-->
+            </div><br>
+
+
+            <!-- Carousel Card -->
+            <div class="container" id="caroselDiv" style="min-height: 500px; display:flex; align-items:center; justify-content:center; width: 80%" data-interval="false" >
+                <div class="card card-raised card-carousel animated fadeIn" style="background: #CCCCCC; border: 0px;" data-interval="false">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false" style="border: 0px">
+                        <div class="carousel slide" data-ride="carousel" data-interval="false" style="left:0; right:0;top:0; bottom:0;margin:auto;max-width:100%;max-height:100%;overflow:auto;">
+
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators" id="carIndicator">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
+                            </ol>
+
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" id="carNotice" data-interval="false" style="border: 0px ; min-height: 120px">
+                                <div class="item active" >
+                                    <div id="quillEdit0" style="background-color: white">
+                                        <h1 align="center">No Advertisements to be displayed</h1>
+                                    </div>
+                                    <script>
+
+                                        var quill0 = new Quill('#quillEdit0', {
+                                            modules : {
+                                                toolbar: false
+                                            },
+                                            theme:'snow'
+                                        });
+                                        quill0.enable(false);
+                                    </script>
+                                </div>
+                                <div class="item" >
+                                    <div id="quillEdit1" style="background-color: white">
+                                        <h1 align="center">No Advertisements to be displayed</h1>
+                                    </div>
+                                    <script>
+
+                                        var quill1 = new Quill('#quillEdit1', {
+                                            modules : {
+                                                toolbar: false
+                                            },
+                                            theme:'snow'
+                                        });
+                                        quill1.enable(false);
+                                    </script>
+                                </div>
+                                <div class="item" >
+                                    <div id="quillEdit2" style="background-color: white">
+                                        <h1 align="center">No Advertisements to be displayed</h1>
+                                    </div>
+                                    <script>
+                                        var quill2 = new Quill('#quillEdit2', {
+                                            modules : {
+                                                toolbar: false
+                                            },
+                                            theme:'snow'
+                                        });
+                                        quill2.enable(false);
+                                    </script>
+                                </div>
+                                <div class="item" >
+                                    <div id="quillEdit3" style="background-color: white">
+                                        <h1 align="center">No Advertisements to be displayed</h1>
+                                    </div>
+                                    <script>
+                                        var quill3 = new Quill('#quillEdit3', {
+                                            modules : {
+                                                toolbar: false
+                                            },
+                                            theme:'snow'
+                                        });
+                                        quill3.enable(false);
+                                    </script>
+                                </div>
+                                <div class="item" >
+                                    <div id="quillEdit4" style="background-color: white">
+                                        <h1 align="center">No Advertisements to be displayed</h1>
+                                    </div>
+                                    <script>
+                                        var quill4 = new Quill('#quillEdit4', {
+                                            modules : {
+                                                toolbar: false
+                                            },
+                                            theme:'snow'
+                                        });
+                                        quill4.enable(false);
+                                    </script>
+                                </div>
+                            </div>
+
+
+                            <!-- Controls -->
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <i class="material-icons">keyboard_arrow_left</i>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <i class="material-icons">keyboard_arrow_right</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Carousel Card -->
+
+            <div class="card card-nav-tabs animated fadeIn">
+                <div class="header header-info" style="padding-bottom: 20px">
+                    <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active">
+                                    <a href="#inbox" data-toggle="tab" aria-expanded="true">
+                                        <i class="material-icons">message</i>
+                                        Inbox
+                                    </a>
+                                </li>
+                                <!--<li class="" id="sentTab">-->
+                                    <!--<a href="#update" data-toggle="tab" aria-expanded="false">-->
+                                        <!--<i class="material-icons">done_all</i>-->
+                                        <!--Sent-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class="" id="w8nApprovalTab" style="visibility: hidden">-->
+                                    <!--<a href="#view-all" data-toggle="tab" aria-expanded="false">-->
+                                        <!--<i class="material-icons">thumbs_up_down</i>-->
+                                        <!--w8n approval-->
+                                    <!--</a>-->
+
+                                <!--</li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="tab-content">
+                        <div class="tab-pane active animated fadeIn" id="inbox">
+                            <div class="card">
+                                <div class="content table-responsive table-full-width">
+                                    <table id="noticeTable" class="table table-hover table-striped">
+                                        <thead>
+                                        <tr><th onclick="sortNTable(0)" style="cursor: pointer">Sender</th>
+                                            <th onclick="sortNTable(1)" style="cursor: pointer">Title</th>
+                                            <th onclick="sortNTable(2)" style="cursor: pointer">Type</th>
+                                            <th onclick="sortNDateTable(3)" style="cursor: pointer">Date</th>
+                                        </tr></thead>
+                                        <tbody id="noticeDetailTable" >
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="tab-pane animated fadeIn" id="update">-->
+                            <!--<div class="card">-->
+                                <!--<div class="content table-responsive table-full-width">-->
+                                    <!--<table id="sentTable" class="table table-hover table-striped">-->
+                                        <!--<thead>-->
+                                        <!--<tr><th onclick="sortSTable(0)" style="cursor: pointer">Title</th>-->
+                                            <!--<th onclick="sortSTable(1)" style="cursor: pointer">Type</th>-->
+                                            <!--<th onclick="sortSDateTable(2)" style="cursor: pointer">Date</th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                        <!--</tr></thead>-->
+                                        <!--<tbody id="sentDetailTable" >-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="tab-pane animated fadeIn" id="view-all">-->
+                            <!--<div class="card">-->
+                                <!--<div class="content table-responsive table-full-width">-->
+                                    <!--<table id="authTable" class="table table-hover table-striped">-->
+                                        <!--<thead>-->
+                                        <!--<tr><th onclick="sortATable(0)" style="cursor: pointer">Title</th>-->
+                                            <!--<th onclick="sortATable(1)" style="cursor: pointer">Type</th>-->
+                                            <!--<th onclick="sortADateTable(2)" style="cursor: pointer">Date</th>-->
+                                            <!--<th onclick="sortATable(3)" style="cursor: pointer">State</th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                            <!--<th></th>-->
+                                        <!--</tr></thead>-->
+                                        <!--<tbody id="authDetailTable" >-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" id="sommin">
+
+            </div>
+
+        </div>
+    </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <p class="copyright pull-right">
+                    &copy; 2017 <a href="#">Smart Notice Board</a> | CERIS
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="newTypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Create new notice</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please choose a notice type to create:</p>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="newType" id="nTRBReg">
+                        Regular
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="newType" id="nTRBTemp">
+                        Temporary
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="newType" id="nTRBEvent">
+                        Event
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="newType" id="nTRBAD">
+                        Advertisement
+                    </label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" onclick="doNew()">Create New</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #f1f1f1; padding-bottom: 10px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="noticeTitle">Title: </p>
+                <p id="noticeType">Type: </p>
+                <p id="noticeSender">Sender: </p>
+                <p id="noticeDate">Date: </p>
+                <div id="quillDisp">
+
+                </div>
+
+                <script>
+
+                    var quillD = new Quill('#quillDisp', {
+                        modules : {
+                            toolbar: false
+                        },
+
+                        theme:'snow'
+                    });
+                    quillD.enable(false);
+
+
+
+                </script>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="genViewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog" role="document" align="center" style="width: 100%; height: 100%; margin: 0%; padding: 0%">
+        <div class="modal-content" style="height: auto; min-height: 100%; border-radius: 0; background-color: black ">
+            <div class="modal-header" style="background-color: black; padding-bottom: 10px ;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white" onclick="genViewReset()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <!--<div class="modal-body" style="display:flex; align-items:center; justify-content:center;">-->
+            <!--<div class="row" style="margin: 0%">-->
+            <!--<div class="col-sm-1"></div>-->
+            <div id="quillGenView" style="background-color: white; margin:5% 2% 2% 2% ;"   >
+            </div>
+
+            <script>
+
+                var quillGenView = new Quill('#quillGenView', {
+                    modules : {
+                        toolbar: false
+                    },
+
+                    theme:'snow'
+                });
+                quillGenView.enable(false);
+
+
+
+            </script>
+            <!--<div class="col-sm-1"></div>-->
+            <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</body>
+
+<!--   Core JS Files   -->
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--&lt;!&ndash;  Checkbox, Radio & Switch Plugins &ndash;&gt;-->
+<!--<script src="js/bootstrap-checkbox-radio-switch.js"></script>-->
+
+<!--&lt;!&ndash;  Charts Plugin &ndash;&gt;-->
+<!--<script src="js/chartist.min.js"></script>-->
+
+<!--&lt;!&ndash;  Notifications Plugin    &ndash;&gt;-->
+<!--<script src="js/bootstrap-notify.js"></script>-->
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="js/light-bootstrap-dashboard.js"></script>
+
+<!--JS for material-->
+<script src="js/material-kit.js"></script>
+<script src="js/material.min.js"></script>
+
+<!--JS for this page-->
+<script src="js/main-notices.js"></script>
+
+<script>
+    if (loggedID=="0000000"){
+        document.getElementById("w8nApprovalTab").setAttribute("style","visibility: visible");
+    }
+    refresh();
+    //setTimeout(sortBoth,200);
+
+    //setTimeout(showPage, 500);
+
+    function sortBoth() {
+        sortFSDateTable(2);
+        sortFNDateTable(3);
+        sortFADateTable(2);
+    }
+
+
+</script>
+<!--<script type="text/javascript">-->
+    <!--$(document).ready(function () {-->
+
+<!--//        	demo.initChartist();-->
+
+        <!--$.notify({-->
+            <!--icon: 'pe-7s-gift',-->
+            <!--message: "Welcome to <b>Smart Notice Board</b>"-->
+
+        <!--}, {-->
+            <!--type: 'info',-->
+            <!--timer: 4000-->
+        <!--});-->
+
+    <!--});-->
+<!--</script>-->
+
+</html>
