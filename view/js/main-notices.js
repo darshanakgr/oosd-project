@@ -8,6 +8,8 @@ socket.on('connect',function(){
     console.log('Connected to server');
 });
 
+var loggedID;
+
 var indNum=0;
 var indSent=0;
 var indAuth=0;
@@ -32,6 +34,7 @@ var arraySentEvents=[];
 var arrayAuthEvents=[];
 var arrayGenView=[];
 
+
 var modal = document.getElementById('newTypeModal');
 
 window.onclick = function(event) {
@@ -45,28 +48,30 @@ socket.on('disconnect',function(){
 });
 
 //Assign user privileges
-socket.emit('getNoticeUser', {
-    index:sessionStorage.getItem('loggedID')
-}, function (err, res) {
-    if(err){
-        return console.log(err);
-    }
-});
+// socket.emit('getNoticeUser', {
+//     index:sessionStorage.getItem('loggedID')
+// }, function (err, res) {
+//     if(err){
+//         return console.log(err);
+//     }
+// });
 
 //Refresh Notices
 function  refresh() {
     clearLists();
     noInbox();
-    socket.emit('getNoticeUser', {
-        index: loggedID,
-    }, function (err, res) {
-        if(err){
-            return console.log(err);
-        }
-        if(res!=null) {
-            loadNoticesList(res);
-        }
-    });
+    if(loggedID!=null) {
+        socket.emit('getNoticeUser', {
+            index: loggedID,
+        }, function (err, res) {
+            if (err) {
+                return console.log(err);
+            }
+            if (res != null) {
+                loadNoticesList(res);
+            }
+        });
+    }
 
     setTimeout(loadADs,500);
     setTimeout(sortBoth,500);
@@ -80,22 +85,24 @@ function searchNotice() {
     clearLists();
     noInbox();
 
-    socket.emit('getNoticeUser', {
-        index: loggedID,
-    }, function (err, res) {
-        if(err){
-            return console.log(err);
-        }
-        //console.log(res);
-        if(res!=null) {
-            if (document.getElementById("searchInput").value != "") {
-                searchNoticesList(res, document.getElementById("searchInput").value);
+    if(loggedID!=null) {
+        socket.emit('getNoticeUser', {
+            index: loggedID,
+        }, function (err, res) {
+            if (err) {
+                return console.log(err);
             }
-            else {
-                loadNoticesList(res);
+            //console.log(res);
+            if (res != null) {
+                if (document.getElementById("searchInput").value != "") {
+                    searchNoticesList(res, document.getElementById("searchInput").value);
+                }
+                else {
+                    loadNoticesList(res);
+                }
             }
-        }
-    });
+        });
+    }
 
     //search: document.getElementById("searchInput").value
 
